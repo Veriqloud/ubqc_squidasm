@@ -2,12 +2,12 @@
 A compiler to simulate Universal Blind Quantum Computation [1] using the quantum network simulation software SquidASM. As the basic framework an outdated compiler using SimulaQron has been modified, which can be found in the reference section [2].
 
 ## 0. Outline
-- #### 1. Introduction to UBQC
-- #### 2. File structure
-- #### 3. Running the simulation
-- #### 4. Changes from the old compiler
-- #### 5. Outlook
-- #### 6. References
+#### 1. Introduction to UBQC
+#### 2. File structure
+#### 3. Running the simulation
+#### 4. Changes from the old compiler
+#### 5. Outlook
+#### 6. References
 
 ## 1. UBQC
 Universal Blind Quantum Computation provides a method for a client without any quantum computational power to execute quantum computations on a remote server without revealing neither the input nor the output. The measurement-based scheme for quantum computation (MBQC) is chosen as the foundation. This is a different approach to quantum computation than the gate-based one, while it's possible to construct MBQC instructions from any given gate-based circuit. These instructions consist of three types of objects: Entanglement operations, measurement instructions, and byproduct operators. To be able to run these instructions according to [1], one needs to reorder these instructions by making use of commutation relations. Like this, we can achieve that first all entanglement operations are perforemed, then all the measurements, and finally the byproducts. This so called $\textit{flow}$ first been first introduced by Kashefi et al. [3].
