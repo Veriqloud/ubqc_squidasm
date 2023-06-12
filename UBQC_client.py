@@ -11,6 +11,10 @@ from netqasm.sdk.qubit import Qubit as SdkQubit
 from netsquid.qubits import qubitapi as qapi
 import netsquid.qubits
 import squidasm.sim.stack.globals
+from circuits_qasm import qasm_circs
+from flow_qasm import circuit_file_to_flow, count_qubits_in_sequence
+from angle import measure_angle2
+from squidasm.sim.stack.program import Program, ProgramContext, ProgramMeta
 
 def get_qubit(netqasm_qubit: SdkQubit, node_name) -> qapi.Qubit:
     """Get the the qubit(s), only possible in simulation and can be used for debugging.
@@ -46,20 +50,10 @@ def get_qubit(netqasm_qubit: SdkQubit, node_name) -> qapi.Qubit:
 
     return ns_qubit
 
-# Import file with circuits
-from circuits_qasm import qasm_circs
-from flow_qasm import circuit_file_to_flow, count_qubits_in_sequence
-
-# Import file for measuring angles
-from angle import measure_angle2
-
-from squidasm.sim.stack.program import Program, ProgramContext, ProgramMeta
-
 # Load parser to get arguments from the client
 parser=argparse.ArgumentParser(
     description='Choose a circuit',
     formatter_class=RawTextHelpFormatter)
-
 
 # If the client wants to draw the circuit
 parser.add_argument('-d','--draw', action="store_true", help='draw the circuit')
@@ -84,9 +78,9 @@ circuits = qasm_circs()
 
 # Which circuit?
     
-# If no circuit is chosen, take a simple Hadamard gate (Circuit 11)
+# If no circuit is chosen, take a simple Hadamard gate (Circuit 4)
 if not args.circuit:
-    circ = circuits[10]
+    circ = circuits[3]
     circ_flow = circuit_file_to_flow(circ[0])
     seq = circ_flow[0]
     qout_idx = circ_flow[1]
@@ -103,8 +97,6 @@ else:
 # If the client wants to draw the circuit
 if(args.draw):
     print(circ[1])
-    
-    
 
 # Define gates the client wants to apply
 def apply_singleU(U,q):
@@ -213,8 +205,6 @@ class AliceProgram(Program):
             if args.input:
                 U = input_gates[i]
                 q = apply_singleU(U,q)
-                if(args.log):
-                		print("apply {} to qubit {}".format(U,i))
             
             # Rotation in format (n*pi/2^d; here: n = rand_angle, d = 7)
             q.rot_Z(rand_angle,7)
@@ -245,17 +235,11 @@ class AliceProgram(Program):
             print(get_qubit(qubits[i],"Alice").qstate.qrepr.dm)
             
         # Now: List of qubits is initialized. Next step: Sending them to the server
-        
-        if(args.log):
-        		print("Client sending (classical): Create {} qubits".format(nQubits))
         myCsocket.send(nQubits)
         
-        # Send the qubits by making use of teh quantum teleportation protocol
+        # Send the qubits by making use of the quantum teleportation protocol
         
         for i in range(0,nQubits):
-            if(args.log):
-            	print("Client sending (quantum): Qubit {}".format(i+1))
-            
             # For each qubit: Initialize an EPR qubit to send the information to server
             eprqubit = myEprSocket.create_keep()[0]
             
@@ -268,21 +252,15 @@ class AliceProgram(Program):
             m1 = eprqubit.measure()
             yield from myConnection.flush()
             
-            mes=[np.round(m0),np.round(m1)]
+            mes=[int(m0),int(m1)]
             myCsocket.send(mes)
             
         # Now: Client sends the number of measurements that are to perform. This information comes from the flow file
-        if(args.log):
-        		print("Client Sending (classical): Ask to perform {} measurements".format(nMeasurement))
         myCsocket.send(nMeasurement)
         
         # Then: Send lists E1 and E2 of which qubits to entangle
-        if(args.log):
-        		print("Client Sending (classical): List of 1st Qubits to Entangle")
+
         myCsocket.send(np.array(E1))
-	
-        if(args.log):
-        		print("Client Sending (classical): List of 2nd Qubits to Entangle")
         myCsocket.send(np.array(E2))
 
         qout_idx2 = list(range(nQubits))
@@ -301,7 +279,7 @@ class AliceProgram(Program):
                 # What is the angle we wish to measure (according to circuit implementation)
                 computation_angle = s.angle
 
-                # What is the angle we randomized our qubit with=
+                # What is the angle we randomized our qubit with?
                 input_angle = angles[qubit_n-1]
 
                 # What is our random variable r?
@@ -312,8 +290,6 @@ class AliceProgram(Program):
                 #print("s.angle = {} outcome = {} input_angle = {} meas_ang2 = {} r = {} to_send = {}".format(s.angle,outcome,input_angle,measure_angle2(s, outcome, input_angle),r,angle_to_send))
 
                 # Now: Send information to the server telling which qubit to measure
-                if(args.log):
-                		print("Client Sending (classical): ask to measure qubit {}".format(qubit_n))
                 myCsocket.send(qubit_n)
 
                 # Send information of the measurement angle to the server
@@ -329,10 +305,10 @@ class AliceProgram(Program):
 
                 # We adjust for the randomness only we know we added
                 if r == 1:
-                    outcome[qubit_n - 1] = np.round(1 - m)
+                    outcome[qubit_n - 1] = int(1 - m)
 
                 else:
-                    outcome[qubit_n - 1] = np.round(m)
+                    outcome[qubit_n - 1] = int(m)
         
         # Now: All the entanglements and measurements are performed. The server sends back the output qubits.
         if(args.log):
@@ -341,7 +317,6 @@ class AliceProgram(Program):
         qout = [-1]*len(qout_idx)
         qidx_sort = qout_idx[:]
         qidx_sort.sort()
-        #qout_idx.sort(reverse=True)
         noutput = len(qout_idx)
         if(args.log):
         		print("qout_idx = {}, outcome = {}, qidx_sort = {}".format(qout_idx, [int(r) for r in outcome], qidx_sort))
@@ -359,9 +334,9 @@ class AliceProgram(Program):
             yield from myConnection.flush()
 
             # Apply correction depending on outcome
-            if np.round(m0) == 1:
+            if int(m0) == 1:
                 output_qubit.Z()
-            if np.round(m1) == 1:
+            if int(m1) == 1:
                 output_qubit.X()
                 
             # Store qubits send back by server in qout
@@ -370,22 +345,11 @@ class AliceProgram(Program):
             qout[qidx_sort.index(qidx_sort[i])]=output_qubit
             
         # Here: Applying corrections on the output qubits according to the initial angles, taking care of the induced randomness
-	
-        if(args.log):
-        		print("Client applying correction") 
-        for i in range(noutput):
-            print(f"Angle: {angles[qidx_sort[i]-1]}, rounded angle = {int(angles[qidx_sort[i]-1])}, modulo: {-int(angles[qidx_sort[i]-1])%256}")
-            print(len(angles))
-            print(angles)
-            print(noutput)
-            print(qidx_sort)
-            print(qout_idx)
-            qout[qidx_sort.index(qout_idx[i])].rot_Z(-int(angles[qidx_sort[i]-1])%256,7)
-            if(args.log):
-            	print("Blinding Correction: ({}) on qubit {}".format(-int(angles[qidx_sort[i]-1])%256,qout_idx[i]))
-            
-        # Now: Apply byproduct corrections+
 
+        for i in range(noutput):
+            qout[qidx_sort.index(qout_idx[i])].rot_Z(-int(angles[qidx_sort[i]-1])%256,7)
+            
+        # Now: Apply byproduct corrections:
         if(args.log):
          	print("State before corrections:")
          	for i in range(noutput):
