@@ -8,15 +8,7 @@ from netqasm.sdk.qubit import Qubit as SdkQubit
 from netsquid.qubits import qubitapi as qapi
 import netsquid.qubits
 import squidasm.sim.stack.globals
-
-
-# Import file with circuits
-#from circuits_qasm import qasm_circs
-#from flow_qasm import circuit_file_to_flow, count_qubits_in_sequence
-
 from squidasm.sim.stack.program import Program, ProgramContext, ProgramMeta
-
-# Define qubit and outcome arrays:
 
 def get_qubit(netqasm_qubit: SdkQubit, node_name) -> qapi.Qubit:
     """Get the the qubit(s), only possible in simulation and can be used for debugging.
@@ -90,36 +82,25 @@ class BobProgram(Program):
 
             
             # Apply correction depending on outcome
-            if np.round(m0) == 1:
+            if int(m0) == 1:
                 eprQubit.Z()
                 
-            if np.round(m1) == 1:
+            if int(m1) == 1:
                 eprQubit.X()
 
                 
             # Append qubit to list
             qubits.append(eprQubit)
             
-        yield from myConnection.flush()
-        for i in range(nQubits):
-            print(f"Qubit {i}'s state after receiving:")
-            print(get_qubit(qubits[i],"Bob").qstate.qrepr.dm)
-
         # Now: Client sends nMeasurement
-        nMeasurement = yield from myCsocket.recv()
-        #print("Server received request: perform {} measurements!".format(nMeasurement))
-        
+        nMeasurement = yield from myCsocket.recv()        
         E = []
         
         # Server receives lists of qubits to entangle
-        E1 = yield from myCsocket.recv()
-        #print("Server received first list of qubits to entangle!")
-        
+        E1 = yield from myCsocket.recv()        
         E2 = yield from myCsocket.recv()
-        #print("Server received second list of qubits to entangle!")
         
         # Entangle qubits
-        
         for i, j in zip(E1,E2):
             qubit_i = qubits[i-1]
             qubit_j = qubits[j-1]
@@ -129,10 +110,6 @@ class BobProgram(Program):
             
             # Store entangled tuples in E
             E.append([i,j])
-            #print("Entangle qubit {} with qubit {}".format(i,j))
-        #print("E = {}".format(E))
-        
-        #print("Server measuring...")
         
         # Create list of enumerations of qubits
         qout_idx = list(range(nQubits))
@@ -148,16 +125,13 @@ class BobProgram(Program):
 
             qout_idx.remove(qubit_n-1)
             
-            #print("Server measuring qubit {} using angle {}".format(qubit_n,angle))
-            
             # Now: Apply rotations to be able to measure in given basis, include 7 due to rotation syntax in SquidASM
             qubits[qubit_n-1].rot_Z(-int(angle)%256,7)
             qubits[qubit_n-1].rot_Y(256-64,7) # to make the measurement along in the |+> |-> basis
             m = qubits[qubit_n-1].measure()
             yield from myConnection.flush()
             
-            #print("Server sending result of measurement for qubit {}: {}".format(qubit_n,m))
-            myCsocket.send(np.round(m))
+            myCsocket.send(int(m))
         
         # Now: Send back unmeasured output qubits
         for i in range(nQubits - nMeasurement):
@@ -173,9 +147,7 @@ class BobProgram(Program):
             yield from myConnection.flush()
             
             # Send measurement result back to Alice to perform corrections
-            mes=[np.round(m0),np.round(m1)]
+            mes=[int(m0),int(m1)]
             myCsocket.send(mes)
-            
-        #print("All qubits sent back to the client!")
         
         return {}
