@@ -1,7 +1,7 @@
 # Compiler for UBQC using SquidASM
 A compiler to simulate Universal Blind Quantum Computation [1] using the quantum network simulation software SquidASM. As the basic framework an outdated compiler using SimulaQron has been modified, which can be found in the reference section [2].
 
-## Outline
+### Outline
 - #### 0. Introduction to UBQC
 - #### 1. File structure
 - #### 2. Running the simulation
@@ -107,4 +107,5 @@ For debugging reasons, in this section the changes from the original protocol in
 
 ## 5. Referenecs
 [1] Universal Blind Quantum Computation, Kashefi et al. 2009
+
 [2] Original Compiler: https://github.com/quantumprotocolzoo/protocols/tree/master/UBQC
