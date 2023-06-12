@@ -1,7 +1,7 @@
-# ubqc_squidasm
+# Compiler for UBQC using SquidASM
 A compiler to simulate Universal Blind Quantum Computation using the quantum network simulation software SquidASM. As the basic framework an outdated compiler using SimulaQron has been modified.
 
-# 0. UBQC
+## 0. UBQC
 Universal Blind Quantum Computation provides a method for a client without any quantum computational power to execute quantum computations on a remote server without revealing neither the input nor the output. The measurement-based scheme for quantum computation (MBQC) is chosen as the foundation. This is a different approach to quantum computation than the gate-based one, while it's possible to construct MBQC instructions from any given gate-based circuit. These instructions consist of three types of objects: Entanglement operations, measurement instructions, and byproduct operators.
 The UBQC protocol relies on a mixture between classical and quantum communication: The idea is that, similarly to MBQC, quantum states are evolved through projective measurements, where the exact measurement angles are hidden from the server, providing that no information about the client's computation get's leaked. This protocol is meant to be executed using real quantum machines, while in this work the aim is to simulate the protocol using SquidASM.
 
@@ -18,7 +18,7 @@ The protocol can be sumarized using the following steps:
 
 After these steps are performed, the qubits that Alice corrected should be in the quantum state that was predicted as the outcome of the simulated circuit, where the computation was run without revealing it to Bob.
 
-# 1. File structure
+## 1. File structure
 
 1.1 measurement.py
 - Contains the instructions to convert a QASM object into the correspondent MBQC instructions
@@ -44,7 +44,7 @@ After these steps are performed, the qubits that Alice corrected should be in th
 1.8 run_ubqc.py
 - Characteristic to SquidASM. File for simulation control: Yields the possibility to run the simulation N times and infer about the statistical likelyhood of success. Configure this file to change the number of runs as well as the output.
 
-# 2. Changes from the old protocol
+## 2. Changes from the old protocol
 For debugging reasons, in this section the changes from the original protocol in SimulaQron are introduced:
 
 2.1 Changing the input format from JSON to QASM:
@@ -83,7 +83,7 @@ For debugging reasons, in this section the changes from the original protocol in
 - run_UBQC.py was not working properly if the protocol was run N>1 times. Issue: Qubit array on the server's side was initialized before the program was run, leading to overwriting of the N-ths simulation qubit array through the N+1-st. 
 - Including the initialization of the qubit array into the beginning of the server's instructions rather then before leads to reinitialization each time the simulation is run, solving the problem
 
-3.0 Outlook
+## 3. Outlook 
 - Success probability depends on the number of qubits that are used for the computation: 1% failure chance for one qubit circuits, while this increases with the number of computational (!) qubits necessary for MBQC.
 - Displaying the density matrices of the output states shows slight deviations from the expected DM, leading to wrong measurement results in a small fraction of the iterations
 - Quantum State Teleportation implementation doesn't teleport the state 100% accurately, probably being the reason for the algorithm to fail at times. This is coherent with the fact that the more computational qubits we need, the more qubits we have to teleport and the higher the chance of failure becomes.
