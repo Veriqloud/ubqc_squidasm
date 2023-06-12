@@ -1,5 +1,5 @@
 # Compiler for UBQC using SquidASM
-A compiler to simulate Universal Blind Quantum Computation using the quantum network simulation software SquidASM. As the basic framework an outdated compiler using SimulaQron has been modified.
+A compiler to simulate Universal Blind Quantum Computation using the quantum network simulation software SquidASM. As the basic framework an outdated compiler using SimulaQron has been modified, which can be found in the reference section.
 
 ## 0. UBQC
 Universal Blind Quantum Computation provides a method for a client without any quantum computational power to execute quantum computations on a remote server without revealing neither the input nor the output. The measurement-based scheme for quantum computation (MBQC) is chosen as the foundation. This is a different approach to quantum computation than the gate-based one, while it's possible to construct MBQC instructions from any given gate-based circuit. These instructions consist of three types of objects: Entanglement operations, measurement instructions, and byproduct operators.
@@ -54,7 +54,7 @@ After these steps are performed, the qubits that Alice corrected should be in th
 - $\texttt{- h}$ for help
 
 ## 3. Changes from the old protocol
-For debugging reasons, in this section the changes from the original protocol in SimulaQron are introduced:
+For debugging reasons, in this section the changes from the original protocol in SimulaQron are introduced
 
 #### 3.1 Changing the input format from JSON to QASM:
 - Used qiskit.qobj_todict function to extract information from QASM objects, these dictionaries can be treated equivalently to JSON files
