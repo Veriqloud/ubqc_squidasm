@@ -7,14 +7,14 @@ The UBQC protocol relies on a mixture between classical and quantum communicatio
 
 The protocol can be sumarized using the following steps:
 
-1. Alice initializes her qubits, applies random phase $\theta$\\
-2. Alice further blinds her computation with an angle $r \in \{0, \pi \}$ \\
-3. Alice sends the blinded qubits to Bob, together with measurement angles $\phi ' = \phi + \theta + r$\\
-4. Alice sends lists of qubits to entangle  \\
-5. Bob entangles the qubits, creates cluster state \\
-6. Bob measures the qubits in the provided basis, sends results back to Alice \\
-7. Alice unblinds the qubits by applying phase $- \theta$ \\
-8. Alice applies Byproduct operators depending on Bob's measurement outcome \\
+1. Alice initializes her qubits, applies random phase $\theta$
+2. Alice further blinds her computation with an angle $r \in \{0, \pi \}$ 
+3. Alice sends the blinded qubits to Bob, together with measurement angles $\phi ' = \phi + \theta + r$
+4. Alice sends lists of qubits to entangle  
+5. Bob entangles the qubits, creates cluster state 
+6. Bob measures the qubits in the provided basis, sends results back to Alice 
+7. Alice unblinds the qubits by applying phase $- \theta$ 
+8. Alice applies Byproduct operators depending on Bob's measurement outcome 
 
 After these steps are performed, the qubits that Alice corrected should be in the quantum state that was predicted as the outcome of the simulated circuit, where the computation was run without revealing it to Bob.
 
@@ -47,10 +47,10 @@ After these steps are performed, the qubits that Alice corrected should be in th
 ## 2. Running the simulation
 - To run the simulation, head to the directory in which the files are deposited. Using the consol, $\texttt{python run_ubqc.py} can be used to run the simulation given the current settings provided in run_ubqc.py. Possible arguments include:
 - $\texttt{- l}$ for enabling and disabling the logging
-- $\texttt{- c}$ {CIRCUIT}$ for choosing a circuit from circuits_qasm.py. Note that enumeration starts from zero.
+- $\texttt{- c \{ CIRCUIT \} }$ for choosing a circuit from circuits_qasm.py. Note that enumeration starts from zero.
 - $\texttt{- d}$ to enable or disable the drawing of the circuit
-- $\texttt{- i}$ for choosing input gates that are applied onto the input qubits independently from the chosen circuit.
-- $\texttt{- o}$ for choosing output gates that are applied onto the output qubits independently from the chosen circuit.
+- $\texttt{- i \{ GATES \} }$ for choosing input gates that are applied onto the input qubits independently from the chosen circuit. Seperation: Comma
+- $\texttt{- o \{ GATES \} }$ for choosing output gates that are applied onto the output qubits independently from the chosen circuit. Seperation: Comma
 - $\texttt{- h}$ for help
 
 ## 3. Changes from the old protocol
