@@ -10,7 +10,8 @@ A compiler to simulate Universal Blind Quantum Computation [1] using the quantum
 - #### 6. References
 
 ## 1. UBQC
-Universal Blind Quantum Computation provides a method for a client without any quantum computational power to execute quantum computations on a remote server without revealing neither the input nor the output. The measurement-based scheme for quantum computation (MBQC) is chosen as the foundation. This is a different approach to quantum computation than the gate-based one, while it's possible to construct MBQC instructions from any given gate-based circuit. These instructions consist of three types of objects: Entanglement operations, measurement instructions, and byproduct operators.
+Universal Blind Quantum Computation provides a method for a client without any quantum computational power to execute quantum computations on a remote server without revealing neither the input nor the output. The measurement-based scheme for quantum computation (MBQC) is chosen as the foundation. This is a different approach to quantum computation than the gate-based one, while it's possible to construct MBQC instructions from any given gate-based circuit. These instructions consist of three types of objects: Entanglement operations, measurement instructions, and byproduct operators. To be able to run these instructions according to [1], one needs to reorder these instructions by making use of commutation relations. Like this, we can achieve that first all entanglement operations are perforemed, then all the measurements, and finally the byproducts. This so called $\textit{flow}$ first been first introduced by Kashefi et al. [3].
+
 The UBQC protocol relies on a mixture between classical and quantum communication: The idea is that, similarly to MBQC, quantum states are evolved through projective measurements, where the exact measurement angles are hidden from the server, providing that no information about the client's computation get's leaked. This protocol is meant to be executed using real quantum machines, while in this work the aim is to simulate the protocol using SquidASM.
 
 The protocol can be sumarized using the following steps:
@@ -106,6 +107,8 @@ For debugging reasons, in this section the changes from the original protocol in
 - Quantum State Teleportation implementation doesn't teleport the state 100% accurately, probably being the reason for the algorithm to fail at times. This is coherent with the fact that the more computational qubits we need, the more qubits we have to teleport and the higher the chance of failure becomes.
 
 ## 6. Referenecs
-[1] Universal Blind Quantum Computation, Kashefi et al. 2009
+[1] "Universal Blind Quantum Computation", Kashefi et al. 2009
 
 [2] Original Compiler: https://github.com/quantumprotocolzoo/protocols/tree/master/UBQC
+
+[3] "The Measurement Calculus", Kashefi et al. 2007
