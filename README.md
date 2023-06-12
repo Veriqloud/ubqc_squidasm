@@ -44,46 +44,55 @@ After these steps are performed, the qubits that Alice corrected should be in th
 #### 1.8 run_ubqc.py
 - Characteristic to SquidASM. File for simulation control: Yields the possibility to run the simulation N times and infer about the statistical likelyhood of success. Configure this file to change the number of runs as well as the output.
 
-## 2. Changes from the old protocol
+## 2. Running the simulation
+- To run the simulation, head to the directory in which the files are deposited. Using the consol, $\texttt{python run_ubqc.py} can be used to run the simulation given the current settings provided in run_ubqc.py. Possible arguments include:
+- $\texttt{- l}$ for enabling and disabling the logging
+- $\texttt{- c}$ {CIRCUIT}$ for choosing a circuit from circuits_qasm.py. Note that enumeration starts from zero.
+- $\texttt{- d}$ to enable or disable the drawing of the circuit
+- $\texttt{- i}$ for choosing input gates that are applied onto the input qubits independently from the chosen circuit.
+- $\texttt{- o}$ for choosing output gates that are applied onto the output qubits independently from the chosen circuit.
+- $\texttt{- h}$ for help
+
+## 3. Changes from the old protocol
 For debugging reasons, in this section the changes from the original protocol in SimulaQron are introduced:
 
-#### 2.1 Changing the input format from JSON to QASM:
+#### 3.1 Changing the input format from JSON to QASM:
 - Used qiskit.qobj_todict function to extract information from QASM objects, these dictionaries can be treated equivalently to JSON files
 - Only changes made in measurement.py, flow.py receives the same input as in the original compiler
 - Provides naturally the option to simulate Qiskit circuits directly
 - Outcome has been tested on all test circuits provided by the old compiler
 
-#### 2.2 Changing from SimulaQron to SquidASM
+#### 3.2 Changing from SimulaQron to SquidASM
 - Had to find correspondant functions in SquidASM to provide classical and quantum communication
 - Classical communication: One to one correspondance between the programs
 - Rotations: Slightly adjusted Syntax between SimulaQron and SquidASM
 - Quantum communication: SimulaQron provides way to directly send qubits from Alice to Bob, SquidASM only offers EPR pairs 
 - Implemented Quantum State Teleportation to transfer qubits from Alice to Bob
 
-#### 2.3 Verifying the circuit
+#### 3.3 Verifying the circuit
 - SquidASM's only subroutine to infer about qubit states are computational basis measurements, not revealing the full qubit state
 - Subroutine in NetQASM has been implemented to convert SquidASM qubits to NetQASM, then using a NetQASM function to display the state
 
-#### 2.4 Implementation of X and Z gates
+#### 3.4 Implementation of X and Z gates
 - X and Z gates in circuits were not simulated correctly in the old protocol
 - Get converted into Byproduct operators in the flow, not containing any measurement's outcome as a condition
 - Byproduct operators in the old compiler were only executed if the condition was fulfilled, not when there was no condition
 - Changing this solved the problem
 
-#### 2.5 Generalization to N qubits
+#### 3.5 Generalization to N qubits
 - Old compiler was only tested on 1 and 2 qubit circuits
 - Running three and four qubit circuits on the new compiler yielded issues: Circuits' simulations outcome depended on the order of which commuting (!) gates were executed in the Qiskit circuit
 - Issue with indices was found: Old compiler contained two arrays with indices for output qubits: qout_idx and qidx_sort. Using only the sorted version solved the problem.
 
-#### 2.6 Changing of the drawing engine
+#### 3.6 Changing of the drawing engine
 - Old compiler used projetq to draw the circuit that the client wants to simulate
 - Heavy module, replaced it through Qiskit's drawing engine since Qiskit was used anyway for treatment of QASM input files
 
-#### 2.7 Statistics
+#### 3.7 Statistics
 - run_UBQC.py was not working properly if the protocol was run N>1 times. Issue: Qubit array on the server's side was initialized before the program was run, leading to overwriting of the N-ths simulation qubit array through the N+1-st. 
 - Including the initialization of the qubit array into the beginning of the server's instructions rather then before leads to reinitialization each time the simulation is run, solving the problem
 
-## 3. Outlook 
+## 4. Outlook 
 - Success probability depends on the number of qubits that are used for the computation: 1% failure chance for one qubit circuits, while this increases with the number of computational (!) qubits necessary for MBQC.
 - Displaying the density matrices of the output states shows slight deviations from the expected DM, leading to wrong measurement results in a small fraction of the iterations
 - Quantum State Teleportation implementation doesn't teleport the state 100% accurately, probably being the reason for the algorithm to fail at times. This is coherent with the fact that the more computational qubits we need, the more qubits we have to teleport and the higher the chance of failure becomes.
