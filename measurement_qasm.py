@@ -1,18 +1,14 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# ## Output check of measurement.py with QASM input
+# Output check of measurement.py with QASM input
 
 # In this notebook we check that the modified subroutine, loading circuits in the qasm format, yields the same output in measurement.py as the previous function.
-# 
+
 # First, we import all the necessary libraries and load a test circuit in the qasm format.
-
-# In[1]:
-
 
 import json
 import sys
-
 from collections import Iterable
 from copy import deepcopy
 from itertools import chain
@@ -24,11 +20,9 @@ from qiskit.compiler.assembler import assemble
 from qiskit.assembler.disassemble import disassemble
 
 
-# #### Here, we take QASM-type inputs directly, while this can be modified easily to take filepaths instead of QASM-objects.
+# Here, we take QASM-type inputs directly, while this can be modified easily to take filepaths instead of QASM-objects.
 
-# In[2]:
-
-
+# Defining dummy circuit
 q = QuantumRegister(2)
 c = ClassicalRegister(2)
 qc = QuantumCircuit(q, c)
@@ -40,13 +34,6 @@ qc.z(q[1])
 qc.cz(q[0],q[1])
 qobj = assemble(qc, shots=2000, memory=True)
 
-
-# ### Testing the output
-
-# In[3]:
-
-
-# Since every gate is implemented through (at least one) new qubit, the variable "qubit_count
 def _convert_gate_h(q1, q2, qubit_count):
     new_qubit = qubit_count + 1
     qubits = [[q1, q1, new_qubit], [new_qubit, 0, 0]]
@@ -183,6 +170,8 @@ def _convert_to_measurements(obj, gates, qubits, qubit_count, angles,qout_idx,qo
 
     return _convert_to_measurements(obj, gates, qubits, qubit_count, angles, qout_idx, qout_init, qout_final)
 
+
+# This is the only function that was modified with respect to the original compiler
 def load_circuit_qasm(qobj):
     
     circuit = qobj.to_dict()['experiments'][0]['instructions']
