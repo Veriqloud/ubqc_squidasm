@@ -1,5 +1,13 @@
 # Compiler for UBQC using SquidASM
-A compiler to simulate Universal Blind Quantum Computation using the quantum network simulation software SquidASM. As the basic framework an outdated compiler using SimulaQron has been modified, which can be found in the reference section.
+A compiler to simulate Universal Blind Quantum Computation [1] using the quantum network simulation software SquidASM. As the basic framework an outdated compiler using SimulaQron has been modified, which can be found in the reference section [2].
+
+## Outline
+- #### 0. Introduction to UBQC
+- #### 1. File structure
+- #### 2. Running the simulation
+- #### 3. Changes from the old compiler
+- #### 4. Outlook
+- #### 5. References
 
 ## 0. UBQC
 Universal Blind Quantum Computation provides a method for a client without any quantum computational power to execute quantum computations on a remote server without revealing neither the input nor the output. The measurement-based scheme for quantum computation (MBQC) is chosen as the foundation. This is a different approach to quantum computation than the gate-based one, while it's possible to construct MBQC instructions from any given gate-based circuit. These instructions consist of three types of objects: Entanglement operations, measurement instructions, and byproduct operators.
@@ -96,3 +104,7 @@ For debugging reasons, in this section the changes from the original protocol in
 - Success probability depends on the number of qubits that are used for the computation: 1% failure chance for one qubit circuits, while this increases with the number of computational (!) qubits necessary for MBQC.
 - Displaying the density matrices of the output states shows slight deviations from the expected DM, leading to wrong measurement results in a small fraction of the iterations
 - Quantum State Teleportation implementation doesn't teleport the state 100% accurately, probably being the reason for the algorithm to fail at times. This is coherent with the fact that the more computational qubits we need, the more qubits we have to teleport and the higher the chance of failure becomes.
+
+## 5. Referenecs
+[1] Universal Blind Quantum Computation, Kashefi et al. 2009
+[2] Original Compiler: https://github.com/quantumprotocolzoo/protocols/tree/master/UBQC
