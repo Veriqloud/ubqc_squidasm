@@ -112,6 +112,7 @@ For debugging reasons, in this section the changes from the original protocol in
 - Also depends on the number of measurements implemented.
 - Displaying the density matrices of the output states shows slight deviations from the expected DM, leading to wrong measurement results in a small fraction of the iterations
 - Quantum State Teleportation implementation doesn't teleport the state 100% accurately, probably being the reason for the algorithm to fail at times. This is coherent with the fact that the more computational qubits we need, the more qubits we have to teleport and the higher the chance of failure becomes.
+- Besides the correlation with a high amount of measurements and a high amount of computational qubits needed, a correlation with the types of gates is apparent (circuits with more #CNOT appear to fail more often, when comparing with equivalent circuits in terms of nMeas, nQubits)
 
 
 
