@@ -101,12 +101,18 @@ For debugging reasons, in this section the changes from the original protocol in
 - run_UBQC.py was not working properly if the protocol was run N>1 times. Issue: Qubit array on the server's side was initialized before the program was run, leading to overwriting of the N-ths simulation qubit array through the N+1-st. 
 - Including the initialization of the qubit array into the beginning of the server's instructions rather then before leads to reinitialization each time the simulation is run, solving the problem
 
-## 5. Outlook 
+## 5. Statistical results
+
+![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/internship_plot_compqubits.png?raw=true)
+
+![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/internship_plot_nmeas.png?raw=true)
+
+## 6. Outlook 
 - Success probability depends on the number of qubits that are used for the computation: 1% failure chance for one qubit circuits, while this increases with the number of computational (!) qubits necessary for MBQC.
+- Also depends on the number of measurements implemented.
 - Displaying the density matrices of the output states shows slight deviations from the expected DM, leading to wrong measurement results in a small fraction of the iterations
 - Quantum State Teleportation implementation doesn't teleport the state 100% accurately, probably being the reason for the algorithm to fail at times. This is coherent with the fact that the more computational qubits we need, the more qubits we have to teleport and the higher the chance of failure becomes.
 
-![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/internship_plot_compqubits.png?raw=true)
 
 
 
