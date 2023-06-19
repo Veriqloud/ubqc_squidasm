@@ -110,7 +110,7 @@ For debugging reasons, in this section the changes from the original protocol in
 
 ![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/internship_plot_outputqubits_noise.png?raw=true)
 
-![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/internship_plot_entanglements_noise.png?raw=true)
+![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/internship_plot_entanglements_nois.png?raw=true)
 
 ## 6. Outlook 
 - Success probability depends on the number of qubits that are used for the computation: 1% failure chance for one qubit circuits, while this increases with the number of computational (!) qubits necessary for MBQC.
