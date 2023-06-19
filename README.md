@@ -120,6 +120,7 @@ For debugging reasons, in this section the changes from the original protocol in
 - Besides the correlation with a high amount of measurements and a high amount of computational qubits needed, a correlation with the types of gates is apparent (circuits with more #CNOT appear to fail more often, when comparing with equivalent circuits in terms of nMeas, nQubits)
 - Without noise, no strong correlation between output qubits and success probability, but this emerges when noise is taken into account
 - Negative correlation between number of entanglements and success probability apparent, while this can also emerge from the correlation between entanglements and number of computational qubits itself
+- Even with simulated noise the success probability is significantly higher than the joint coin flip probability $1/2^N$ of a given circuit
 
 
 ## 7. Referenecs
