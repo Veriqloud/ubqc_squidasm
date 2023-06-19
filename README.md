@@ -17,12 +17,12 @@ The UBQC protocol relies on a mixture between classical and quantum communicatio
 
 The protocol can be sumarized using the following steps:
 
-1. Alice initializes her qubits, applies random phase $\theta$
-2. Alice further blinds her computation with an angle $r \in \{0, \pi \}$ 
-3. Alice sends the blinded qubits to Bob, together with measurement angles $\phi ' = \phi + \theta + r$
+1. For each qubit: Alice initializes it, applies random phase $\theta_i$
+2. Alice further blinds her computation with an angle $r_i \in \{0, \pi \}$ 
+3. Alice sends the blinded qubit to Bob, together with measurement angles $\phi_i ' = \phi + \theta_i + r_i$
 4. Alice sends lists of qubits to entangle  
-5. Bob entangles the qubits, creates cluster state 
-6. Bob measures the qubits in the provided basis, sends results back to Alice 
+5. Bob entangles the qubits, creates graph state 
+6. Bob measures the qubits successively in the provided basis, sends results back to Alice 
 7. Alice unblinds the qubits by applying phase $- \theta$ 
 8. Alice applies Byproduct operators depending on Bob's measurement outcome 
 
