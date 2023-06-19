@@ -23,7 +23,7 @@ The protocol can be sumarized using the following steps:
 4. Alice sends lists of qubits to entangle  
 5. Bob entangles the qubits, creates graph state 
 6. Bob measures the qubits successively in the provided basis, sends results back to Alice 
-7. Alice unblinds the qubits by applying phase $- \theta$ 
+7. Alice unblinds the qubits by applying phases $- \theta_i$ 
 8. Alice applies Byproduct operators depending on Bob's measurement outcome 
 
 After these steps are performed, the qubits that Alice corrected should be in the quantum state that was predicted as the outcome of the simulated circuit, where the computation was run without revealing it to Bob.
@@ -101,6 +101,9 @@ For debugging reasons, in this section the changes from the original protocol in
 #### 4.7 Statistics
 - run_UBQC.py was not working properly if the protocol was run N>1 times. Issue: Qubit array on the server's side was initialized before the program was run, leading to overwriting of the N-ths simulation qubit array through the N+1-st. 
 - Including the initialization of the qubit array into the beginning of the server's instructions rather then before leads to reinitialization each time the simulation is run, solving the problem
+
+#### 4.8 Added noise
+- Noise was added in the simulation to achieve more realistic result; the applied model contains noise for local qubit operations on either party's side, but no noise emerging from the quantum communication channel itself.
 
 ## 5. Statistical results
 
