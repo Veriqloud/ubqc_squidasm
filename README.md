@@ -125,16 +125,9 @@ For debugging reasons, in this section the changes from the original protocol in
 - Even with simulated noise the success probability is significantly higher than the joint coin flip probability $1/2^N$ of a given circuit
 
 
-## 7. Referenecs
-[1] "Universal Blind Quantum Computation", Kashefi et al. 2009
+## 7. Appendix
 
-[2] Original Compiler: https://github.com/quantumprotocolzoo/protocols/tree/master/UBQC
-
-[3] "The Measurement Calculus", Kashefi et al. 2007
-
-[4] https://squidasm.readthedocs.io
-
-[5] https://netqasm.readthedocs.io/en/latest/
+### 7.2 Classification of test circuits
 
 |Circuit|Outcome|#Qubits|#Comp. qubits|#Meas|# Entangl.|
 | ----- |-------|------|------|------|------|
@@ -153,4 +146,35 @@ For debugging reasons, in this section the changes from the original protocol in
 |13      | [1,1,0,0,0]   | 5    | 10    | 5    |  8   |
 |14      | [1,1,1,1,0]   | 5    | 14    | 9    |  10   |
 |15      | [0,1,1,1,1]   | 5    | 18    | 13    |  15   |
- 
+
+### 7.3 Results with default noise
+
+|Circuit/Iteration|1|2|3|4|5|6|7|8|9|10|Mean|STD|
+|----|----|----|----|----|----|----|----|----|----|----|----|----|
+1|100|99|100     | 98      | 98      | 99      | 97      | 99      | 99      | 97       & \textbf{98.6} & 1.0 \\
+2       | 98      | 97      | 97      | 96      | 97      | 98      | 100     | 99      | 100     | 98       |98.0 | 1.3 |
+3       | 94      | 94      | 97      | 98      | 94      | 93      | 91      | 96      | 95      | 96       |94.8 | 1.9 |
+4       | 97      | 95      | 96      | 97      | 98      | 95      | 94      | 92      | 92      | 92       |94.8 | 2.1 |
+5       | 92      | 88      | 93      | 88      | 91      | 93      | 92      | 95      | 92      | 93       |91. | 2.1 |
+6       | 85      | 80      | 77      | 82      | 82      | 85      | 81      | 89      | 82      | 81       |82.3|  3.1 |
+7       | 88      | 95      | 94      | 94      | 95      | 89      | 90      | 95      | 90      | 98       |92.8 | 3.1 |
+8       | 88      | 96      | 92      | 89      | 94      | 92      | 94      | 93      | 91      | 89       |91.8 | 2.4 |
+9       | 85      | 85      | 87      | 84      | 90      | 80      | 82      | 94      | 85      | 89       |86.1 | 3.9 |
+10      | 89      | 86      | 90      | 89      |86      | 88      | 87      | 95      | 93      | 88       |89.1 | 2.8 |
+11      | 86      | 92      | 85      | 91      | 92      | 85      | 85      | 83      | 89      | 90       |87.8 | 3.2 |
+12      | 87      | 87      | 85      | 86      | 87      | 80      | 89      | 81      | 90      | 84       |85.6 | 3.0 |
+13      | 93      | 86      | 95      | 90      | 86      | 84      | 90      | 90      | 90      | 93       |89.7 | 3.3 |
+14      | 84      | 84      | 84      | 83      | 81      | 80      | 90      | 78      | 77      | 87       |82.8 | 3.8 |
+15      | 77      | 73      | 87      | 75      | 75      | 80      | 74      | 83      | 77      | 88       |78.9 | 5.1|
+
+
+## 8. References
+[1] "Universal Blind Quantum Computation", Kashefi et al. 2009
+
+[2] Original Compiler: https://github.com/quantumprotocolzoo/protocols/tree/master/UBQC
+
+[3] "The Measurement Calculus", Kashefi et al. 2007
+
+[4] https://squidasm.readthedocs.io
+
+[5] https://netqasm.readthedocs.io/en/latest/
