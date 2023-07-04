@@ -26,7 +26,7 @@ The protocol can be sumarized using the following steps:
 7. Alice unblinds the qubits by applying phases $- \theta_i$ 
 8. Alice applies Byproduct operators depending on Bob's measurement outcome 
 
-Here $\phi$ refers to the measurement angle that's acquired through the flow construction of a given gate. After these steps are performed, the qubits that Alice corrected should be in the quantum state that was predicted as the outcome of the simulated circuit, where the computation was run without revealing it to Bob.
+Here $\phi$ refers to the measurement angle that's acquired through the flow construction of a given gate. $\theta$ can be chosen in different scales, where in this implementation $\theta$ can take 256 values between 0 and $2\pi$. After these steps are performed, the qubits that Alice corrected should be in the quantum state that was predicted as the outcome of the simulated circuit, where the computation was run without revealing it to Bob.
 
 ## 2. File structure
 
