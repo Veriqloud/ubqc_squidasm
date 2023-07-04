@@ -18,15 +18,15 @@ The UBQC protocol relies on a mixture between classical and quantum communicatio
 The protocol can be sumarized using the following steps:
 
 1. For each qubit: Alice initializes it, applies random phase $\theta_i$
-2. Alice further blinds her computation with an angle $r_i \in \{0, \pi \}$ 
+2. Alice further blinds the i-th qubit with an angle $r_i \in {0, \pi }$ 
 3. Alice sends the blinded qubit to Bob, together with measurement angles $\phi_i ' = \phi + \theta_i + r_i$
-4. Alice sends lists of qubits to entangle  
+4. Alice entanglement instructions to Bob  
 5. Bob entangles the qubits, creates graph state 
 6. Bob measures the qubits successively in the provided basis, sends results back to Alice 
 7. Alice unblinds the qubits by applying phases $- \theta_i$ 
 8. Alice applies Byproduct operators depending on Bob's measurement outcome 
 
-After these steps are performed, the qubits that Alice corrected should be in the quantum state that was predicted as the outcome of the simulated circuit, where the computation was run without revealing it to Bob.
+Here $/phi$ refers to the measurement angle that's acquired through the flow construction of a given gate. After these steps are performed, the qubits that Alice corrected should be in the quantum state that was predicted as the outcome of the simulated circuit, where the computation was run without revealing it to Bob.
 
 ## 2. File structure
 
@@ -55,7 +55,7 @@ After these steps are performed, the qubits that Alice corrected should be in th
 - Characteristic to SquidASM. File for simulation control: Yields the possibility to run the simulation N times and infer about the statistical likelyhood of success. Configure this file to change the number of runs as well as the output.
 
 ## 3. Running the simulation
-Functioning versions of SquidASM [4] and NetQASM [5] on the user's side are required to run the simulation. To run the simulation, head to the directory in which the files are deposited. Using the consol, $\texttt{python run\_ubqc.py}$ can be used to run the simulation given the current settings provided in run_ubqc.py. Possible arguments include:
+Functioning versions of SquidASM [4] and NetQASM [5] on the user's side are required to run the simulation. To run the simulation, head to the directory in which the files are deposited. Using the consol, $\texttt{python run_ubqc.py}$ can be used to run the simulation given the current settings provided in run_ubqc.py. Possible arguments include:
 - $\texttt{- l}$ for enabling and disabling the logging
 - $\texttt{- c \{ CIRCUIT \} }$ for choosing a circuit from circuits_qasm.py. Note that enumeration starts from zero.
 - $\texttt{- d}$ to enable or disable the drawing of the circuit
