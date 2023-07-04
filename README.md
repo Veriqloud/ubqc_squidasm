@@ -135,3 +135,198 @@ For debugging reasons, in this section the changes from the original protocol in
 [4] https://squidasm.readthedocs.io
 
 [5] https://netqasm.readthedocs.io/en/latest/
+
+## 8. Appendix
+\scalebox{1.2}{\textbf{Circuit 1}
+\hspace{5pt} \Qcircuit @C=1.0em @R=0.2em @!R { \\
+	 	\nghost{\ket{+}} & \lstick{\ket{+}} & \gate{\mathrm{H}} & \qw & \qw\\
+	 	\nghost{} & \lstick{} & \lstick{} \cw & \cw & \cw\\ 
+\\   }}
+\hline \vspace{3pt}
+\scalebox{1.2}{\\ \textbf{Circuit 2}
+\Qcircuit @C=1.0em @R=0.2em @!R { \\
+	 	\nghost{{q24} :  } & \lstick{\ket{+}} & \gate{\mathrm{Z}} & \gate{\mathrm{H}} & \gate{\mathrm{R_X}\,(\mathrm{128})} & \qw & \qw\\
+	 	\nghost{} & \lstick{} & \lstick{} \cw & \cw & \cw & \cw & \cw\\
+\\ }}
+\hline \vspace{3pt}
+\scalebox{1.2}{\textbf{Circuit 3}
+\Qcircuit @C=1.0em @R=0.2em @!R { \\
+	 	\nghost{{q25} :  } & \lstick{\ket{+}} & \gate{\mathrm{Z}} & \gate{\mathrm{H}} & \gate{\mathrm{X}} & \qw & \qw\\
+	 	\nghost{\mathrm{{c25} :  }} & \lstick{} & \lstick{} \cw & \cw & \cw & \cw & \cw\\
+\\ }}
+\hline \vspace{3pt}
+\scalebox{1.2}{ \textbf{Circuit 4}
+\Qcircuit @C=1.0em @R=0.2em @!R { \\
+	 	\nghost{{q26}_{0} :  } & \lstick{\ket{+}} & \gate{\mathrm{H}} & \qw & \qw & \qw\\
+	 	\nghost{{q26}_{1} :  } & \lstick{\ket{+}} & \gate{\mathrm{Z}} & \gate{\mathrm{H}} & \qw & \qw\\
+	 	\nghost{\mathrm{{c26} :  }} & \lstick{} & \lstick{} \cw & \cw & \cw & \cw\\
+\\ }}
+\hline \vspace{3pt}
+\scalebox{1.2}{ \textbf{Circuit 5}
+\Qcircuit @C=1.0em @R=0.2em @!R { \\
+	 	\nghost{{q27}_{0} :  } & \lstick{\ket{+}} & \gate{\mathrm{H}} & \qw & \targ & \qw & \qw\\
+	 	\nghost{{q27}_{1} :  } & \lstick{\ket{+}} & \gate{\mathrm{Z}} & \gate{\mathrm{H}} & \ctrl{-1} & \qw & \qw\\
+	 	\nghost{\mathrm{{c27} :  }} & \lstick{} & \lstick{} \cw & \cw & \cw & \cw & \cw\\
+\\ }}
+\hline \vspace{3pt}
+\scalebox{1.2}{ \textbf{Circuit 6}
+\Qcircuit @C=1.0em @R=0.2em @!R { \\
+	 	\nghost{{q28}_{0} :  } & \lstick{\ket{+}} & \gate{\mathrm{H}} & \qw & \ctrl{1} & \targ & \ctrl{1} & \qw & \qw\\
+	 	\nghost{{q28}_{1} :  } & \lstick{\ket{+}} & \gate{\mathrm{Z}} & \gate{\mathrm{H}} & \targ & \ctrl{-1} & \targ & \qw & \qw\\
+	 	\nghost{\mathrm{{c28} :  }} & \lstick{} & \lstick{} \cw & \cw & \cw & \cw & \cw & \cw & \cw \\
+   \\}}
+\newpage
+\scalebox{1.2}{ \textbf{Circuit 7}
+\Qcircuit @C=1.0em @R=0.2em @!R { \\
+	 	\nghost{{q29}_{0} :  } & \lstick{\ket{+}} & \gate{\mathrm{Z}} & \gate{\mathrm{H}} & \qw & \qw\\
+	 	\nghost{{q29}_{1} :  } & \lstick{\ket{+}} & \gate{\mathrm{Z}} & \gate{\mathrm{H}} & \qw & \qw\\
+	 	\nghost{{q29}_{2} :  } & \lstick{\ket{+}} & \gate{\mathrm{H}} & \qw & \qw & \qw\\
+	 	\nghost{\mathrm{{c29} :  }} & \lstick{} & \lstick{} \cw & \cw & \cw & \cw }}
+\hline \vspace{3pt}
+\scalebox{1.2}{ \textbf{Circuit 8}
+\Qcircuit @C=1.0em @R=0.2em @!R { \\
+	 	\nghost{{q30}_{0} :  } & \lstick{\ket{+}} & \gate{\mathrm{Z}} & \gate{\mathrm{H}} & \ctrl{2} & \qw & \qw\\
+	 	\nghost{{q30}_{1} :  } & \lstick{\ket{+}} & \gate{\mathrm{Z}} & \gate{\mathrm{H}} & \qw & \qw & \qw\\
+	 	\nghost{{q30}_{2} :  } & \lstick{\ket{+}} & \gate{\mathrm{H}} & \qw & \targ & \qw & \qw\\
+	 	\nghost{\mathrm{{c30} :  }} & \lstick{} & \lstick{} \cw & \cw & \cw & \cw & \cw\\
+\\ }}
+\hline \vspace{3pt}
+\scalebox{1.2}{ \textbf{Circuit 9}
+\Qcircuit @C=1.0em @R=0.2em @!R { \\
+	 	\nghost{{q31}_{0} :  } & \lstick{\ket{+}} & \gate{\mathrm{Z}} & \gate{\mathrm{H}} & \ctrl{2} & \targ & \qw & \qw\\
+	 	\nghost{{q31}_{1} :  } & \lstick{\ket{+}} & \gate{\mathrm{Z}} & \gate{\mathrm{H}} & \qw & \qw & \qw & \qw\\
+	 	\nghost{{q31}_{2} :  } & \lstick{\ket{+}} & \gate{\mathrm{H}} & \qw & \targ & \ctrl{-2} & \qw & \qw\\
+	 	\nghost{\mathrm{{c31} :  }} & \lstick{} & \lstick{} \cw & \cw & \cw & \cw & \cw & \cw\\
+\\ }}
+\hline \vspace{3pt}
+\scalebox{1.2}{ \textbf{Circuit 10}
+\Qcircuit @C=1.0em @R=0.2em @!R { \\
+	 	\nghost{{q32}_{0} :  } & \lstick{\ket{+}} & \gate{\mathrm{Z}} & \gate{\mathrm{H}} & \qw & \qw\\
+	 	\nghost{{q32}_{1} :  } & \lstick{\ket{+}} & \gate{\mathrm{Z}} & \gate{\mathrm{H}} & \qw & \qw\\
+	 	\nghost{{q32}_{2} :  } & \lstick{\ket{+}} & \gate{\mathrm{H}} & \qw & \qw & \qw\\
+	 	\nghost{{q32}_{3} :  } & \lstick{\ket{+}} & \gate{\mathrm{H}} & \qw & \qw & \qw\\
+	 	\nghost{\mathrm{{c32} :  }} & \lstick{} & \lstick{} \cw & \cw & \cw & \cw\\
+\\ }}
+\hline \vspace{3pt}
+
+\scalebox{1.2}{ \textbf{Circuit 11}
+\Qcircuit @C=1.0em @R=0.2em @!R { \\
+	 	\nghost{{q33}_{0} :  } & \lstick{\ket{+}} & \gate{\mathrm{Z}} & \gate{\mathrm{H}} & \qw & \qw & \qw\\
+	 	\nghost{{q33}_{1} :  } & \lstick{\ket{+}} & \gate{\mathrm{Z}} & \gate{\mathrm{H}} & \qw & \qw & \qw\\
+	 	\nghost{{q33}_{2} :  } & \lstick{\ket{+}} & \gate{\mathrm{H}} & \gate{\mathrm{X}} & \ctrl{1} & \qw & \qw\\
+	 	\nghost{{q33}_{3} :  } & \lstick{\ket{+}} & \gate{\mathrm{H}} & \qw & \targ & \qw & \qw\\
+	 	\nghost{\mathrm{{c33} :  }} & \lstick{} & \lstick{} \cw & \cw & \cw & \cw & \cw\\
+\\ }}
+\newpage
+\scalebox{1.2}{ \textbf{Circuit 12}
+\Qcircuit @C=1.0em @R=0.2em @!R { \\
+	 	\nghost{{q34}_{0} :  } & \lstick{\ket{+}} & \gate{\mathrm{Z}} & \gate{\mathrm{H}} & \qw & \qw & \qw & \qw & \qw\\
+	 	\nghost{{q34}_{1} :  } & \lstick{\ket{+}} & \gate{\mathrm{Z}} & \gate{\mathrm{H}} & \qw & \qw & \qw & \qw & \qw\\
+	 	\nghost{{q34}_{2} :  } & \lstick{\ket{+}} & \gate{\mathrm{H}} & \gate{\mathrm{H}} & \gate{\mathrm{Z}} & \gate{\mathrm{H}} & \ctrl{1} & \qw & \qw\\
+	 	\nghost{{q34}_{3} :  } & \lstick{\ket{+}} & \gate{\mathrm{H}} & \qw & \qw & \qw & \targ & \qw & \qw\\
+	 	\nghost{\mathrm{{c34} :  }} & \lstick{} & \lstick{} \cw & \cw & \cw & \cw & \cw & \cw & \cw\\
+\\ }}
+\hline \vspace{3pt}
+\scalebox{1.2}{ \textbf{Circuit 13}
+\Qcircuit @C=1.0em @R=0.2em @!R { \\
+	 	\nghost{{q35}_{0} :  } & \lstick{\ket{+}} & \gate{\mathrm{Z}} & \gate{\mathrm{H}} & \qw & \qw\\
+	 	\nghost{{q35}_{1} :  } & \lstick{\ket{+}} & \gate{\mathrm{Z}} & \gate{\mathrm{H}} & \qw & \qw\\
+	 	\nghost{{q35}_{2} :  } & \lstick{\ket{+}} & \gate{\mathrm{H}} & \qw & \qw & \qw\\
+	 	\nghost{{q35}_{3} :  } & \lstick{\ket{+}} & \gate{\mathrm{H}} & \qw & \qw & \qw\\
+	 	\nghost{{q35}_{4} :  } & \lstick{\ket{+}} & \gate{\mathrm{H}} & \qw & \qw & \qw\\
+	 	\nghost{\mathrm{{c35} :  }} & \lstick{} & \lstick{} \cw & \cw & \cw & \cw\\
+\\ }}
+\hline \vspace{3pt}
+\scalebox{1.2}{ \textbf{Circuit 14}
+\Qcircuit @C=1.0em @R=0.2em @!R { \\
+	 	\nghost{{q36}_{0} :  } & \lstick{\ket{+}} & \gate{\mathrm{Z}} & \gate{\mathrm{H}} & \qw & \qw & \qw\\
+	 	\nghost{{q36}_{1} :  } & \lstick{\ket{+}} & \gate{\mathrm{Z}} & \gate{\mathrm{H}} & \ctrl{2} & \qw & \qw\\
+	 	\nghost{{q36}_{2} :  } & \lstick{\ket{+}} & \gate{\mathrm{H}} & \gate{\mathrm{R_X}\,(\mathrm{128})} & \qw & \qw & \qw\\
+	 	\nghost{{q36}_{3} :  } & \lstick{\ket{+}} & \gate{\mathrm{H}} & \qw & \targ & \qw & \qw\\
+	 	\nghost{{q36}_{4} :  } & \lstick{\ket{+}} & \gate{\mathrm{H}} & \qw & \qw & \qw & \qw\\
+	 	\nghost{\mathrm{{c36} :  }} & \lstick{} & \lstick{} \cw & \cw & \cw & \cw & \cw\\
+\\ }}
+\hline \vspace{3pt}
+\scalebox{1.2}{ \textbf{Circuit 15}
+\Qcircuit @C=1.0em @R=0.2em @!R { \\
+	 	\nghost{{q37}_{0} :  } & \lstick{\ket{+}} & \gate{\mathrm{Z}} & \gate{\mathrm{H}} & \qw & \qw & \targ & \qw & \qw\\
+	 	\nghost{{q37}_{1} :  } & \lstick{\ket{+}} & \gate{\mathrm{Z}} & \gate{\mathrm{H}} & \ctrl{2} & \qw & \qw & \qw & \qw\\
+	 	\nghost{{q37}_{2} :  } & \lstick{\ket{+}} & \gate{\mathrm{H}} & \gate{\mathrm{R_X}\,(\mathrm{128})} & \qw & \qw & \qw & \qw & \qw\\
+	 	\nghost{{q37}_{3} :  } & \lstick{\ket{+}} & \gate{\mathrm{H}} & \qw & \targ & \qw & \qw & \qw & \qw\\
+	 	\nghost{{q37}_{4} :  } & \lstick{\ket{+}} & \gate{\mathrm{H}} & \gate{\mathrm{H}} & \gate{\mathrm{Z}} & \gate{\mathrm{H}} & \ctrl{-4} & \qw & \qw\\
+	 	\nghost{\mathrm{{c37} :  }} & \lstick{} & \lstick{} \cw & \cw & \cw & \cw & \cw & \cw & \cw\\
+\\ }}
+
+\newpage
+
+\begin{table}[!htp]
+\centering
+\begin{tabular}{c|c|c|c|c|c}
+\textbf{Circuit} & \textbf{Outcome}         & \textbf{\#Qubits} & \textbf{\#Comp. qubits} & \textbf{\#Meas.} & \textbf{\# Entangl.}  \\ \hline
+1       & {[}0{]}         & 1        & 2              & 1     &    1      \\
+2       & {[}0{]}         & 1        & 2              & 2     &    3      \\
+3       & {[}0{]}         & 1        & 4              & 3     &    1      \\
+4       & {[}0,1{]}       & 2        & 4              & 2     &     2     \\
+5       & {[}1,1{]}       & 2        & 6              & 4     &     5     \\
+6       & {[}1,0{]}       & 2        & 10             & 8     &     11     \\
+7       & {[}1,1,0{]}     & 3        & 6              & 3     &     3     \\
+8       & {[}1,1,1{]}     & 3        & 6              & 5     &     6     \\
+9       & {[}0,1,1{]}     & 3        & 10             & 7     &     9     \\
+10      & {[}1,1,0,0{]}   & 4        & 8              & 4     &     4     \\
+11      & {[}1,1,1,1{]}   & 4        & 10             & 6     &     7     \\
+12      & {[}1,1,1,1{]}   & 4        & 12             & 8     &     9     \\
+13      & {[}1,1,0,0,0{]} & 5        & 10             & 5     &     8     \\
+14      & {[}1,1,1,1,0{]} & 5        & 14             & 9     &     10     \\
+15      & {[}0,1,1,1,1{]} & 5        & 18             & 13    &     15    
+\end{tabular}
+\caption{The expected outcomes, number of output qubits, number of computational qubits, number of measurements needed, and number of entangled pairs for each of the test circuits.}
+\end{table}
+
+\subsection{Simulation results}
+\label{sec:results}
+
+\begin{table}[!htp]
+\centering
+\begin{tabular}{c|cccccccccc|c|c}
+\textbf{Circuit/Iteration} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{10} & \textbf{Mean} & \textbf{STD} \\ \hline
+1       & 100     & 99      & 100     & 98      & 98      & 99      & 97      & 99      & 99      & 97       & \textbf{98.6} & 1.0 \\
+2       & 98      & 97      & 97      & 96      & 97      & 98      & 100     & 99      & 100     & 98       & \textbf{98.0} & 1.3 \\
+3       & 94      & 94      & 97      & 98      & 94      & 93      & 91      & 96      & 95      & 96       & \textbf{94.8} & 1.9 \\
+4       & 97      & 95      & 96      & 97      & 98      & 95      & 94      & 92      & 92      & 92       & \textbf{94.8} & 2.1 \\
+5       & 92      & 88      & 93      & 88      & 91      & 93      & 92      & 95      & 92      & 93       & \textbf{91.7} & 2.1 \\
+6       & 85      & 80      & 77      & 82      & 82      & 85      & 81      & 89      & 82      & 81       & \textbf{82.4} & 3.1 \\
+7       & 88      & 95      & 94      & 94      & 95      & 89      & 90      & 95      & 90      & 98       & \textbf{92.8} & 3.1 \\
+8       & 88      & 96      & 92      & 89      & 94      & 92      & 94      & 93      & 91      & 89       & \textbf{91.8} & 2.4 \\
+9       & 85      & 85      & 87      & 84      & 90      & 80      & 82      & 94      & 85      & 89       & \textbf{86.1} & 3.9 \\
+10      & 89      & 86      & 90      & 89      & 86      & 88      & 87      & 95      & 93      & 88       & \textbf{89.1} & 2.8 \\
+11      & 86      & 92      & 85      & 91      & 92      & 85      & 85      & 83      & 89      & 90       & \textbf{87.8} & 3.2 \\
+12      & 87      & 87      & 85      & 86      & 87      & 80      & 89      & 81      & 90      & 84       & \textbf{85.6} & 3.0 \\
+13      & 93      & 86      & 95      & 90      & 86      & 84      & 90      & 90      & 90      & 93       & \textbf{89.7} & 3.3 \\
+14      & 84      & 84      & 84      & 83      & 81      & 80      & 90      & 78      & 77      & 87       & \textbf{82.8} & 3.8 \\
+15      & 77      & 73      & 87      & 75      & 75      & 80      & 74      & 83      & 77      & 88       & \textbf{78.9} & 5.1
+\end{tabular}
+\caption{The success rate of the UBQC protocol estimated from the number of results that were measured as right out of 100. These simulation runs have been performed 10 times for each circuit to get statistically relevant results. For plotting the data, circuits with the same number of measurements/entanglements/qubits have been binned together. This table refers to the noiseless case.}
+\end{table}
+
+\begin{table}[!htp]
+\centering
+\begin{tabular}{c|cccccccccc|c|c}
+\textbf{Circuit/Iteration} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{10} & \textbf{Mean} & \textbf{STD} \\ \hline
+1       & 63&72&69&74&66&72&66&75&72&77       & \textbf{70.6} & 4.2 \\
+2       & 50&72&63&57&55&68&56&63&57&57       & \textbf{59.8} & 6.3 \\
+3       & 63&72&63&69&71&70&58&73&66&80       & \textbf{68.5} & 5.9 \\
+4       & 46&46&55&33&49&45&43&58&48&43       & \textbf{46.6} & 6.5 \\
+5       & 36&34&46&41&36&35&34&41&42&39       & \textbf{38.4} & 3.8 \\
+6       & 23&24&28&28&28&25&24&24&23&29       & \textbf{25.6} & 2.2 \\
+7       & 36&33&44&39&39&30&41&32&36&44       & \textbf{37.4} & 4.6 \\
+8       & 20&23&28&28&30&26&30&26&31&27       & \textbf{26.9} & 3.2 \\
+9       & 24&24&23&21&23&19&25&17&31&23       & \textbf{23.0} & 3.5 \\
+10      & 25&27&26&30&28&20&23&28&27&17       & \textbf{25.1} & 3.8 \\
+11      & 21&14&18&21&19&14&20&19&23&20       & \textbf{18.9} & 2.8 \\
+12      & 12&10&13&16&16&17&13&20&9&14       & \textbf{14.0} & 3.2 \\
+13      & 17&27&16&19&19&25&12&14&13&10       & \textbf{17.2} & 5.2 \\
+14      & 17&15&14&13&11&10&12&6&9&13       & \textbf{12.0} & 3.0 \\
+15      & 7&4&6&10&7&7&5&13&13&12       & \textbf{8.4} & 3.2
+\end{tabular}
+\caption{The success rate of the UBQC protocol for the same 15 circuits in the noisy case (see section \ref{sec:noise})}
+\end{table}
