@@ -7,9 +7,10 @@ A compiler to simulate Universal Blind Quantum Computation [1] using the quantum
 #### 3. Running the simulation
 #### 4. Changes from the old compiler
 #### 5. Statistical results
-#### 6. Outlook
-#### 7. Appendix
-#### 8. References
+#### 6. Discussion
+#### 7. Security Benchmarking
+#### 8. Appendix
+#### 9. References
 
 ## 1. UBQC
 Universal Blind Quantum Computation provides a method for a client without any quantum computational power to execute quantum computations on a remote server without revealing neither the input nor the output. The measurement-based scheme for quantum computation (MBQC) is chosen as the foundation. This is a different approach to quantum computation than the gate-based one, while it's possible to construct MBQC instructions from any given gate-based circuit. These instructions consist of three types of objects: Entanglement operations, measurement instructions, and byproduct operators. To be able to run these instructions according to [1], one needs to reorder these instructions by making use of commutation relations. Like this, we can achieve that first all entanglement operations are perforemed, then all the measurements, and finally the byproducts. This so called $\textit{flow}$ first been first introduced by Kashefi et al. [3].
@@ -125,10 +126,12 @@ For debugging reasons, in this section the changes from the original protocol in
 - Noise configuration: SquidASM's default file includes noise, had to be manipulated to reach $\approx$ 100\% success probability
 - Even with simulated noise the success probability is significantly higher than the joint coin flip probability $1/2^N$ of a given circuit
 
+## 7. Security Benchmarking
+The success rate in the noisy case was significantly higher than the random success rate, being an indicator that the protocol can be used to infer about the right result of a given circuit even in the presence of noise. Besides the accuracy, the security of the protocol is another aspect that can be estimated. As a measure for security we take the 
 
-## 7. Appendix
+## 8. Appendix
 
-## 7.1 Test Circuits
+## 8.1 Test Circuits
 
 ![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/circuit_1.png?raw=true)
 ![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/circuit_2.png?raw=true)
@@ -146,9 +149,7 @@ For debugging reasons, in this section the changes from the original protocol in
 ![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/circuit_14.png?raw=true)
 ![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/circuit_15.png?raw=true)
 
-
-
-### 7.2 Classification of test circuits
+### 8.2 Classification of test circuits
 
 |Circuit| Exp. Outcome|#Qubits|#Comp. qubits|#Meas|# Entangl.|
 | ----- |-------|------|------|------|------|
@@ -168,7 +169,7 @@ For debugging reasons, in this section the changes from the original protocol in
 |14      | **[1,1,1,1,0]**   | 5    | 14    | 9    |  10   |
 |15      | **[0,1,1,1,1]**   | 5    | 18    | 13    |  15   |
 
-### 7.3 Results with default noise
+### 8.3 Results with default noise
 
 |Circuit/Iteration|1|2|3|4|5|6|7|8|9|10|Mean|STD|
 |----|----|----|----|----|----|----|----|----|----|----|----|----|
@@ -190,7 +191,7 @@ For debugging reasons, in this section the changes from the original protocol in
 
 All results here refer to the success rate out of 100 iterations for a given circuit.
 
-### 7.4 Results with tailored noise
+### 8.4 Results with tailored noise
 
 |Circuit/Iteration|1|2|3|4|5|6|7|8|9|10|Mean|STD|
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
@@ -213,7 +214,7 @@ All results here refer to the success rate out of 100 iterations for a given cir
 Again, the results refer to the success rate out of 100 iterations for each test circuit.
 
 
-## 8. References
+## 9. References
 [1] "Universal Blind Quantum Computation", Kashefi et al. 2009
 
 [2] Original Compiler: https://github.com/quantumprotocolzoo/protocols/tree/master/UBQC
