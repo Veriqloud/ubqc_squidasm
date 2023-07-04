@@ -127,6 +127,12 @@ For debugging reasons, in this section the changes from the original protocol in
 
 ## 7. Appendix
 
+## 7.1 Test Circuits
+       ┌───┐
+  q1:  ┤ H ├
+       └───┘
+c1: 1/═════
+
 ### 7.2 Classification of test circuits
 
 |Circuit|Outcome|#Qubits|#Comp. qubits|#Meas|# Entangl.|
