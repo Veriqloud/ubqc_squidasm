@@ -8,7 +8,8 @@ A compiler to simulate Universal Blind Quantum Computation [1] using the quantum
 #### 4. Changes from the old compiler
 #### 5. Statistical results
 #### 6. Outlook
-#### 7. References
+#### 7. Appendix
+#### 8. References
 
 ## 1. UBQC
 Universal Blind Quantum Computation provides a method for a client without any quantum computational power to execute quantum computations on a remote server without revealing neither the input nor the output. The measurement-based scheme for quantum computation (MBQC) is chosen as the foundation. This is a different approach to quantum computation than the gate-based one, while it's possible to construct MBQC instructions from any given gate-based circuit. These instructions consist of three types of objects: Entanglement operations, measurement instructions, and byproduct operators. To be able to run these instructions according to [1], one needs to reorder these instructions by making use of commutation relations. Like this, we can achieve that first all entanglement operations are perforemed, then all the measurements, and finally the byproducts. This so called $\textit{flow}$ first been first introduced by Kashefi et al. [3].
@@ -129,7 +130,8 @@ For debugging reasons, in this section the changes from the original protocol in
 
 ## 7.1 Test Circuits
 
-
+![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/circuit_1.png?raw=true)
+![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/circuit_2.png?raw=true)
 
 ### 7.2 Classification of test circuits
 
