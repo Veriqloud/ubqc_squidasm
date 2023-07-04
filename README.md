@@ -116,7 +116,7 @@ For debugging reasons, in this section the changes from the original protocol in
 ![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/internship_plot_entanglements_noise.png?raw=true)
 
 ## 6. Discussion
-- Noiseless (!) success probability depends on the number of qubits that are used for the computation: 1% failure chance for one qubit circuits, while this increases with the number of computational (!) qubits necessary for MBQC.
+- Success probability depends on the number of qubits that are used for the computation: 1% failure chance for one qubit circuits, while this increases with the number of computational (!) qubits necessary for MBQC. Reason: Apparent noiseless default configuration was indeed not noiseless
 - Also correlation of success probability with the number of measurements necessary
 - Displaying the density matrices of the output states shows slight deviations from the expected DM, leading to wrong measurement results in a small fraction of the iterations
 - Quantum State Teleportation implementation doesn't teleport the state 100% accurately, probably being the reason for the algorithm to fail at times. This is coherent with the fact that the more computational qubits we need, the more qubits we have to teleport and the higher the chance of failure becomes.
