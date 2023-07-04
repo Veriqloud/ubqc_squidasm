@@ -189,7 +189,7 @@ All results here refer to the success rate out of 100 iterations for a given cir
 14      | 17|15|14|13|11|10|12|6|9|13      |12.0 |3.0 |
 15      | 7|4|6|10|7|7|5|13|13|12      |8.4 | 3.2|
 
-Again, the results refer to the success rate out of 100 iterations for each circuit.
+Again, the results refer to the success rate out of 100 iterations for each test circuit.
 
 
 ## 8. References
