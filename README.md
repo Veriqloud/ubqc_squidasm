@@ -147,6 +147,7 @@ For debugging reasons, in this section the changes from the original protocol in
 ![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/circuit_15.png?raw=true)
 
 
+
 ### 7.2 Classification of test circuits
 
 |Circuit| Exp. Outcome|#Qubits|#Comp. qubits|#Meas|# Entangl.|
