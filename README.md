@@ -55,7 +55,7 @@ Here $/phi$ refers to the measurement angle that's acquired through the flow con
 - Characteristic to SquidASM. File for simulation control: Yields the possibility to run the simulation N times and infer about the statistical likelyhood of success. Configure this file to change the number of runs as well as the output.
 
 ## 3. Running the simulation
-Functioning versions of SquidASM [4] and NetQASM [5] on the user's side are required to run the simulation. To run the simulation, head to the directory in which the files are deposited. Using the consol, $\texttt{python run_ubqc.py}$ can be used to run the simulation given the current settings provided in run_ubqc.py. Possible arguments include:
+Functioning versions of SquidASM [4] and NetQASM [5] on the user's side are required to run the simulation. To run the simulation, head to the directory in which the files are deposited. Using the consol, python run\_ubqc.py can be used to run the simulation given the current settings provided in run_ubqc.py. Possible arguments include:
 - $\texttt{- l}$ for enabling and disabling the logging
 - $\texttt{- c \{ CIRCUIT \} }$ for choosing a circuit from circuits_qasm.py. Note that enumeration starts from zero.
 - $\texttt{- d}$ to enable or disable the drawing of the circuit
