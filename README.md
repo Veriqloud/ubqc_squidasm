@@ -132,6 +132,20 @@ For debugging reasons, in this section the changes from the original protocol in
 
 ![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/circuit_1.png?raw=true)
 ![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/circuit_2.png?raw=true)
+![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/circuit_3.png?raw=true)
+![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/circuit_4.png?raw=true)
+![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/circuit_5.png?raw=true)
+![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/circuit_6.png?raw=true)
+![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/circuit_7.png?raw=true)
+![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/circuit_8.png?raw=true)
+![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/circuit_9.png?raw=true)
+![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/circuit_10.png?raw=true)
+![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/circuit_11.png?raw=true)
+![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/circuit_12.png?raw=true)
+![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/circuit_13.png?raw=true)
+![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/circuit_14.png?raw=true)
+![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/circuit_15.png?raw=true)
+
 
 ### 7.2 Classification of test circuits
 
