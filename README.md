@@ -109,13 +109,13 @@ For debugging reasons, in this section the changes from the original protocol in
 
 ## 5. Statistical results
 
-![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/internship_plot_compqubits_noise_accumulated.png?raw=true)
+![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/plots/internship_plot_compqubits_noise_accumulated.png?raw=true)
 
-![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/internship_plot_nmeas_noise_accumulated.png?raw=true)
+![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/plots/internship_plot_nmeas_noise_accumulated.png?raw=true)
 
-![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/internship_plot_outputqubits_noise.png?raw=true)
+![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/plots/internship_plot_outputqubits_noise.png?raw=true)
 
-![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/internship_plot_entanglements_noise.png?raw=true)
+![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/plots/internship_plot_entanglements_noise.png?raw=true)
 
 ## 6. Discussion
 - Success probability depends on the number of qubits that are used for the computation: 1% failure chance for one qubit circuits, while this increases with the number of computational (!) qubits necessary for MBQC. Reason: Apparent noiseless default configuration was indeed not noiseless
