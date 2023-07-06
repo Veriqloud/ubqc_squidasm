@@ -77,10 +77,10 @@ args=parser.parse_args()
 circuits = qasm_circs()
 
 # Which circuit?
-    
-# If no circuit is chosen, take a simple Hadamard gate (Circuit 4)
+
+# If no circuit is chosen, take a simple Hadamard gate (Circuit 1)
 if not args.circuit:
-    circ = circuits[3]
+    circ = circuits[0]
     circ_flow = circuit_file_to_flow(circ[0])
     seq = circ_flow[0]
     qout_idx = circ_flow[1]
@@ -91,12 +91,13 @@ else:
     circ = circuits[int(args.circuit)]
     circ_flow = circuit_file_to_flow(circ[0])
     seq = circ_flow[0]
+    result = circ[1]
     qout_idx = circ_flow[1]
     print("Client chose circuit {}!".format(int(args.circuit)))
 
 # If the client wants to draw the circuit
 if(args.draw):
-    print(circ[1])
+    print(circ[2])
 
 # Define gates the client wants to apply
 def apply_singleU(U,q):
