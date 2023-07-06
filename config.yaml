@@ -1,3 +1,5 @@
+# Noise configuration file for a perfect, noiseless simulation
+
 stacks:
   - name: Alice
     qdevice_typ: generic
