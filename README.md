@@ -54,7 +54,7 @@ Here $\phi$ refers to the measurement angle that's acquired through the flow con
 - Characteristic to SquidASM. File to configure the network and the type of noise that's simulated: Possibility to modify the amount of noise that's simulated on either parties side, as well as the quantum communication channel itself. The default configuration (config_default.yaml), a perfect noiseless configuration (config_perfect.yaml), and a customized noise configuration (config_noise.yaml) are provided. The user can switch between those in the file run_ubqc.py.
 
 #### 2.8 run_ubqc.py
-- Characteristic to SquidASM. File for simulation control: Yields the possibility to run the simulation N times and infer about the statistical likelyhood of success. Configure this file to change the number of runs as well as the output.
+- Characteristic to SquidASM. File for simulation control: Yields the possibility to run the simulation N times and infer about the statistical likelyhood of success. Configure this file to change the number of runs as well as the output. Configuration file is also chosen here.
 
 ## 3. Running the simulation
 Functioning versions of SquidASM [4] and NetQASM [5] on the user's side are required to run the simulation. To run the simulation, head to the directory in which the files are deposited. Using the consol, python run_ubqc.py can be used to run the simulation given the current settings provided in run_ubqc.py. Possible arguments include:
