@@ -38,8 +38,6 @@ The UBQC protocol relies on a mixture between classical and quantum communicatio
 
 Here $\phi$ refers to the measurement angle that's acquired through the flow construction of a given gate. $\theta$ can be chosen in different scales, where in this implementation $\theta$ can take 256 values between 0 and $2\pi$. After these steps are performed, the qubits that Alice corrected should be in the quantum state that was predicted as the outcome of the simulated circuit, where the computation was run without revealing it to Bob.
 
-\hline
-
 ## 2. File structure
 
 #### 2.1 measurement.py
@@ -65,6 +63,9 @@ Here $\phi$ refers to the measurement angle that's acquired through the flow con
 
 #### 2.8 run_ubqc.py
 - Characteristic to SquidASM. File for simulation control: Yields the possibility to run the simulation N times and infer about the statistical likelyhood of success. Configure this file to change the number of runs as well as the output. Configuration file is also chosen here.
+
+#### 2.9 benchmarking.py
+- Used to estimate the security of the protocol. See section 7 for further information.
 
 ## 3. Running the simulation
 Functioning versions of SquidASM [4] and NetQASM [5] on the user's side are required to run the simulation. To run the simulation, head to the directory in which the files are deposited. Using the consol, python run_ubqc.py can be used to run the simulation given the current settings provided in run_ubqc.py. Possible arguments include:
