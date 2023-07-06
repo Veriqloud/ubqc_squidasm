@@ -1,5 +1,8 @@
+# Noise configuration file with customized noise:
+
 # Perfect 2 node network, no noise from either computation on the nodes or communication between nodes
-# Configuration with perfect link, a generic qdevice, but some noise on the generic device
+# configuration with perfect link, a generic qdevice, but some noise on the generic device
+
 qdevice_cfg: &qdevice_cfg
   num_qubits: 20
 
