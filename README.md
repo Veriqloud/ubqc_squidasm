@@ -143,7 +143,7 @@ Besides the accuracy, the security of the protocol is another aspect that can be
 - The only gates that a circuit can consist of are the fundamental set **(X,Z,J,CZ,H)**
 - Since X and Z gates appear only in the section of byproduct operators, Bob has no way to infer about their application (all estimated probabilities are up to an arbitrary number of these gates)
 - The only information that Bob gets from Alice are the number of computational qubits, the number of measurements, and the number of entangled pairs
-- Whenever a measurement at a given angle is performed (meaning a H or J gate), Bob has a chance of 1/256 to guess the computational angle of the gate
+- Whenever a measurement at a given angle is performed (meaning a H or J gate), Bob cannot infer information about the measurement angle and hence has a chance of 1/256 to guess the computational angle implementing the given gate
 - Different possible circuits are identified with each other if they are equivalent
 
 To get an estimate for the probability for Bob to guess the right circuit, one has to find out how many circuits are consistent with the information given by Alice. Each fundamental gate is associated with the following instructions in the MBQC formalism:
