@@ -26,7 +26,7 @@ The UBQC protocol relies on a mixture between classical and quantum communicatio
 
 **3.** Alice sends the blinded qubit to Bob, together with measurement angles $\phi_i ' = \phi + \theta_i + r_i$
 
-**4.*+ Alice entanglement instructions to Bob  
+**4.** Alice entanglement instructions to Bob  
 
 **5.** Bob entangles the qubits, creates graph state 
 
@@ -37,6 +37,8 @@ The UBQC protocol relies on a mixture between classical and quantum communicatio
 **8.** Alice applies Byproduct operators depending on Bob's measurement outcome 
 
 Here $\phi$ refers to the measurement angle that's acquired through the flow construction of a given gate. $\theta$ can be chosen in different scales, where in this implementation $\theta$ can take 256 values between 0 and $2\pi$. After these steps are performed, the qubits that Alice corrected should be in the quantum state that was predicted as the outcome of the simulated circuit, where the computation was run without revealing it to Bob.
+
+\hline
 
 ## 2. File structure
 
