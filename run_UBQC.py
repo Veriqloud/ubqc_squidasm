@@ -4,7 +4,10 @@ from squidasm.run.stack.config import StackNetworkConfig
 from squidasm.run.stack.run import run
 import netsquid
 
-cfg = StackNetworkConfig.from_file("config.yaml")
+# Here: Choose noise configuration. Can choose between the default configuration (config_default.yaml), a perfect config (config_perfect)
+# and a customized noise configuration (config_noise.yaml). Standard is perfect configuration.
+
+cfg = StackNetworkConfig.from_file("config_perfect.yaml")
 
 alice_program = AliceProgram()
 bob_program = BobProgram()
