@@ -6,7 +6,7 @@ A compiler to simulate Universal Blind Quantum Computation [1] using the quantum
 #### 2. File structure
 #### 3. Running the simulation
 #### 4. Changes from the old compiler
-#### 5. Statistical results
+#### 5. Performance
 #### 6. Discussion
 #### 7. Security Benchmarking
 #### 8. Appendix
@@ -118,7 +118,7 @@ For debugging reasons, in this section the changes from the original protocol in
 #### 4.8 Added noise
 - Noise was added in the simulation to achieve more realistic result; the applied model contains noise for local qubit operations on either party's side, but no noise emerging from the quantum communication channel itself.
 
-## 5. Statistical results
+## 5. Performance
 
 ![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/plots/internship_plot_compqubits_noise_accumulated.png?raw=true)
 
