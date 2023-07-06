@@ -118,16 +118,16 @@ For debugging reasons, in this section the changes from the original protocol in
 ![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/plots/internship_plot_entanglements_noise.png?raw=true)
 
 ## 6. Discussion
-- Success probability depends on the number of qubits that are used for the computation: 1% failure chance for one qubit circuits, while this increases with the number of computational (!) qubits necessary for MBQC. Reason: Apparent noiseless default configuration was indeed not noiseless
-- Also correlation of success probability with the number of measurements necessary
+- Success probability depends on the number of qubits that are used for the computation: 1% failure chance for one qubit circuits, while this increases with the number of computational (!) qubits necessary for MBQC. Reason: Default configuration was indeed not noiseless
+- Also correlation of success probability with the number of measurements needed
 - Displaying the density matrices of the output states shows slight deviations from the expected DM, leading to wrong measurement results in a small fraction of the iterations
-- Quantum State Teleportation implementation doesn't teleport the state 100% accurately, probably being the reason for the algorithm to fail at times. This is coherent with the fact that the more computational qubits we need, the more qubits we have to teleport and the higher the chance of failure becomes.
-- Besides the correlation with a high amount of measurements and a high amount of computational qubits needed, a correlation with the types of gates is apparent (circuits with more #CNOT appear to fail more often, when comparing with equivalent circuits in terms of nMeas, nQubits)
-- Noise configuration: SquidASM's default file includes noise, had to be manipulated to reach $\approx$ 100\% success probability
-- Even with simulated noise the success probability is significantly higher than the joint coin flip probability $1/2^N$ of a given circuit
+- Quantum State Teleportation implementation doesn't teleport the state 100% accurately, probably being the reason for the algorithm to fail at times. This is coherent with the fact that the more computational qubits we need, the more qubits we have to teleport and the higher the chance of failure becomes. Reason here again is SquidASM's default noise configuration file
+- Besides the correlation with a high amount of measurements and a high amount of computational qubits needed, a correlation with the types of gates is apparent in the default case (circuits with more #CNOT appear to fail more often, when comparing with equivalent circuits in terms of nMeas, nQubits). Reason: Two qubit gates come with a higher depolarization chance in the default case.
+- SquidASM's default file includes noise, had to be manipulated to reach $\approx$ 100\% success probability. Perfectly noiseless configuration can be found in config_perfect.yaml
+- Even with the customized noise the success probability is significantly higher than the joint coin flip probability $1/2^N$ of a given circuit. Indicator that the protocol can be used to infer about the result of a UBQC computation even in the presence of noise, if the sample size is big enough.
 
 ## 7. Security Benchmarking
-The success rate in the noisy case was significantly higher than the random success rate, being an indicator that the protocol can be used to infer about the right result of a given circuit even in the presence of noise. Besides the accuracy, the security of the protocol is another aspect that can be estimated. As a measure for security we take the probability for Bob to guess the right circuit that Alice wants to implement. For that, the following assumptions are made:
+Besides the accuracy, the security of the protocol is another aspect that can be estimated. As a measure for security we take the probability for Bob to guess the right circuit that Alice wants to implement. For that, the following assumptions are made:
 
 - The only gates that a circuit can consist of are the fundamental set **(X,Z,J,CZ,H)**
 - Since X and Z gates appear only in the section of byproduct operators, Bob has no way to infer about their application (all estimated probabilities are up to an arbitrary number of these gates)
@@ -152,21 +152,7 @@ After all possible sets of gates are found by solving the aforementioned combina
 
 ## 8.1 Test Circuits
 
-![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/circuit_1.png?raw=true)
-![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/circuit_2.png?raw=true)
-![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/circuit_3.png?raw=true)
-![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/circuit_4.png?raw=true)
-![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/circuit_5.png?raw=true)
-![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/circuit_6.png?raw=true)
-![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/circuit_7.png?raw=true)
-![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/circuit_8.png?raw=true)
-![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/circuit_9.png?raw=true)
-![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/circuit_10.png?raw=true)
-![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/circuit_11.png?raw=true)
-![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/circuit_12.png?raw=true)
-![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/circuit_13.png?raw=true)
-![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/circuit_14.png?raw=true)
-![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/circuit_15.png?raw=true)
+Drawings of the circuits that the compiler was tested upon can be found in the folder test_circuits.
 
 ### 8.2 Classification of test circuits
 
@@ -231,7 +217,6 @@ All results here refer to the success rate out of 100 iterations for a given cir
 15      | 7|4|6|10|7|7|5|13|13|12      |**8.4** | 3.2|
 
 Again, the results refer to the success rate out of 100 iterations for each test circuit.
-
 
 ## 9. References
 [1] "Universal Blind Quantum Computation", Kashefi et al. 2009
