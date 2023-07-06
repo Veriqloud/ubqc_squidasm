@@ -47,7 +47,7 @@ Here $\phi$ refers to the measurement angle that's acquired through the flow con
 - Reorders the measurement instructions, putting them in the EMC order (Entanglement, measurement, correction)
 
 #### 2.3 circuits_qasm.py
-- Contains 20 test circuits on which the protocol can be tested. Circuits are first defined over Qiskit and then converted to QASM objects. This yields the possibility to simulate arbitrary qiskit circuits by loading them here.
+- Contains 15 test circuits on which the protocol can be tested. Circuits are first defined over Qiskit and then converted to QASM objects. This yields the possibility to simulate arbitrary qiskit circuits by loading them here.
 
 #### 2.4 angles.py
 - Contains instructions on how to compute the angle that Alice has to send to Bob, including the actual computational angle as well as Alice's blinding angle.
