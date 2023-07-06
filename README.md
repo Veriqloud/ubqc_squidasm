@@ -97,8 +97,8 @@ For debugging reasons, in this section the changes from the original protocol in
 - Subroutine in NetQASM has been implemented to convert SquidASM qubits to NetQASM, then using a NetQASM function to display the state
 
 #### 4.4 Implementation of X and Z gates
-- X and Z gates in circuits were not simulated correctly in the old protocol
-- Get converted into Byproduct operators in the flow, not containing any measurement's outcome as a condition
+- X and Z gates in circuits were not simulated correctly using the old compiler
+- These gates get converted into byproduct operators in the flow construction, not containing any measurement's outcome as a condition
 - Byproduct operators in the old compiler were only executed if the condition was fulfilled, not when there was no condition
 - Changing this solved the problem
 
