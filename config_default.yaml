@@ -1,3 +1,5 @@
+# Noise configuration file with default noise in SquidASM.
+
 stacks:
   - name: Alice
     qdevice_typ: generic
