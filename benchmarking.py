@@ -1,3 +1,5 @@
+# Code to estimate the probability of Bob to guess the circuit Alice wants to implement
+
 import scipy.special
 import numpy as np
 from collections import Iterable
@@ -11,6 +13,7 @@ from qiskit import transpile
 from qiskit.quantum_info import Statevector
 from itertools import combinations_with_replacement
 from itertools import combinations
+from measurement_qasm import load_circuit_qasm
 
 # Define the three fundamental gates that are used in the measurement formalism. All circuits will be expressed in terms of these.
 
