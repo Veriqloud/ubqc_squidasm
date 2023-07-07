@@ -170,7 +170,7 @@ Drawings of the circuits that the compiler was tested upon can be found in the f
 |Circuit| Expected Outcome|#Qubits|#Computational qubits|#Measurements|#Entanglements|
 | ----- |-------|------|------|------|------|
 |1      | **[0]**   | 1    | 2    | 1    |  1   |
-|2      | **[0]**   | 1    | 2    | 2    |  3   |
+|2      | **[0]**   | 1    | 2    | 1    |  1   |
 |3      | **[0]**   | 1    | 4    | 3    |  1   |
 |4      | **[0,1]**   | 2    | 4    | 2    |  2   |
 |5      | **[1,1]**   | 2    | 6    | 4    |  5   |
