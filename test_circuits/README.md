@@ -1,4 +1,7 @@
-## 1. Drawings of test circuits
+# Test circuits
+In this file the 15 test circuits that the compiler was tested upon can be found, as well as their classification in terms of the MBQC formalism and the results acquired in the simulations with default noise, as well as customized noise.
+
+### 1. Drawings of test circuits
 
 ![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/test_circuits/circuit_1.png?raw=true)
 ![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/test_circuits/circuit_2.png?raw=true)
@@ -16,7 +19,7 @@
 ![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/test_circuits/circuit_14.png?raw=true)
 ![alt text](https://github.com/veriqloud/ubqc_squidasm/blob/main/test_circuits/circuit_15.png?raw=true)
 
-## 2. Classification of circuits
+### 2. Classification of circuits
 
 |Circuit| Expected Outcome|#Qubits|#Computational qubits|#Measurements|#Entanglements|
 | ----- |-------|------|------|------|------|
@@ -36,7 +39,7 @@
 |14      | **[1,1,1,1,0]**   | 5    | 14    | 9    |  10   |
 |15      | **[0,1,1,1,1]**   | 5    | 18    | 13    |  15   |
 
-## 3. Performance
+### 3. Performance
 
 |Circuit/Iteration|Mean (default noise)|STD (default noise)|Mean (customized noise) | STD (customized noise) |
 |----|----|----|----|----|
