@@ -93,7 +93,7 @@ else:
     seq = circ_flow[0]
     result = circ[1]
     qout_idx = circ_flow[1]
-    print("Client chose circuit {}!".format(int(args.circuit)))
+    print("Client chose circuit {}!".format(int(args.circuit)+1))
 
 # If the client wants to draw the circuit
 if(args.draw):
