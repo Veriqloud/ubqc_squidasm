@@ -167,7 +167,7 @@ Drawings of the circuits that the compiler was tested upon can be found in the f
 
 ### 8.2 Classification of test circuits
 
-|Circuit| Exp. Outcome|#Qubits|#Comp. qubits|#Meas|# Entangl.|
+|Circuit| Expected Outcome|#Qubits|#Computational qubits|#Measurements|#Entanglements|
 | ----- |-------|------|------|------|------|
 |1      | **[0]**   | 1    | 2    | 1    |  1   |
 |2      | **[0]**   | 1    | 2    | 2    |  3   |
