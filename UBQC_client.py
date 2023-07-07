@@ -211,12 +211,6 @@ class AliceProgram(Program):
             q.rot_Z(rand_angle,7)
             qubits.append(q)
             
-        if(args.log):
-         	print("State before corrections:")
-         	for i in range(noutput):
-        	 		print(get_qubit(qout[i],"Alice").qstate.qrepr.dm)
-         	for s in seq:
-            		s.printinfo()
             
         # Now: Do the same with auxillary qubits, without applying unitary transformations beforehand (commented out)
         
@@ -231,9 +225,6 @@ class AliceProgram(Program):
             qubits.append(q)
 
         yield from myConnection.flush()
-        for i in range(nQubits):
-            print(f"Qubit {i}'s state before sending:")
-            print(get_qubit(qubits[i],"Alice").qstate.qrepr.dm)
             
         # Now: List of qubits is initialized. Next step: Sending them to the server
         myCsocket.send(nQubits)
@@ -389,4 +380,4 @@ class AliceProgram(Program):
         meas = [int(r) for r in meas]
         
         print("Measurement in Z-Basis: {}".format(meas))
-        return meas
+        return [meas,result]
