@@ -72,6 +72,9 @@ Here $\phi$ refers to the measurement angle that's acquired through the flow con
 #### 2.11 plots
 - Includes graphics displaying the success rate acquired through simulations
 
+#### 2.12 jupyter-notebook
+- Folder containing the files necessary to run the simulation in a jupyter notebook
+
 ## 3. Running the simulation
 Functioning versions of SquidASM [4] and NetQASM [5] on the user's side are required to run the simulation. To run the simulation, head to the directory in which the files are deposited. Using the consol, python run_ubqc.py can be used to run the simulation given the current settings provided in run_ubqc.py. Possible arguments include:
 - $\texttt{- l}$ for enabling the logging, most logs are disabled by default. 
