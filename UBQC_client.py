@@ -367,6 +367,6 @@ class AliceProgram(Program):
             meas.append(qout[qidx_sort.index(qout_idx[i])].measure())
         yield from myConnection.flush()
         meas = [int(r) for r in meas]
-        
-        print("Measurement in Z-Basis: {}".format(meas))
+        if(args.log):
+            print("Measurement in Z-Basis: {}".format(meas))
         return [meas,result]
