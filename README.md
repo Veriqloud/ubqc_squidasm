@@ -9,8 +9,7 @@ A compiler to simulate Universal Blind Quantum Computation [1] using the quantum
 #### 5. Performance
 #### 6. Discussion
 #### 7. Security Benchmarking
-#### 8. Appendix
-#### 9. References
+#### 8. References
 
 ## 1. UBQC
 Universal Blind Quantum Computation provides a method for a client without any quantum computational power to execute quantum computations on a remote server without revealing neither the input nor the output. The measurement-based scheme for quantum computation (MBQC) is chosen as the foundation. This is a different approach to quantum computation than the gate-based one, while it's possible to construct MBQC instructions from any given gate-based circuit. These instructions consist of three types of objects: Entanglement operations, measurement instructions, and byproduct operators. To be able to run these instructions according to [1], one needs to reorder these instructions by making use of commutation relations. Like this, we can achieve that first all entanglement operations are perforemed, then all the measurements, and finally the byproducts. This so called $\textit{flow}$ first been first introduced by Kashefi et al. [3].
@@ -66,6 +65,12 @@ Here $\phi$ refers to the measurement angle that's acquired through the flow con
 
 #### 2.9 benchmarking.py
 - Used to estimate the security of the protocol. See section 7 for further information.
+
+#### 2.10 test_circuits
+- Includes visualizations and detailed information about the test circuits the compiler was tested upon, as well as the statistical results
+
+#### 2.11 plots
+- Includes graphics displaying the success rate acquired through simulations
 
 ## 3. Running the simulation
 Functioning versions of SquidASM [4] and NetQASM [5] on the user's side are required to run the simulation. To run the simulation, head to the directory in which the files are deposited. Using the consol, python run_ubqc.py can be used to run the simulation given the current settings provided in run_ubqc.py. Possible arguments include:
@@ -159,11 +164,7 @@ To get an estimate for the probability for Bob to guess the right circuit, one h
 Taken these into account, the problem of finding the number of consistent combinations boils down to a combinatorial problem. This again shows that Bob doesn't gather any data about X and Z gates, which is why we should rather speak of different possible circuit classes up to these gates rather than particular circuits here. Nonetheless the term is dropped to ease the description.
 After all possible sets of gates are found by solving the aforementioned combinatorial problem, the number of output qubits of a given circuit is calculated via $N_{qubits} - N_{meas}$. Then all possible combinations of each set acting on each possible output qubit are getting constructed, to get a comprehensive list of circuits that are consistent with the given variables. After this is performed, all of these circuits are getting converted to Qiskit circuit, to make use of the function \textit{transpiler}, transforming circuits to their easiest equivalent. Comparing the statevectors of the given circuits with each other lets one exclude redundant circuits from the list. This finally leaves one with all distinguishable circuits that are consistent with the data Bob received from Alice, and hence with the probability of him to overcome the blindness. The code to estimate the probability and to display the given circuits for a given set of variables can be found in benchmarking.py. **Note**: In the code CX gates are used as placeholders for J gates, since they are not native in Python. This will be adjusted.
 
-## 8. Appendix
-
-The test circuits that the compiler was tested upon, as well as their classification and performance in the presence of default and customized noise can be found in the folder test_circuits.
-
-## 9. References
+## 8. References
 [1] "Universal Blind Quantum Computation", Kashefi et al. 2009
 
 [2] Original Compiler: https://github.com/quantumprotocolzoo/protocols/tree/master/UBQC
