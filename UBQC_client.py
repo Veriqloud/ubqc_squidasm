@@ -357,12 +357,7 @@ class AliceProgram(Program):
                 if s.type == "X" and s.qubit == qidx_sort[i] and (outcome[s.power_idx-1] == 1 or s.power_idx == 0): 
                     qout[i].X()
                     if(args.log):
-                    	print("Byproduct: X s = {} condition = {} qout_idx = {}, qidx_sort.idx = {}".format(outcome[s.power_idx-1],s.power_idx,qout_idx[i],qidx_sort.index(qout_idx[i])))
-
-        if(args.log):
-        		print("State after corrections:")
-        		for i in range(noutput):
-        			print(get_qubit(qout[i],"Alice").qstate.qrepr.dm)		
+                    	print("Byproduct: X s = {} condition = {} qout_idx = {}, qidx_sort.idx = {}".format(outcome[s.power_idx-1],s.power_idx,qout_idx[i],qidx_sort.index(qout_idx[i])))	
 
 
         # Initialize array with measurement results, apply measurements (again neglecting possible single qubit corrections)
