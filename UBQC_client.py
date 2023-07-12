@@ -81,6 +81,7 @@ circuits = qasm_circs()
 # If no circuit is chosen, take a simple Hadamard gate (Circuit 1)
 if not args.circuit:
     circ = circuits[0]
+    result = circ[1]
     circ_flow = circuit_file_to_flow(circ[0])
     seq = circ_flow[0]
     qout_idx = circ_flow[1]
