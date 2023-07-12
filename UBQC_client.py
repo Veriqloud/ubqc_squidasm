@@ -340,14 +340,7 @@ class AliceProgram(Program):
 
         for i in range(noutput):
             qout[qidx_sort.index(qout_idx[i])].rot_Z(-int(angles[qidx_sort[i]-1])%256,7)
-            
-        # Now: Apply byproduct corrections:
-        if(args.log):
-         	print("State before corrections:")
-         	for i in range(noutput):
-        	 		print(get_qubit(qout[i],"Alice").qstate.qrepr.dm)
-         	for s in seq:
-            		s.printinfo()
+
         for s in seq:
             for i in range(noutput):  
                 if s.type == "Z" and s.qubit == qidx_sort[i] and (outcome[s.power_idx-1] == 1 or s.power_idx == 0): 
