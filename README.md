@@ -19,11 +19,11 @@ The UBQC protocol relies on a mixture between classical and quantum communicatio
 **The protocol can be sumarized using the following steps:**
 
 
-**1.** For each qubit: Alice initializes it, applies random phase $\theta_i$
+**1.** For each qubit i: Alice initializes it, applies random phase $\theta_i$ out of 256 possibilities
 
-**2.** Alice further blinds the i-th qubit with an angle $r_i \in {0, \pi }$ 
+**2.** Alice further blinds the i-th qubit with an angle $r_i \in {0, \pi }$ with 50% chance for each
 
-**3.** Alice sends the blinded qubit to Bob, together with measurement angles $\phi_i ' = \phi + \theta_i + r_i$
+**3.** Alice sends the blinded qubit to Bob, together with measurement angles $\phi_i ' = \phi + \theta_i + r_i$. 
 
 **4.** Alice entanglement instructions to Bob  
 
