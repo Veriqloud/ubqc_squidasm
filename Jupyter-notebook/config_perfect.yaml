@@ -1,0 +1,30 @@
+# Noise configuration file for a perfect, noiseless simulation
+
+stacks:
+  - name: Alice
+    qdevice_typ: generic
+    qdevice_cfg:
+      num_qubits: 100
+      dummy: null
+      init_time : 0
+      single_qubit_gate_depolar_prob : 0.0
+      two_qubit_gate_depolar_prob : 0.0
+      measure_time : 0
+      single_qubit_gate_depolar_prob : 0.0
+      two_qubit_gate_depolar_prob : 0.0
+
+  - name: Bob
+    qdevice_typ: generic
+    qdevice_cfg:
+      num_qubits: 100
+      dummy: null
+      init_time : 0
+      single_qubit_gate_depolar_prob : 0
+      two_qubit_gate_depolar_prob : 0.0
+      measure_time : 0
+      single_qubit_gate_depolar_prob : 0.0
+      two_qubit_gate_depolar_prob : 0.0
+links:
+  - stack1: Alice
+    stack2: Bob
+    typ: perfect

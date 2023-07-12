@@ -1,0 +1,17 @@
+# Noise configuration file with default noise in SquidASM.
+
+stacks:
+  - name: Alice
+    qdevice_typ: generic
+    qdevice_cfg:
+      num_qubits: 20
+
+  - name: Bob
+    qdevice_typ: generic
+    qdevice_cfg:
+      num_qubits: 20
+
+links:
+  - stack1: Alice
+    stack2: Bob
+    typ: perfect
