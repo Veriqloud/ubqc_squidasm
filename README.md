@@ -80,8 +80,8 @@ Functioning versions of SquidASM [4] and NetQASM [5] on the user's side are requ
 - $\texttt{- l}$ for enabling the logging, most logs are disabled by default. 
 - $\texttt{- c \{ CIRCUIT \} }$ for choosing a circuit from circuits_qasm.py. Note that enumeration starts from zero.
 - $\texttt{- d}$ to enable or disable the drawing of the circuit
-- $\texttt{- i \{ GATES \} }$ for choosing input gates that are applied onto the input qubits independently from the chosen circuit. Seperation: Comma
-- $\texttt{- o \{ GATES \} }$ for choosing output gates that are applied onto the output qubits independently from the chosen circuit. Seperation: Comma
+- $\texttt{- i \{ GATES \} }$ for choosing input gates that are applied onto the input qubits independently from the chosen circuit. Seperation: Comma. Choose between I,X,Y,Z,H,K,T,rot_X,rot_Z,rot_Y. Example Syntax (3 qubits): -i X,Z,I
+- $\texttt{- o \{ GATES \} }$ for choosing output gates that are applied onto the output qubits independently from the chosen circuit. Seperation: Comma. Choose between I,X,Y,Z,H,K,T,rot_X,rot_Z,rot_Y. Example Syntax (3 qubits): -i X,Z,I
 - $\texttt{- h}$ for help
 
 ## 4. Changes from the old protocol
