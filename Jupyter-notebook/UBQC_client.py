@@ -151,7 +151,6 @@ class AliceProgram(Program):
 
         # Initialize list to store measurement results, needed for corrections
         outcome = nQubits * [-1]
-	gatecounter = 1
         
         # For all input angles: create a random angle and save it into our angles array
         for i in range(0, nInputs):
@@ -171,11 +170,10 @@ class AliceProgram(Program):
 
             # If gates should be applied before the input
             if self.args["input"]:
-                U = input_gates[i]
+                U = self.args["input"][i]
 		if(U[:3] == 'rot'):
                 	angle = U[6:-1]
                 q = apply_singleU(U,q,angle)
-		gatecounter += 1
             
             # Rotation in format (n*pi/2^d; here: n = rand_angle, d = 7)
             q.rot_Z(rand_angle,7)
