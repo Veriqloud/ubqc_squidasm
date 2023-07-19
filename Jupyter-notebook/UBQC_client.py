@@ -55,7 +55,7 @@ def get_qubit(netqasm_qubit: SdkQubit, node_name) -> qapi.Qubit:
 
 
 # Define gates the client wants to apply
-def apply_singleU(U,q):
+def apply_singleU(U,q,count):
     if U.lower()=='x':
         q.X()
     elif U.lower()=='y':
@@ -69,13 +69,13 @@ def apply_singleU(U,q):
     elif U.lower()=='t':
         q.T()
     elif U.lower()=='rot_x':
-        angle = input("angle ?")
+        angle = input(f"Rotation angle for qubit {}?")
         q.rot_X(int(angle),7)
     elif U.lower()=='rot_y':
-        angle = input("angle ?")
+        angle = input(f"Rotation angle for qubit {}?")
         q.rot_Y(int(angle),7)
     elif U.lower()=='rot_z':
-        angle = input("angle ?")
+        angle = input(f"Rotation angle for qubit {}?")
         q.rot_Z(int(angle),7)
     elif U.lower()=='i':
 	return q
@@ -163,6 +163,7 @@ class AliceProgram(Program):
 
         # Initialize list to store measurement results, needed for corrections
         outcome = nQubits * [-1]
+	gatecounter = 1
         
         # For all input angles: create a random angle and save it into our angles array
         for i in range(0, nInputs):
@@ -183,7 +184,8 @@ class AliceProgram(Program):
             # If gates should be applied before the input
             if self.args["input"]:
                 U = input_gates[i]
-                q = apply_singleU(U,q)
+                q = apply_singleU(U,q,gatecounter)
+		gatecounter += 1
             
             # Rotation in format (n*pi/2^d; here: n = rand_angle, d = 7)
             q.rot_Z(rand_angle,7)
@@ -346,13 +348,15 @@ class AliceProgram(Program):
         # Initialize array with measurement results, apply measurements (again neglecting possible single qubit corrections)
 
         meas = []
+	gatecounter = 1
         if(self.args["output"]):
             output_gates = self.args["output"]
             for i in range(noutput):
                 U = output_gates[i]
                 if(self.args["log"]):
                  	print("apply {} to qubit {} sorting to {}".format(U,qout_idx[i],i))
-                apply_singleU(U,qout[i])
+                apply_singleU(U,qout[i],gatecounter)
+		gatecounter += 1
         for i in range(noutput):
             meas.append(qout[qidx_sort.index(qout_idx[i])].measure())
         yield from myConnection.flush()
