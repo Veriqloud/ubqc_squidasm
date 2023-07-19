@@ -55,7 +55,7 @@ def get_qubit(netqasm_qubit: SdkQubit, node_name) -> qapi.Qubit:
 
 
 # Define gates the client wants to apply
-def apply_singleU(U,q,count):
+def apply_singleU(U,q,angle=None):
     if U.lower()=='x':
         q.X()
     elif U.lower()=='y':
@@ -68,14 +68,11 @@ def apply_singleU(U,q,count):
         q.K()
     elif U.lower()=='t':
         q.T()
-    elif U.lower()=='rot_x':
-        angle = input(f"Rotation angle for qubit {}?")
+    elif U[:5].lower()=='rot_x':
         q.rot_X(int(angle),7)
-    elif U.lower()=='rot_y':
-        angle = input(f"Rotation angle for qubit {}?")
+    elif U[:5].lower()=='rot_y':
         q.rot_Y(int(angle),7)
-    elif U.lower()=='rot_z':
-        angle = input(f"Rotation angle for qubit {}?")
+    elif U[:5].lower()=='rot_z':
         q.rot_Z(int(angle),7)
     elif U.lower()=='i':
 	return q
@@ -135,15 +132,6 @@ class AliceProgram(Program):
             seq = circ_flow[0]
             result = 0
             qout_idx = circ_flow[1]
-        
-
-            
-        if self.args["input"]:
-            print("Client chose input gates: {}".format(self.args["input"]))
-
-        if self.args["output"]:
-            print("Client chose output gates: {}".format(self.args["output"]))
-
 
         # Count how many qubits are needed
         nQubits = count_qubits_in_sequence(seq)
@@ -184,7 +172,9 @@ class AliceProgram(Program):
             # If gates should be applied before the input
             if self.args["input"]:
                 U = input_gates[i]
-                q = apply_singleU(U,q,gatecounter)
+		if(U[:3] == 'rot'):
+                	angle = U[6:-1]
+                q = apply_singleU(U,q,angle)
 		gatecounter += 1
             
             # Rotation in format (n*pi/2^d; here: n = rand_angle, d = 7)
@@ -348,15 +338,15 @@ class AliceProgram(Program):
         # Initialize array with measurement results, apply measurements (again neglecting possible single qubit corrections)
 
         meas = []
-	gatecounter = 1
         if(self.args["output"]):
             output_gates = self.args["output"]
             for i in range(noutput):
                 U = output_gates[i]
+		if(U[:3] == 'rot'):
+                	angle = U[6:-1]
                 if(self.args["log"]):
                  	print("apply {} to qubit {} sorting to {}".format(U,qout_idx[i],i))
-                apply_singleU(U,qout[i],gatecounter)
-		gatecounter += 1
+                apply_singleU(U,qout[i],angle)
         for i in range(noutput):
             meas.append(qout[qidx_sort.index(qout_idx[i])].measure())
         yield from myConnection.flush()
