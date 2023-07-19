@@ -77,6 +77,8 @@ def apply_singleU(U,q):
     elif U=='rot_Z':
         angle = input("angle ?")
         q.rot_Z(int(angle),7)
+    elif U=='I':
+	return q
     else:
         print("Gate {} not valid!".format(U))
     return q
