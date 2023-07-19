@@ -82,11 +82,13 @@ Functioning versions of SquidASM [4] and NetQASM [5] on the user's side are requ
 - $\texttt{- d}$ to enable or disable the drawing of the circuit
 - $\texttt{- i \{ GATES \} }$ for choosing input gates that are applied onto the input qubits independently from the chosen circuit (Default input state is +).
 
-  Choose between I,X,Y,Z,H,K,T,rot_X,rot_Y,rot_Z. I refers to identity gate, for rotations the rotation angle is demanded from the program as soon as the gate is applied. Seperation between gates: Comma. Example Syntax (3 qubits): -i X,Z,I
+  Choose between I,X,Y,Z,H,K,T,rot_X:angle:,rot_Y:angle:,rot_Z:angle:. I refers to identity gate, rotation angles are provided in the format $n/256$. Seperation between gates: Comma. Example Syntax (3 qubits): -i x,z,rot_x:30:
 - $\texttt{- o \{ GATES \} }$ for choosing output gates that are applied onto the output qubits independently from the chosen circuit.
 
-    Choose between I,X,Y,Z,H,K,T,rot_X,rot_Y,rot_Z. I refers to identity gate, for rotations the rotation angle is demanded from the program as soon as the gate is applied. Seperation between gates: Comma. Example Syntax (3 qubits): -i X,Z,I
+    Choose between I,X,Y,Z,H,K,T,rot_X:angle:,rot_Y:angle:,rot_Z:angle:. I refers to identity gate, rotation angles are provided in the format $n/256$. Seperation between gates: Comma. Example Syntax (3 qubits): -i x,z,rot_x(30)
 - $\texttt{- h}$ for help
+
+Besides the running of a python file it's also possible to directly run the simulation as a python function in a jupyter notebook (see folder jupyter-notebook)
 
 ## 4. Changes from the old protocol
 For debugging reasons, in this section the changes from the original protocol in SimulaQron are introduced
