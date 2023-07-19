@@ -71,7 +71,7 @@ def apply_singleU(U,q,angle=None):
     elif U[:5].lower()=='rot_z':
         q.rot_Z(int(angle),7)
     elif U.lower()=='i':
-	return q
+        return q
     else:
         print("Gate {} not valid!".format(U))
     return q
@@ -167,8 +167,8 @@ class AliceProgram(Program):
             # If gates should be applied before the input
             if self.args["input"]:
                 U = self.args["input"][i]
-		if(U[:3] == 'rot'):
-                	angle = U[6:-1]
+                if(U[:3] == 'rot'):
+                		angle = U[6:-1]
                 q = apply_singleU(U,q,angle)
             
             # Rotation in format (n*pi/2^d; here: n = rand_angle, d = 7)
@@ -255,9 +255,6 @@ class AliceProgram(Program):
 
                 # Client receives classical result of the last measurement, either 0 or 1
                 m = yield from myCsocket.recv()
-		
-                if(self.args["log"]):
-                		print("Client Received: result {}".format(m))
 
                 # We adjust for the randomness only we know we added
                 if r == 1:
@@ -267,9 +264,6 @@ class AliceProgram(Program):
                     outcome[qubit_n - 1] = int(m)
         
         # Now: All the entanglements and measurements are performed. The server sends back the output qubits.
-        if(self.args["log"]):
-        		print("Client Receiving output qubits")
-        		print("qout_idx = {}".format(qout_idx))
         qout = [-1]*len(qout_idx)
         qidx_sort = qout_idx[:]
         qidx_sort.sort()
@@ -297,7 +291,7 @@ class AliceProgram(Program):
                 
             # Store qubits send back by server in qout
             if(self.args["log"]):
-            	print("Client Received: recv qubit {} sorting to {}".format(qout_idx[i],qidx_sort.index(qout_idx[i])))
+                print("Client Received: recv qubit {} sorting to {}".format(qout_idx[i],qidx_sort.index(qout_idx[i])))
             qout[qidx_sort.index(qidx_sort[i])]=output_qubit
             
         # Here: Applying corrections on the output qubits according to the initial angles, taking care of the induced randomness
@@ -307,27 +301,18 @@ class AliceProgram(Program):
             
         # Now: Apply byproduct corrections:
         if(self.args["log"]):
-         	print("State before corrections:")
-         	for i in range(noutput):
-        	 		print(get_qubit(qout[i],"Alice").qstate.qrepr.dm)
-         	for s in seq:
-            		s.printinfo()
+             for s in seq:
+                    s.printinfo()
         for s in seq:
             for i in range(noutput):  
                 if s.type == "Z" and s.qubit == qidx_sort[i] and (outcome[s.power_idx-1] == 1 or s.power_idx == 0): 
                     qout[i].Z()
                     if(self.args["log"]):
-                    	print("Byproduct: Z : s = {} condition = {}  qout_idx = {}, qidx_sort.idx = {}".format(outcome[s.power_idx-1],s.power_idx,qout_idx[i],qidx_sort.index(qout_idx[i])))   
+                        print("Byproduct: Z : s = {} condition = {}  qout_idx = {}, qidx_sort.idx = {}".format(outcome[s.power_idx-1],s.power_idx,qout_idx[i],qidx_sort.index(qout_idx[i])))   
                 if s.type == "X" and s.qubit == qidx_sort[i] and (outcome[s.power_idx-1] == 1 or s.power_idx == 0): 
                     qout[i].X()
                     if(self.args["log"]):
-                    	print("Byproduct: X s = {} condition = {} qout_idx = {}, qidx_sort.idx = {}".format(outcome[s.power_idx-1],s.power_idx,qout_idx[i],qidx_sort.index(qout_idx[i])))
-
-        if(self.args["log"]):
-        		print("State after corrections:")
-        		for i in range(noutput):
-        			print(get_qubit(qout[i],"Alice").qstate.qrepr.dm)		
-
+                        print("Byproduct: X s = {} condition = {} qout_idx = {}, qidx_sort.idx = {}".format(outcome[s.power_idx-1],s.power_idx,qout_idx[i],qidx_sort.index(qout_idx[i])))
 
         # Initialize array with measurement results, apply measurements (again neglecting possible single qubit corrections)
 
@@ -336,10 +321,8 @@ class AliceProgram(Program):
             output_gates = self.args["output"]
             for i in range(noutput):
                 U = output_gates[i]
-		if(U[:3] == 'rot'):
-                	angle = U[6:-1]
-                if(self.args["log"]):
-                 	print("apply {} to qubit {} sorting to {}".format(U,qout_idx[i],i))
+                if(U[:3] == 'rot'):
+                    angle = U[6:-1]
                 apply_singleU(U,qout[i],angle)
         for i in range(noutput):
             meas.append(qout[qidx_sort.index(qout_idx[i])].measure())
@@ -348,3 +331,4 @@ class AliceProgram(Program):
         
         print("Measurement in Z-Basis: {}".format(meas))
         return [meas,result]
+
