@@ -110,10 +110,6 @@ def apply_singleU(U,q,angle=None):
         q.Z()
     elif U.lower()=='h':
         q.H()
-    elif U.lower()=='k':
-        q.K()
-    elif U.lower()=='t':
-        q.T()
     elif U[:5].lower()=='rot_x':
         q.rot_X(int(angle),7)
     elif U[:5].lower()=='rot_y':
