@@ -101,29 +101,29 @@ if(args.draw):
     print(circ[2])
 
 # Define gates the client wants to apply
-def apply_singleU(U,q):
-    if U=='X':
+def apply_singleU(U,q, count):
+    if U.lower()=='x':
         q.X()
-    elif U=='Y':
+    elif U.lower()=='y':
         q.Y()
-    elif U=='Z':
+    elif U.lower()=='z':
         q.Z()
-    elif U=='H':
+    elif U.lower()=='h':
         q.H()
-    elif U=='K':
+    elif U.lower()=='k':
         q.K()
-    elif U=='T':
+    elif U.lower()=='t':
         q.T()
-    elif U=='rot_X':
-        angle = input("angle ?")
+    elif U.lower()=='rot_x':
+        angle = input(f"Rotation angle for qubit {count}?")
         q.rot_X(int(angle),7)
-    elif U=='rot_Y':
-        angle = input("angle ?")
+    elif U.lower()=='rot_y':
+        angle = input(f"Rotation angle for qubit {count}?")
         q.rot_Y(int(angle),7)
-    elif U=='rot_Z':
-        angle = input("angle ?")
+    elif U.lower()=='rot_z':
+        angle = input(f"Rotation angle for qubit {count}?")
         q.rot_Z(int(angle),7)
-    elif U=='I':
+    elif U.lower()=='i':
 	return q
     else:
         print("Gate {} not valid!".format(U))
@@ -188,6 +188,7 @@ class AliceProgram(Program):
         
         qubits = []
         angles = []
+	gatecounter = 1
         
         # For all input angles: create a random angle and save it into our angles array
         for i in range(0, nInputs):
@@ -208,7 +209,8 @@ class AliceProgram(Program):
             # If gates should be applied before the input
             if args.input:
                 U = input_gates[i]
-                q = apply_singleU(U,q)
+                q = apply_singleU(U,q,gatecounter)
+		gatecounter+=1
             
             # Rotation in format (n*pi/2^d; here: n = rand_angle, d = 7)
             q.rot_Z(rand_angle,7)
@@ -359,12 +361,14 @@ class AliceProgram(Program):
         # Initialize array with measurement results, apply measurements (again neglecting possible single qubit corrections)
 
         meas = []
+	gatecounter = 1
         if(args.output):
             for i in range(noutput):
                 U = output_gates[i]
                 if(args.log):
                  	print("apply {} to qubit {} sorting to {}".format(U,qout_idx[i],i))
-                apply_singleU(U,qout[i])
+                apply_singleU(U,qout[i],gatecounter)
+		gatecounter += 1
         for i in range(noutput):
             meas.append(qout[qidx_sort.index(qout_idx[i])].measure())
         yield from myConnection.flush()
