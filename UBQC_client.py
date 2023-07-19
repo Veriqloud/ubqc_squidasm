@@ -114,14 +114,14 @@ def apply_singleU(U,q,angle=None):
         q.K()
     elif U.lower()=='t':
         q.T()
-    elif U.lower()=='rot_x':
+    elif U[:5].lower()=='rot_x':
         q.rot_X(int(angle),7)
-    elif U.lower()=='rot_y':
+    elif U[:5].lower()=='rot_y':
         q.rot_Y(int(angle),7)
-    elif U.lower()=='rot_z':
+    elif U[:5].lower()=='rot_z':
         q.rot_Z(int(angle),7)
     elif U.lower()=='i':
-	return q
+        return q
     else:
         print("Gate {} not valid!".format(U))
     return q
@@ -130,10 +130,11 @@ def apply_singleU(U,q,angle=None):
 
 if args.input:
     input_gates = args.input.split(',')
+    print(f"Client chose input gates {input_gates}!")
 
 if args.output:
     output_gates = args.output.split(',')
-
+    print(f"Client chose output gates {output_gates}!")
 
 # Count how many qubits are needed
 nQubits = count_qubits_in_sequence(seq)
@@ -183,7 +184,6 @@ class AliceProgram(Program):
         
         qubits = []
         angles = []
-	gatecounter = 1
         
         # For all input angles: create a random angle and save it into our angles array
         for i in range(0, nInputs):
@@ -204,10 +204,11 @@ class AliceProgram(Program):
             # If gates should be applied before the input
             if args.input:
                 U = input_gates[i]
-		if(U[:3] == 'rot'):
-			angle = U[6:-1]
+                angle = 0
+                if(U[:3] == 'rot'):
+                    angle = U[6:-1]
                 q = apply_singleU(U,q,angle)
-		gatecounter+=1
+
             
             # Rotation in format (n*pi/2^d; here: n = rand_angle, d = 7)
             q.rot_Z(rand_angle,7)
@@ -220,7 +221,7 @@ class AliceProgram(Program):
             rand_angle = int(256 * random.random())
             angles.append(rand_angle)
             if(args.log):
-            	print("i = {} rand_ang = {}".format(i,angles[i]))
+                print("i = {} rand_ang = {}".format(i,angles[i]))
             q = Qubit(myConnection)
             q.rot_Y(1,1)  # |+> state
             q.rot_Z(rand_angle,7)
@@ -293,9 +294,6 @@ class AliceProgram(Program):
 
                 # Client receives classical result of the last measurement, either 0 or 1
                 m = yield from myCsocket.recv()
-		
-                if(args.log):
-                		print("Client Received: result {}".format(m))
 
                 # We adjust for the randomness only we know we added
                 if r == 1:
@@ -305,15 +303,10 @@ class AliceProgram(Program):
                     outcome[qubit_n - 1] = int(m)
         
         # Now: All the entanglements and measurements are performed. The server sends back the output qubits.
-        if(args.log):
-        		print("Client Receiving output qubits")
-        		print("qout_idx = {}".format(qout_idx))
         qout = [-1]*len(qout_idx)
         qidx_sort = qout_idx[:]
         qidx_sort.sort()
         noutput = len(qout_idx)
-        if(args.log):
-        		print("qout_idx = {}, outcome = {}, qidx_sort = {}".format(qout_idx, [int(r) for r in outcome], qidx_sort))
         
         # Subroutine of quantum teleportation has to be implemented on the clients side to receive qubits:
 
@@ -334,8 +327,6 @@ class AliceProgram(Program):
                 output_qubit.X()
                 
             # Store qubits send back by server in qout
-            if(args.log):
-            	print("Client Received: recv qubit {} sorting to {}".format(qout_idx[i],qidx_sort.index(qout_idx[i])))
             qout[qidx_sort.index(qidx_sort[i])]=output_qubit
             
         # Here: Applying corrections on the output qubits according to the initial angles, taking care of the induced randomness
@@ -361,10 +352,10 @@ class AliceProgram(Program):
         if(args.output):
             for i in range(noutput):
                 U = output_gates[i]
-		if(U[:3] == 'rot'):
-			angle = U[6:-1]
+                if(U[:3] == 'rot'):
+                    angle = U[6:-1]
                 if(args.log):
-                 	print("apply {} to qubit {} sorting to {}".format(U,qout_idx[i],i))
+                     print("apply {} to qubit {} sorting to {}".format(U,qout_idx[i],i))
                 apply_singleU(U,qout[i],angle)
         for i in range(noutput):
             meas.append(qout[qidx_sort.index(qout_idx[i])].measure())
