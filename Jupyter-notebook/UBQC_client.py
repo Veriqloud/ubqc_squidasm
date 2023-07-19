@@ -56,28 +56,28 @@ def get_qubit(netqasm_qubit: SdkQubit, node_name) -> qapi.Qubit:
 
 # Define gates the client wants to apply
 def apply_singleU(U,q):
-    if U=='X':
+    if U.lower()=='x':
         q.X()
-    elif U=='Y':
+    elif U.lower()=='y':
         q.Y()
-    elif U=='Z':
+    elif U.lower()=='z':
         q.Z()
-    elif U=='H':
+    elif U.lower()=='h':
         q.H()
-    elif U=='K':
+    elif U.lower()=='k':
         q.K()
-    elif U=='T':
+    elif U.lower()=='t':
         q.T()
-    elif U=='rot_X':
+    elif U.lower()=='rot_x':
         angle = input("angle ?")
         q.rot_X(int(angle),7)
-    elif U=='rot_Y':
+    elif U.lower()=='rot_y':
         angle = input("angle ?")
         q.rot_Y(int(angle),7)
-    elif U=='rot_Z':
+    elif U.lower()=='rot_z':
         angle = input("angle ?")
         q.rot_Z(int(angle),7)
-    elif U=='I':
+    elif U.lower()=='i':
 	return q
     else:
         print("Gate {} not valid!".format(U))
