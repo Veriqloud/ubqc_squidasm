@@ -79,7 +79,7 @@ def apply_singleU(U,q):
         q.rot_Z(int(angle),7)
     else:
         print("Gate {} not valid!".format(U))
-    return 
+    return q
 
 # Store in- and output gates in corresponding arrays
 
