@@ -1,5 +1,5 @@
 # Compiler for UBQC using SquidASM
-A compiler to simulate Universal Blind Quantum Computation [1] using the quantum network simulation software SquidASM with Qiskit/QASM circuits as an input. As the basic framework an outdated compiler using SimulaQron has been modified, which can be found in the reference section [2].
+A compiler to simulate **Universal Blind Quantum Computation** [1] using the quantum network simulation software **SquidASM** with Qiskit/QASM circuits as an input. As the basic framework an outdated compiler using SimulaQron has been modified, which can be found in the reference section [2].
 
 ## 0. Outline
 #### 1. Introduction to UBQC
@@ -113,7 +113,7 @@ For debugging reasons, in this section the changes from the original protocol in
 - Subroutine in NetQASM has been implemented to convert SquidASM qubits to NetQASM, then using a NetQASM function to display the state
 
 #### 4.4 Implementation of X and Z gates
-- X and Z gates in circuits were not simulated correctly using the old compiler
+- $X$ and $Z$ gates in circuits were not simulated correctly using the old compiler
 - These gates get converted into byproduct operators in the flow construction, not containing any measurement's outcome as a condition
 - Byproduct operators in the old compiler were only executed if the condition was fulfilled, not when there was no condition
 - Changing this solved the problem
@@ -175,7 +175,7 @@ To get an estimate for the probability for Bob to guess the right circuit, one h
 Taken these into account, the problem of finding the number of consistent combinations boils down to a combinatorial problem. This again shows that Bob doesn't gather any data about $X$ and $Z$ gates, which is why we should rather speak of different possible circuit classes up to these gates rather than particular circuits here. Nonetheless the term is dropped to ease the description.
 After all possible sets of gates are found by solving the aforementioned combinatorial problem, the number of output qubits of a given circuit is calculated via $N_{qubits} - N_{meas}$. Then all possible combinations of each set acting on each possible output qubit are getting constructed, to get a comprehensive list of circuits that are consistent with the given variables. After this is performed, all of these circuits are getting converted to Qiskit circuit, to make use of the function $\textit{transpiler}$, transforming circuits to their easiest equivalent. Comparing the statevectors of the given circuits with each other lets one exclude redundant circuits from the list. This finally leaves one with all distinguishable circuits that are consistent with the data Bob received from Alice, and hence with the probability of him to overcome the blindness. The code to estimate the probability and to display the given circuits for a given set of variables can be found in **benchmarking.py**, or in **benchmarking.ipynb** in the folder jupyter-notebook. The user can either provide the three variables directly, or extract them from a given quantum circuit to estimate its security.
 
-**Note**: In the code $R_x$ gates are used as placeholders for $J$ gates, since they are not native in Python. This is yet to be adjusted, but it doesn't influence the success probability of Bob to guess the right circuit. $J$ gates here are gates satisfying $R_x(\alpha) = J(\alpha) H$. Furthermore $J$ and $CZ$ build a basis to construct any unitary operator [6]
+**Note**: In the code $R_x$ gates are used as placeholders for $J$ gates, since they are not native in Python. This is yet to be adjusted, but it doesn't influence the success probability of Bob to guess the right circuit. $J$ gates here are gates satisfying $R_x(\alpha) = J(\alpha) H$. Furthermore $J$ and $CZ$ build a basis to construct any unitary operator [6].
 
 ## 8. Shor's algorithm
 A basic framework for running Shor's prime factorization algorithm using UBQC can be found in the notebook **UBQC_shor.ipynb** in the folder Jupyter-notebook. This feature is not fully implemented yet.
@@ -191,7 +191,7 @@ A basic framework for running Shor's prime factorization algorithm using UBQC ca
 
 [5] [NetQASM documentation](https://netqasm.readthedocs.io/en/latest/)
 
-[6] "Parsimonious and robust realizations of unitary maps in the one-way model",  V. Danos, E. Kashefi, P. Panangaden. 
+[6] "Parsimonious and robust realizations of unitary maps in the one-way model",  V. Danos, E. Kashefi, P. Panangaden 
 
 ## 10. Author
 Younes Naceur
