@@ -173,7 +173,7 @@ To get an estimate for the probability for Bob to guess the right circuit, one h
 
 Taken these into account, the problem of finding the number of consistent combinations boils down to a combinatorial problem. This again shows that Bob doesn't gather any data about X and Z gates, which is why we should rather speak of different possible circuit classes up to these gates rather than particular circuits here. Nonetheless the term is dropped to ease the description.
 After all possible sets of gates are found by solving the aforementioned combinatorial problem, the number of output qubits of a given circuit is calculated via $N_{qubits} - N_{meas}$. Then all possible combinations of each set acting on each possible output qubit are getting constructed, to get a comprehensive list of circuits that are consistent with the given variables. After this is performed, all of these circuits are getting converted to Qiskit circuit, to make use of the function $\textit{transpiler}$, transforming circuits to their easiest equivalent. Comparing the statevectors of the given circuits with each other lets one exclude redundant circuits from the list. This finally leaves one with all distinguishable circuits that are consistent with the data Bob received from Alice, and hence with the probability of him to overcome the blindness. The code to estimate the probability and to display the given circuits for a given set of variables can be found in benchmarking.py. The user can either provide the three variables directly, or extract them from a given quantum circuit to estimate its security.
-**Note**: In the code CX gates are used as placeholders for J gates, since they are not native in Python. This is yet to be adjusted, but it doesn't influence the success probability of Bob to guess the right circuit.
+**Note**: In the code CX gates are used as placeholders for J gates, since they are not native in Python. This is yet to be adjusted, but it doesn't influence the success probability of Bob to guess the right circuit. J gates here are gates satisfying $R_x(\alpha) = J(\alpha) H$. Furthermore J and CZ build a basis to construct any unitary operator [6]
 
 ## 8. References
 [1] "Universal Blind Quantum Computation", Kashefi et al. 2009
@@ -185,6 +185,8 @@ After all possible sets of gates are found by solving the aforementioned combina
 [4] https://squidasm.readthedocs.io
 
 [5] https://netqasm.readthedocs.io/en/latest/
+
+[6]"Parsimonious and robust realizations of unitary maps in the one-way model",  V. Danos, E. Kashefi, P. Panangaden. 
 
 ## 9. Author
 Younes Naceur
