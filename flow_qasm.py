@@ -7,8 +7,6 @@
 # 
 # For this, again we load a dummy circuit from qiskit to convert it into a QASM file.
 
-# In[3]:
-
 
 import numpy as np
 from measurement_qasm import load_and_convert_circuit
@@ -19,12 +17,9 @@ from qiskit.compiler.assembler import assemble
 from qiskit.assembler.disassemble import disassemble
 
 
-# ### Loading dummy circuit
+# Loading dummy circuit
 
 # #### Note: All of the functions in measurement_qasm.py and flow_qasm.py take QASM-type input, while we can slightly change the code so that datapaths to QASM files are taken as the input instead!
-
-# In[4]:
-
 
 q = QuantumRegister(2)
 c = ClassicalRegister(2)
@@ -38,10 +33,7 @@ qc.cz(q[0],q[1])
 qobj = assemble(qc, shots=2000, memory=True)
 
 
-# ### Testing the output
-
-# In[6]:
-
+# Define the objects that occur in a flow
 
 class Gate:
     """Represents gate being applied to qubits/conditions"""
@@ -77,6 +69,8 @@ class Gate:
             print("\t", self.type, self.qubit, self.power_idx)
 
 
+# Two subroutines applying commutation relations to measurement instructions to convert them into flow instructions.
+
 def _measurement_dictionary_to_sequence(dictionary):
     seq = []
     gates = dictionary["gates"]
@@ -92,7 +86,6 @@ def _measurement_dictionary_to_sequence(dictionary):
             seq.append(Gate(gates[i], [qubits[0][i], conditions[i]]))
 
     return seq
-
 
 def _construct_flow_from_sequence(seq):
     seq = deepcopy(seq)
@@ -157,6 +150,7 @@ def _construct_flow_from_sequence(seq):
 
     return seq
 
+# Subroutine to count the number of computational qubits needed from a measurement sequence.
 
 def count_qubits_in_sequence(seq):
     qubits = set()
@@ -168,6 +162,8 @@ def count_qubits_in_sequence(seq):
         except AttributeError:
             qubits.add(gate.qubit)
     return len(qubits)
+
+# Main function. Loads a QASM object, converts it into measurement instructions, and then into flow instructions. Get's called by UBQC_client.py
 
 def circuit_file_to_flow(qobj):
     result = load_and_convert_circuit(qobj)
@@ -184,12 +180,6 @@ if __name__ == "__main__":
     print("----- out -----")
     for s in seq_out:
         s.printinfo()
-
-
-# #### Conclusion: Even though if the qout_idx output of measurement_qasm was in reversed order with respect to measurement.json, the output of flow.py and therefore the whole output of the MBQC subroutine is the same!
-
-# In[ ]:
-
 
 
 
