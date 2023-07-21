@@ -75,7 +75,7 @@ Here $\phi$ refers to the measurement angle that's acquired through the flow con
 - Includes graphics displaying the success rate acquired through simulations
 
 #### 2.12 jupyter-notebook
-- Folder containing the files necessary to run the simulation in a jupyter notebook
+- Folder containing the files necessary to run the simulation in a jupyter notebook. Also contains instructions on how it's possible to run Shor's algorithm using the compiler.
 
 ## 3. Running the simulation
 Functioning versions of SquidASM [4] and NetQASM [5] on the user's side are required to run the simulation. To run the simulation, head to the directory in which the files are deposited. Using the consol, python run_ubqc.py can be used to run the simulation given the current settings provided in run_ubqc.py. Possible arguments include:
@@ -177,7 +177,7 @@ After all possible sets of gates are found by solving the aforementioned combina
 **Note**: In the code RX gates are used as placeholders for J gates, since they are not native in Python. This is yet to be adjusted, but it doesn't influence the success probability of Bob to guess the right circuit. J gates here are gates satisfying $R_x(\alpha) = J(\alpha) H$. Furthermore J and CZ build a basis to construct any unitary operator [6]
 
 ## 8. Shor's algorithm
-The test of the compiler on Shor's prime factorization algorithm can be found in the notebook shor_ubqc.ipynb in the folder Jupyter-notebook.
+A basic framework for running Shor's prime factorization algorithm using UBQC can be found in the notebook **UBQC_shor.ipynb** in the folder Jupyter-notebook. This feature is not fully implemented yet.
 
 ## 9. References
 [1] "Universal Blind Quantum Computation", Kashefi et al. 2009
