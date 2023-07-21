@@ -189,5 +189,3 @@ After all possible sets of gates are found by solving the aforementioned combina
 Younes Naceur
 
 Email: naceur.younes@yahoo.de
-
-LinkedIn: https://www.linkedin.com/in/younes-naceur-60965a252/
