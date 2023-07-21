@@ -92,7 +92,7 @@ Functioning versions of SquidASM [4] and NetQASM [5] on the user's side are requ
 
 Besides the running of a python file it's also possible to directly run the simulation as a python function in a jupyter notebook (see folder jupyter-notebook). In that case the aforementioned arguments are implemented as variables to a Python function. This provides a direct interface to run the UBQC simulation using custom circuits.
 
-## 4. Changes from the old protocol
+## 4. Changes from the old compiler
 For debugging reasons, in this section the changes from the original protocol in SimulaQron are introduced
 
 #### 4.1 Changing the input format from JSON to QASM:
