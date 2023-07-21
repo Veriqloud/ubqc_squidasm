@@ -13,7 +13,7 @@ import netsquid.qubits
 import squidasm.sim.stack.globals
 from circuits_qasm import qasm_circs
 from flow_qasm import circuit_file_to_flow, count_qubits_in_sequence
-from angle import measure_angle2
+from angle import measure_angle
 from squidasm.sim.stack.program import Program, ProgramContext, ProgramMeta
 
 def get_qubit(netqasm_qubit: SdkQubit, node_name) -> qapi.Qubit:
@@ -277,7 +277,7 @@ class AliceProgram(Program):
                 r = np.round(random.random())
 
                 # Calculate the angle to send with randomisation applied
-                angle_to_send = float((measure_angle2(s, outcome, input_angle) + r * 128)) % 256 #PI = 128
+                angle_to_send = float((measure_angle(s, outcome, input_angle) + r * 128)) % 256 #PI = 128
                 #print("s.angle = {} outcome = {} input_angle = {} meas_ang2 = {} r = {} to_send = {}".format(s.angle,outcome,input_angle,measure_angle2(s, outcome, input_angle),r,angle_to_send))
 
                 # Now: Send information to the server telling which qubit to measure
