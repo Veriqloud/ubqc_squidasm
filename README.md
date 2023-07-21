@@ -66,7 +66,7 @@ Here $\phi$ refers to the measurement angle that's acquired through the flow con
 - Characteristic to SquidASM. File for simulation control: Yields the possibility to run the simulation N times and infer about the statistical likelyhood of success. Configure this file to change the number of runs as well as the output. Configuration file is also chosen here.
 
 #### 2.9 benchmarking.py
-- Used to estimate the security of the protocol. See section 7 for further information.
+- Used to estimate the security of the protocol. Can also be found as a jupyter notebook in the folder jupyter-notebook. See section 7 for further information.
 
 #### 2.10 test_circuits
 - Includes visualizations and detailed information about the test circuits the compiler was tested upon, as well as the statistical results
@@ -75,7 +75,7 @@ Here $\phi$ refers to the measurement angle that's acquired through the flow con
 - Includes graphics displaying the success rate acquired through simulations
 
 #### 2.12 jupyter-notebook
-- Folder containing the files necessary to run the simulation in a jupyter notebook. Also contains instructions on how it's possible to run Shor's algorithm using the compiler.
+- Folder containing the files necessary to run the simulation in a jupyter notebook. Also contains instructions on how it's possible to run Shor's algorithm using the compiler, and the benchmarking calculations (section 7) as a jupyter notebook.
 
 ## 3. Running the simulation
 Functioning versions of SquidASM [4] and NetQASM [5] on the user's side are required to run the simulation. To run the simulation, head to the directory in which the files are deposited. Using the consol, python run_ubqc.py can be used to run the simulation given the current settings provided in run_ubqc.py. Possible arguments include:
@@ -173,7 +173,7 @@ To get an estimate for the probability for Bob to guess the right circuit, one h
 |**CZ**|0|0|1|
 
 Taken these into account, the problem of finding the number of consistent combinations boils down to a combinatorial problem. This again shows that Bob doesn't gather any data about X and Z gates, which is why we should rather speak of different possible circuit classes up to these gates rather than particular circuits here. Nonetheless the term is dropped to ease the description.
-After all possible sets of gates are found by solving the aforementioned combinatorial problem, the number of output qubits of a given circuit is calculated via $N_{qubits} - N_{meas}$. Then all possible combinations of each set acting on each possible output qubit are getting constructed, to get a comprehensive list of circuits that are consistent with the given variables. After this is performed, all of these circuits are getting converted to Qiskit circuit, to make use of the function $\textit{transpiler}$, transforming circuits to their easiest equivalent. Comparing the statevectors of the given circuits with each other lets one exclude redundant circuits from the list. This finally leaves one with all distinguishable circuits that are consistent with the data Bob received from Alice, and hence with the probability of him to overcome the blindness. The code to estimate the probability and to display the given circuits for a given set of variables can be found in benchmarking.py. The user can either provide the three variables directly, or extract them from a given quantum circuit to estimate its security.
+After all possible sets of gates are found by solving the aforementioned combinatorial problem, the number of output qubits of a given circuit is calculated via $N_{qubits} - N_{meas}$. Then all possible combinations of each set acting on each possible output qubit are getting constructed, to get a comprehensive list of circuits that are consistent with the given variables. After this is performed, all of these circuits are getting converted to Qiskit circuit, to make use of the function $\textit{transpiler}$, transforming circuits to their easiest equivalent. Comparing the statevectors of the given circuits with each other lets one exclude redundant circuits from the list. This finally leaves one with all distinguishable circuits that are consistent with the data Bob received from Alice, and hence with the probability of him to overcome the blindness. The code to estimate the probability and to display the given circuits for a given set of variables can be found in benchmarking.py, or in benchmarking.ipynb in the folder jupyter-notebook. The user can either provide the three variables directly, or extract them from a given quantum circuit to estimate its security.
 **Note**: In the code RX gates are used as placeholders for J gates, since they are not native in Python. This is yet to be adjusted, but it doesn't influence the success probability of Bob to guess the right circuit. J gates here are gates satisfying $R_x(\alpha) = J(\alpha) H$. Furthermore J and CZ build a basis to construct any unitary operator [6]
 
 ## 8. Shor's algorithm
