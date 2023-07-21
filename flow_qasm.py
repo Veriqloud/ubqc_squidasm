@@ -1,13 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# ### Output check of flow.py with QASM input
-
-# Now, after confirming that the output of measurement_qasm is the same as the output of measurement_json, we go on with the next file that converts the measurement instruction into a flow, and check if it gives the same output for both data types JSON and QASM.
-# 
-# For this, again we load a dummy circuit from qiskit to convert it into a QASM file.
-
-
 import numpy as np
 from measurement_qasm import load_and_convert_circuit
 from copy import deepcopy
@@ -17,7 +7,7 @@ from qiskit.compiler.assembler import assemble
 from qiskit.assembler.disassemble import disassemble
 
 
-# Loading dummy circuit
+# Loading dummy circuit as example
 
 # #### Note: All of the functions in measurement_qasm.py and flow_qasm.py take QASM-type input, while we can slightly change the code so that datapaths to QASM files are taken as the input instead!
 
