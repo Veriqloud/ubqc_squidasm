@@ -9,41 +9,7 @@ from netsquid.qubits import qubitapi as qapi
 import netsquid.qubits
 import squidasm.sim.stack.globals
 from squidasm.sim.stack.program import Program, ProgramContext, ProgramMeta
-
-def get_qubit(netqasm_qubit: SdkQubit, node_name) -> qapi.Qubit:
-    """Get the the qubit(s), only possible in simulation and can be used for debugging.
-
-    .. note:: The function gets the *current* qubit(s). So make sure the the subroutine is flushed
-              before calling the method.
-
-    Parameters
-    ----------
-    qubit : :class:`~netqasm.sdk.qubit.Qubit` or list
-        The qubit to get the state of or list of qubits.
-
-    Returns
-    -------
-    netsquid.Qubit
-        The netsquid Qubit object
-    """
-
-    # Get the executor and qmemory from the backend
-    network = squidasm.sim.stack.globals.GlobalSimData.get_network()
-    app_id = netqasm_qubit._conn.app_id
-
-    executor = network.stacks[node_name].qnos.app_memories[app_id]
-    qmemory = network.stacks[node_name].qdevice
-
-    # Get the physical position of the qubit
-    virtual_address = netqasm_qubit.qubit_id
-    phys_pos = executor.phys_id_for(virt_id=virtual_address)
-    
-
-    # Get the netsquid qubit
-    ns_qubit = qmemory.mem_positions[phys_pos].get_qubit()
-
-    return ns_qubit
-
+from UBQC_client import get_qubit
 
 class BobProgram(Program):
     PEER_NAME = "Alice"
