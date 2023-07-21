@@ -34,6 +34,8 @@ qc.z(q[1])
 qc.cz(q[0],q[1])
 qobj = assemble(qc, shots=2000, memory=True)
 
+# Functions to individually convert gates into measurement instructions
+
 def _convert_gate_h(q1, q2, qubit_count):
     new_qubit = qubit_count + 1
     qubits = [[q1, q1, new_qubit], [new_qubit, 0, 0]]
@@ -78,6 +80,8 @@ def _replace_qubit(qubits, old, new):
                 qubits[i][j] = new
     #print("replace new {} old {}".format(new,old))
     return qubits
+
+# Function converting instructions in gate-based formalism into measurement instructions. Get's called recursively.
 
 
 def _convert_to_measurements(obj, gates, qubits, qubit_count, angles,qout_idx,qout_init,qout_final):
@@ -171,7 +175,9 @@ def _convert_to_measurements(obj, gates, qubits, qubit_count, angles,qout_idx,qo
     return _convert_to_measurements(obj, gates, qubits, qubit_count, angles, qout_idx, qout_init, qout_final)
 
 
-# This is the only function that was modified with respect to the original compiler
+# This is the only function that was modified with respect to the original compiler. Extracts all the informations from a given Quantumcircuit in QASM format.
+# Uses qobj.to_dict() to convert QASM object to dictionary, to then extract information.
+
 def load_circuit_qasm(qobj):
     
     circuit = qobj.to_dict()['experiments'][0]['instructions']
@@ -216,10 +222,13 @@ def load_circuit_qasm(qobj):
 
     return gates, [qubits_1, qubits_2], nqbits, angles, qout_idx, qout_init, qout_final
 
+# Function converting gate-based instructions (dictionary-like) into measurement instructions.
 
 def convert_to_measurements(gates, qubits, qubit_count, angles,qout_idx,qout_init,qout_final):
     empty = {"gates": [], "qubits": [[], []], "conditions": [], "angles": [], "qout_idx": [], "qout_init": [], "qout_final": []}
     return _convert_to_measurements(empty, gates, qubits, qubit_count, angles, qout_idx, qout_init, qout_final)
+
+# Main function: Load circuit in QASM format and convert it into the corresponding measurement instructions. Get's called by flow_qasm.py
 
 def load_and_convert_circuit(qobj):
     circuit = load_circuit_qasm(qobj)
