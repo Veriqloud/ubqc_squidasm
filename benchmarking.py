@@ -14,6 +14,7 @@ from qiskit.quantum_info import Statevector
 from itertools import combinations_with_replacement
 from itertools import combinations
 from measurement_qasm import load_circuit_qasm
+from flow_qasm import circuit_file_to_flow, count_qubits_in_sequence
 
 # Define the three fundamental gates that are used in the measurement formalism. All circuits will be expressed in terms of these.
 
@@ -187,11 +188,40 @@ def get_probability(n_qubit,n_meas,n_ent):
         possibilities += possibilities_circ
     return 1/possibilities
 
-# Example usage:
 
-n_compqubits = 4
-n_measurement = 2
-n_entanglement = 2
+
+def get_variables(circuit):
+    qobj = assemble(circuit, shots=2000, memory=True)
+    circ_flow = circuit_file_to_flow(qobj)
+    seq = circ_flow[0]
+    nQubits = count_qubits_in_sequence(seq)
+    nEntanglement = 0
+    nMeasurement = 0
+    for s in seq:
+        if s.type == "E":
+            nEntanglement +=1
+        if s.type == "M":
+            nMeasurement += 1
+    return nQubits, nMeasurement, nEntanglement
+
+# Example usage: Either provide the given variables n_compqubits, n_measurement, n_entanglement,
+# or provide a qiskit circuit and extract the corresponding information:
+
+# Load test circuit
+
+q = QuantumRegister(1)
+c = ClassicalRegister(1)
+qc = QuantumCircuit(q,c)
+qc.h(q[0])
+qc.h(q[0])
+
+# Extract variables from test circuit
+
+n_compqubits, n_measurement, n_entanglement = get_variables(qc)
+
+# Estimate security from these variables
+
+print(f"Variables for the given circuit: n_comp = {n_compqubits}, n_meas = {n_measurement}, n_ent = {n_entanglement}")
 
 print(f"Gate combinations: \n {find_consistent_combinations(n_compqubits,n_measurement,n_entanglement)[0]} \n")
 
@@ -202,4 +232,3 @@ print(f"All possible circuits (unique): \n {get_all_circuits(all_combinations_fr
 print(f"Total probability to guess right circuit (up to X and Z gates): \n {get_probability(n_compqubits,n_measurement,n_entanglement)} \n")
 
 # Still to do: Two qubit circuits where only one qubit is manipulated could get excluded, replace RX gates with J gates
-
