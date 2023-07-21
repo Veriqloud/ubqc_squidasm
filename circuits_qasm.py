@@ -214,7 +214,7 @@ def qasm_circs():
 
 
 
-
+# Note: If custom circuits are added here, one also needs to add the expected result to infer about succes rates.
 
 
 
