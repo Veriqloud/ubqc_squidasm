@@ -9,8 +9,9 @@ A compiler to simulate Universal Blind Quantum Computation [1] using the quantum
 #### 5. Performance
 #### 6. Discussion
 #### 7. Security Benchmarking
-#### 8. References
-#### 9. Author
+#### 8. Shor's algorithm
+#### 9. References
+#### 10. Author
 
 ## 1. UBQC
 Universal Blind Quantum Computation provides a method for a client without any quantum computational power to execute quantum computations on a remote server without revealing neither the input nor the output. The measurement-based scheme for quantum computation (MBQC) is chosen as the foundation. This is a different approach to quantum computation than the gate-based one, while it's possible to construct MBQC instructions from any given gate-based circuit. These instructions consist of three types of objects: Entanglement operations, measurement instructions, and byproduct operators. To be able to run these instructions according to [1], one needs to reorder these instructions by making use of commutation relations. Like this, we can achieve that first all entanglement operations are perforemed, then all the measurements, and finally the byproducts. This so called $\textit{flow}$ first been first introduced by Kashefi et al. [3].
@@ -175,7 +176,10 @@ Taken these into account, the problem of finding the number of consistent combin
 After all possible sets of gates are found by solving the aforementioned combinatorial problem, the number of output qubits of a given circuit is calculated via $N_{qubits} - N_{meas}$. Then all possible combinations of each set acting on each possible output qubit are getting constructed, to get a comprehensive list of circuits that are consistent with the given variables. After this is performed, all of these circuits are getting converted to Qiskit circuit, to make use of the function $\textit{transpiler}$, transforming circuits to their easiest equivalent. Comparing the statevectors of the given circuits with each other lets one exclude redundant circuits from the list. This finally leaves one with all distinguishable circuits that are consistent with the data Bob received from Alice, and hence with the probability of him to overcome the blindness. The code to estimate the probability and to display the given circuits for a given set of variables can be found in benchmarking.py. The user can either provide the three variables directly, or extract them from a given quantum circuit to estimate its security.
 **Note**: In the code RX gates are used as placeholders for J gates, since they are not native in Python. This is yet to be adjusted, but it doesn't influence the success probability of Bob to guess the right circuit. J gates here are gates satisfying $R_x(\alpha) = J(\alpha) H$. Furthermore J and CZ build a basis to construct any unitary operator [6]
 
-## 8. References
+## 8. Shor's algorithm
+The test of the compiler on Shor's prime factorization algorithm can be found in the notebook shor_ubqc.ipynb in the folder Jupyter-notebook.
+
+## 9. References
 [1] "Universal Blind Quantum Computation", Kashefi et al. 2009
 
 [2] Original Compiler: https://github.com/quantumprotocolzoo/protocols/tree/master/UBQC
@@ -188,7 +192,7 @@ After all possible sets of gates are found by solving the aforementioned combina
 
 [6]"Parsimonious and robust realizations of unitary maps in the one-way model",  V. Danos, E. Kashefi, P. Panangaden. 
 
-## 9. Author
+## 10. Author
 Younes Naceur
 
 Email: naceur.younes@yahoo.de
