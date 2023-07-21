@@ -183,13 +183,13 @@ A basic framework for running Shor's prime factorization algorithm using UBQC ca
 ## 9. References
 [1] "Universal Blind Quantum Computation", Kashefi et al. 2009
 
-[2] Original Compiler: https://github.com/quantumprotocolzoo/protocols/tree/master/UBQC
+[2][Original Compiler](https://github.com/quantumprotocolzoo/protocols/tree/master/UBQC)
 
 [3] "The Measurement Calculus", Kashefi et al. 2007
 
-[4][squidasm](https://squidasm.readthedocs.io)
+[4] [SquidASM documentation](https://squidasm.readthedocs.io)
 
-[5] https://netqasm.readthedocs.io/en/latest/
+[5] [NetQASM documentation](https://netqasm.readthedocs.io/en/latest/)
 
 [6] "Parsimonious and robust realizations of unitary maps in the one-way model",  V. Danos, E. Kashefi, P. Panangaden. 
 
