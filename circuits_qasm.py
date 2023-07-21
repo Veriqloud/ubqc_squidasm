@@ -12,59 +12,6 @@ from itertools import chain
 # Note: The conversion from a circuit into a QASM object is only implemented here to test that the modified function
 # gives the same output as the original function.
 
-def qasm_form(qobj):
-    
-    circuit = qobj.to_dict()['experiments'][0]['instructions']
-    nGates = len(circuit)
-    gates = []
-    qubits = []
-    qubits_1 = []
-    qubits_2 = []
-    qout_idx = []
-    angles = []
-    
-    for g in range(0, nGates):
-        qubits = qubits + circuit[g]["qubits"]
-        
-       # Qubits_1: Includes (for all gates) the first qubit the gate is acting upon. Results in a list e.g. [1,1,1,2] if the              circuit consits of 4 single qubit gates acting on 1,1,1,2
-    
-        qubits_1 = qubits_1 + [int(circuit[g]["qubits"][0]) + 1]
-        
-        # Qubits_2: A list of all the "second qubits" the gates is acting upon. In the case of H, H, CX: 0,0,2.
-        # If the corresponding gate only acts on one qubit, add a zero to the list of "second qubits"
-        
-        if len(circuit[g]["qubits"]) == 1:
-            qubits_2 = qubits_2 + [0]
-        else:
-            qubits_2 = qubits_2 + [int(circuit[g]["qubits"][1]) + 1]
-            
-        # Finally, "Qubits_1" and "Qubits_2", as well as "Gates" should all have nGates entries, meaning that we can execute
-        # the circuit by iterating over all three lists.
-        
-        # Adjustment: Qiskit saves gates in lowercase letters, while the output of measurement.py needs upper case
-        gates = gates + [circuit[g]["name"].upper()]
-        if (gates[g] == 'RZ') | (gates[g] == 'RX'):
-            
-            # Adjustment: Qiskit saves circuitnames without an underscore, which we have to fix to fit the format
-            
-            gates[g] = gates[g][:1] + '_' + gates[g][1:]
-            angles = angles + [int(circuit[g]['params'][0])]
-        elif gates[g] == 'T' :
-            angles = angles + [32]
-            
-    # Adjustment: Qubit positions are saved in Qiskit starting form zero, wereas we want them to start with one
-    for i in range(len(qubits)):
-        qubits[i] = int(qubits[i])
-        qubits[i] += 1
-        qubits[i] = str(qubits[i])
-    nqbits = len(set(qubits))
-    qout_idx = list(map(int, set(qubits)))
-    qout_init = list(map(int, set(qubits)))
-    qout_final = [-1]*len(qout_idx)
-
-    return gates, [qubits_1, qubits_2], nqbits, angles, qout_idx, qout_init, qout_final
-
-
 circuits_qasm = []
 def qasm_circs():
 
