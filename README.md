@@ -10,6 +10,7 @@ A compiler to simulate Universal Blind Quantum Computation [1] using the quantum
 #### 6. Discussion
 #### 7. Security Benchmarking
 #### 8. References
+#### 9. Author
 
 ## 1. UBQC
 Universal Blind Quantum Computation provides a method for a client without any quantum computational power to execute quantum computations on a remote server without revealing neither the input nor the output. The measurement-based scheme for quantum computation (MBQC) is chosen as the foundation. This is a different approach to quantum computation than the gate-based one, while it's possible to construct MBQC instructions from any given gate-based circuit. These instructions consist of three types of objects: Entanglement operations, measurement instructions, and byproduct operators. To be able to run these instructions according to [1], one needs to reorder these instructions by making use of commutation relations. Like this, we can achieve that first all entanglement operations are perforemed, then all the measurements, and finally the byproducts. This so called $\textit{flow}$ first been first introduced by Kashefi et al. [3].
@@ -88,7 +89,7 @@ Functioning versions of SquidASM [4] and NetQASM [5] on the user's side are requ
     Choose between I, X, Y, Z, H, rot_X:angle:, rot_Y:angle:, rot_Z:angle: . I refers to identity gate, rotation angles are provided in the format $n/256$. Seperation between gates: Comma. Example Syntax (3 qubits): -i x,z,rot_x:30:
 - $\texttt{- h}$ for help
 
-Besides the running of a python file it's also possible to directly run the simulation as a python function in a jupyter notebook (see folder jupyter-notebook). This provides a direct interface to run the UBQC simulation using custom circuits.
+Besides the running of a python file it's also possible to directly run the simulation as a python function in a jupyter notebook (see folder jupyter-notebook). In that case the aforementioned arguments are implemented as variables to a Python function. This provides a direct interface to run the UBQC simulation using custom circuits.
 
 ## 4. Changes from the old protocol
 For debugging reasons, in this section the changes from the original protocol in SimulaQron are introduced
@@ -183,3 +184,7 @@ After all possible sets of gates are found by solving the aforementioned combina
 [4] https://squidasm.readthedocs.io
 
 [5] https://netqasm.readthedocs.io/en/latest/
+
+## 9. Author
+Younes Naceur
+Email: naceur.younes@yahoo.de
