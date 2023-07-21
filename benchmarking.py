@@ -193,13 +193,13 @@ n_compqubits = 4
 n_measurement = 2
 n_entanglement = 2
 
-print(f"Gate combinations: \n {find_consistent_combinations(ncompqubits,n_measurement,n_entanglement)[0]} \n")
+print(f"Gate combinations: \n {find_consistent_combinations(n_compqubits,n_measurement,n_entanglement)[0]} \n")
 
-print(f"All possible circuits (redundant): \n {all_combinations_from_vars(ncompqubits,n_measurement,n_entanglement)[0]} \n")
+print(f"All possible circuits (redundant): \n {all_combinations_from_vars(n_compqubits,n_measurement,n_entanglement)[0]} \n")
 
-print(f"All possible circuits (unique): \n {get_all_circuits(all_combinations_from_vars(ncompqubits,n_measurement,n_entanglement)[0])} \n")
+print(f"All possible circuits (unique): \n {get_all_circuits(all_combinations_from_vars(n_compqubits,n_measurement,n_entanglement)[0])} \n")
 
-print(f"Total probability to guess right circuit (up to X and Z gates): \n {get_probability(ncompqubits,n_measurement,n_entanglement)} \n")
+print(f"Total probability to guess right circuit (up to X and Z gates): \n {get_probability(n_compqubits,n_measurement,n_entanglement)} \n")
 
 # Still to do: Two qubit circuits where only one qubit is manipulated could get excluded, replace RX gates with J gates
 
