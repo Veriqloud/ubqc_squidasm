@@ -88,7 +88,7 @@ Functioning versions of SquidASM [4] and NetQASM [5] on the user's side are requ
     Choose between I, X, Y, Z, H, rot_X:angle:, rot_Y:angle:, rot_Z:angle: . I refers to identity gate, rotation angles are provided in the format $n/256$. Seperation between gates: Comma. Example Syntax (3 qubits): -i x,z,rot_x:30:
 - $\texttt{- h}$ for help
 
-Besides the running of a python file it's also possible to directly run the simulation as a python function in a jupyter notebook (see folder jupyter-notebook)
+Besides the running of a python file it's also possible to directly run the simulation as a python function in a jupyter notebook (see folder jupyter-notebook). This provides a direct interface to run the UBQC simulation using custom circuits.
 
 ## 4. Changes from the old protocol
 For debugging reasons, in this section the changes from the original protocol in SimulaQron are introduced
