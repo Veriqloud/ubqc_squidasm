@@ -187,11 +187,11 @@ A basic framework for running Shor's prime factorization algorithm using UBQC ca
 
 [3] "The Measurement Calculus", Kashefi et al. 2007
 
-[4] https://squidasm.readthedocs.io
+[4][squidasm](https://squidasm.readthedocs.io)
 
 [5] https://netqasm.readthedocs.io/en/latest/
 
-[6]"Parsimonious and robust realizations of unitary maps in the one-way model",  V. Danos, E. Kashefi, P. Panangaden. 
+[6] "Parsimonious and robust realizations of unitary maps in the one-way model",  V. Danos, E. Kashefi, P. Panangaden. 
 
 ## 10. Author
 Younes Naceur
