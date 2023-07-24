@@ -4,7 +4,7 @@ from qiskit.assembler.disassemble import disassemble
 import json
 import sys
 
-from collections import Iterable
+from collections.abc import Iterable
 from copy import deepcopy
 from itertools import chain
 

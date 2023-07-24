@@ -2,7 +2,7 @@
 
 import scipy.special
 import numpy as np
-from collections import Iterable
+from collections.abc import Iterable
 from itertools import chain
 import itertools
 import pandas as pd
