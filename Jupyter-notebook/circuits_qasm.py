@@ -1,6 +1,7 @@
 from qiskit.circuit import QuantumRegister, ClassicalRegister, QuantumCircuit
 from qiskit.compiler.assembler import assemble
 from qiskit.assembler.disassemble import disassemble
+from qiskit.qasm3 import dump
 import json
 import sys
 
@@ -9,9 +10,11 @@ from copy import deepcopy
 from itertools import chain
 
 # Create a circuit to assemble into a qobj
-# Note: The conversion from a circuit into a QASM object is only implemented here to test that the modified function
+# Note: The conversion from a circuit into a QASM object is only implemented 
+# here to test that the modified function
 # gives the same output as the original function.
 
+'''
 def qasm_form(qobj):
     
     circuit = qobj.to_dict()['experiments'][0]['instructions']
@@ -22,6 +25,9 @@ def qasm_form(qobj):
     qubits_2 = []
     qout_idx = []
     angles = []
+
+    print("~Exporting circuit")
+    dump(qobj,"./qobj.txt")
     
     for g in range(0, nGates):
         qubits = qubits + circuit[g]["qubits"]
@@ -63,6 +69,7 @@ def qasm_form(qobj):
     qout_final = [-1]*len(qout_idx)
 
     return gates, [qubits_1, qubits_2], nqbits, angles, qout_idx, qout_init, qout_final
+'''
 
 
 circuits_qasm = []
@@ -75,6 +82,8 @@ def qasm_circs():
         qc1.h(q1[0])
         qobj1 = assemble(qc1, shots=2000, memory=True)
         circuits_qasm.append((qobj1,[0],qc1.draw(filename="circuit.txt",output = "text")))
+
+
 
         # Circuit 2, Expected outcome: [0]
         q2 = QuantumRegister(1)
@@ -95,6 +104,14 @@ def qasm_circs():
         qc3.x(q3[0])
         qobj3 = assemble(qc3, shots=2000, memory=True)
         circuits_qasm.append((qobj3,[0],qc3.draw(filename="circuit.txt",output = "text")))
+
+        '''
+        circuit_str = dumps(qc3)
+        print(f"dumped :",circuit_str)
+        '''
+        iostream = open("qcircuit.txt", "w", encoding="utf-8")
+        circuit_str = dump(qc3,iostream)
+        #print(f"dumped :",circuit_str)
 
         # Circuit 4, Expected outcome: [0,1]
         q4 = QuantumRegister(2)
@@ -292,7 +309,7 @@ def qasm_circs():
         
         return circuits_qasm
 	
-	
+
 
 
 
