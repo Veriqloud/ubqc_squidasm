@@ -105,13 +105,6 @@ def qasm_circs():
         qobj3 = assemble(qc3, shots=2000, memory=True)
         circuits_qasm.append((qobj3,[0],qc3.draw(filename="circuit.txt",output = "text")))
 
-        '''
-        circuit_str = dumps(qc3)
-        print(f"dumped :",circuit_str)
-        '''
-        iostream = open("qcircuit.txt", "w", encoding="utf-8")
-        circuit_str = dump(qc3,iostream)
-        #print(f"dumped :",circuit_str)
 
         # Circuit 4, Expected outcome: [0,1]
         q4 = QuantumRegister(2)
@@ -122,6 +115,7 @@ def qasm_circs():
         qc4.h(q4[1])
         qobj4 = assemble(qc4, shots=2000, memory=True)
         circuits_qasm.append((qobj4,[0,1],qc4.draw(filename="circuit.txt",output = "text")))
+
 
         # Circuit 5, Expected outcome: [1,1]
         q5 = QuantumRegister(2)
@@ -307,6 +301,12 @@ def qasm_circs():
         qobj16 = assemble(qc16,shots=2000, memory=True)
         circuits_qasm.append((qobj16,[1 for i in range(10)],qc16.draw(filename="circuit.txt",output="text")))
         
+
+
+        iostream = open("qcircuit.txt", "w", encoding="utf-8")
+        circuit_str = dump(qc10,iostream)
+        #print(f"dumped :",circuit_str)
+
         return circuits_qasm
 	
 
