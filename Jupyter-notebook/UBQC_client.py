@@ -17,6 +17,14 @@ from circuits_qasm import qasm_circs
 from flow_qasm import circuit_file_to_flow, count_qubits_in_sequence
 from angle import measure_angle
 from squidasm.sim.stack.program import Program, ProgramContext, ProgramMeta
+from qiskit.qasm3 import load
+from enum import Enum
+
+class LoadType(Enum):
+    DEFAULT = 0
+    FILE = 1
+    CUSTOM = 2
+
 
 def get_qubit(netqasm_qubit: SdkQubit, node_name) -> qapi.Qubit:
     """Get the the qubit(s), only possible in simulation and can be used for debugging.
@@ -114,19 +122,32 @@ class AliceProgram(Program):
         # Define circuits
         circuits = qasm_circs()
         
-        if not self.args["custom_circ"]:
-            circ = circuits[int(self.args["circuit"]-1)]
+
+        if self.args["loadMethod"] == LoadType.FILE:
+            print("load case, not yet done")
+            circ = load("./qcircuit.txt")
+            '''
             circ_flow = circuit_file_to_flow(circ[0])
             seq = circ_flow[0]
-            result = circ[1]
+            result = 0
             qout_idx = circ_flow[1]
-            
-        if self.args["custom_circ"]:
-            qiskit_circ = self.args["custom_circ"]
+            '''
+                
+        if self.args["loadMethod"] == LoadType.CUSTOM:
+            print("custome case")
+            qiskit_circ = self.args["loadMethod"]
             circ = assemble(qiskit_circ,shots=2000,memory=True)
             circ_flow = circuit_file_to_flow(circ)
             seq = circ_flow[0]
             result = 0
+            qout_idx = circ_flow[1]
+
+        else: # self.args["loadMethod"] == LoadType.DEFAULT:
+            print("default case")
+            circ = circuits[int(self.args["circuit"]-1)]
+            circ_flow = circuit_file_to_flow(circ[0])
+            seq = circ_flow[0]
+            result = circ[1]
             qout_idx = circ_flow[1]
 
         # Count how many qubits are needed
