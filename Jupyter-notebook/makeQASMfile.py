@@ -17,6 +17,6 @@ qc9.h(q9[2])
 qc9.cx(q9[0],q9[2])
 qc9.cx(q9[2],q9[0])
 
-iostream = open("qcircuit9.qasm", "w", encoding="utf-8")
+iostream = open("qcircuitTest.qasm", "w", encoding="utf-8")
 dump(qc9,iostream)
 
