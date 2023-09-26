@@ -302,11 +302,6 @@ def qasm_circs():
         circuits_qasm.append((qobj16,[1 for i in range(10)],qc16.draw(filename="circuit.txt",output="text")))
         
 
-
-        iostream = open("qcircuit.txt", "w", encoding="utf-8")
-        circuit_str = dump(qc10,iostream)
-        #print(f"dumped :",circuit_str)
-
         return circuits_qasm
 	
 
