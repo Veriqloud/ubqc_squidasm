@@ -275,6 +275,8 @@ def qasm_circs():
         qobj15 = assemble(qc15, shots=2000, memory=True)
         circuits_qasm.append((qobj15,[0,1,1,1,1],qc15.draw(filename="circuit.txt",output = "text")))
         
+
+        # Circuit 16 Expected outcome: [1,1,1,1,1,1,1,1,1,1]
         q16 = QuantumRegister(10)
         c16 = ClassicalRegister(10)
         qc16 = QuantumCircuit(q16,c16)
