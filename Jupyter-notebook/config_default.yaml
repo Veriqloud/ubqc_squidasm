@@ -4,12 +4,12 @@ stacks:
   - name: Alice
     qdevice_typ: generic
     qdevice_cfg:
-      num_qubits: 20
+      num_qubits: 100
 
   - name: Bob
     qdevice_typ: generic
     qdevice_cfg:
-      num_qubits: 20
+      num_qubits: 100
 
 links:
   - stack1: Alice
