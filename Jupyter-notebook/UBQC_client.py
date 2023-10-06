@@ -122,19 +122,18 @@ class AliceProgram(Program):
         # Define circuits
         circuits = qasm_circs()
         
-
         if self.args["loadMethod"] == LoadType.FILE:
-            print("load from a file case")
+            #print("client load from a file")
             circ_obj = load(self.args["loadPath"])
             circ = assemble(circ_obj,shots=2000,memory=True)
             circ_flow = circuit_file_to_flow(circ)
             seq = circ_flow[0]
-            #result = circ[1]
+            result = 0
             qout_idx = circ_flow[1]
            
-                
-        if self.args["loadMethod"] == LoadType.CUSTOM:
-            print("custome circuit case")
+        
+        elif self.args["loadMethod"] == LoadType.CUSTOM:
+            #print("client apply custome circuit")
             qiskit_circ = self.args["custom_circ"]
             circ = assemble(qiskit_circ,shots=2000,memory=True)
             circ_flow = circuit_file_to_flow(circ)
@@ -143,7 +142,7 @@ class AliceProgram(Program):
             qout_idx = circ_flow[1]
 
         else: # self.args["loadMethod"] == LoadType.DEFAULT:
-            print("default circuit case")
+            #print("use default circuit")
             circ = circuits[int(self.args["circuit"]-1)]
             circ_flow = circuit_file_to_flow(circ[0])
             seq = circ_flow[0]
