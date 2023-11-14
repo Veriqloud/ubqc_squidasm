@@ -1,7 +1,5 @@
 # Noise configuration file with customized noise:
 
-# Perfect 2 node network, no noise from either computation on the nodes or communication between nodes
-# configuration with perfect link, a generic qdevice, but some noise on the generic device
 
 qdevice_cfg: &qdevice_cfg
   num_qubits: 100
@@ -20,6 +18,29 @@ qdevice_cfg: &qdevice_cfg
   single_qubit_gate_depolar_prob: 0.05
   two_qubit_gate_depolar_prob: 0.1
 
+  # note that depolar probability is independent from time while T1T2 noise is time dependent. 
+  # Both affect on qubits independently.
+
+link_cfg: &link_cfg
+    # total length [km] of heralded connection (i.e. sum of fibers on both sides on midpoint station).
+    length: 1.0
+    # probability that photons are lost when entering connection the connection on either side.
+    p_loss_init: 0
+    # attenuation coefficient [dB/km] of fiber on either side.
+    p_loss_length: 0
+    # speed of light [km/s] in fiber on either side.
+    speed_of_light: 200_000
+    # dark-count probability per detection
+    dark_count_probability: 0
+    # probability that the presence of a photon leads to a detection event
+    detector_efficiency: 1.0
+    # Hong-Ou-Mandel visibility of photons that are being interfered (measure of photon indistinguishability)
+    visibility: 1.0
+    # determines whether photon-number-resolving detectors are used for the Bell-state measurement
+    num_resolving: False
+
+
+
 stacks:
   - name: Bob
     qdevice_typ: generic
@@ -33,6 +54,6 @@ stacks:
 links:
   - stack1: Alice
     stack2: Bob
-    typ: perfect
-    #cfg:
-     # dummy: null
+    typ: heralded
+    cfg:
+      <<: *link_cfg
