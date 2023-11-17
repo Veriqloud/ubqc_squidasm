@@ -18,8 +18,8 @@ qdevice_cfg: &qdevice_cfg
   single_qubit_gate_depolar_prob: 0.05
   two_qubit_gate_depolar_prob: 0.1
 
-  # note that depolar probability is independent from time while T1T2 noise is time dependent. 
-  # Both affect on qubits independently.
+  # note that depolar probability is time independent while T1T2 noise is time dependent. 
+  # Either depolar probability or time related decoherence is applied at the same time. When it comes to collision, depolar probability has the higher priority.
 
 link_cfg: &link_cfg
     # total length [km] of heralded connection (i.e. sum of fibers on both sides on midpoint station).
