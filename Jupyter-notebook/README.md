@@ -22,7 +22,8 @@ The UBQC protocol provides a scenario in which the client assigns a specific qua
 
 
 # Additional tool
-For those who want to generate `.qasm` files, `makeQASMfile.py` will do the work. By describing a quantum circuit in python code, it will output a `.qasm` file. Or try the example one: `qcircuitTest.qasm`. 
+One of the quantum circuit import method is via a `.qasm` file. For those who are not familiar with QASM syntax but want to try the feature, we provides a script(`makeQASMfile.py`) to convert Qiskit quantum circuit object to a `.qasm` file.
+Or just use the example one: `qcircuitTest.qasm`. 
 
 
 # Reference
