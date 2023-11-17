@@ -15,9 +15,9 @@ The UBQC protocol provides a scenario in which the client assigns a specific qua
 
 
 # How to run
-1. Launch jupyter notebook `UBQC_notebook.ipynb`. A jupyter window will showup. It is an user friendly interface to launch our simulation. Usually users does not need to edit other file then `UBQC_notebook.ipynb`.
-2. Configure the simulation by tuning the parameters of function `run_simulation()` in the small cells. Or use the default configuration without modification.
-3. Press shift + enter keys to run a cell in the jupyter notebook. If the input circuit is legit, the software will draw the input circuit and give the computation results.
+1. Launch the jupyter notebook `UBQC_notebook.ipynb`. A jupyter window will showup. It is an user friendly interface to launch our simulation. Usually users does not need to edit files other then `UBQC_notebook.ipynb` and `config_xxx.yaml`.
+2. Configure the simulation by tuning the parameters in function `run_simulation()` in the cells. Or use the default configuration without modification.
+3. Press shift + enter keys to run a cell in the jupyter notebook. If the input circuit is legit, the software will draw the input circuit and give the computational results. 
 
 
 
