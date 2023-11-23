@@ -47,7 +47,7 @@ def text2squidasm(myqubitList,operators):
 
         else:
             pass
-    
+
     # measure all qubits
     res = []
     for q in myqubitList:
