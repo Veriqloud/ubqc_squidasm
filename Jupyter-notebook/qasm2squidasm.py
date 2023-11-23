@@ -7,6 +7,8 @@ from qiskit.qasm3 import dump
 from squidasm.sim.stack.program import Program, ProgramContext, ProgramMeta
 from netqasm.sdk.qubit import Qubit
 
+import re
+
 
 
 
@@ -35,7 +37,8 @@ def text2squidasm(myqubitList,operators):
 
         elif line[0] == 'rx': # rotation case
             #print(f"applyed cnot in qubit {line[1],line[2]}") 
-            myqubitList[int(line[1])].cnot(myqubitList[int(line[2])])
+            #myqubitList[int(line[1])].cnot(myqubitList[int(line[2])])
+            pass
         
         else:
             pass
@@ -63,7 +66,7 @@ def qasm2text(qcircuit):
     myqasm = open("tempCircuit.qasm", "r", encoding="utf-8")  
     mytext = myqasm.readlines()
     text_size = len(mytext)
-    #print(mytext)
+    print(mytext)
 
     # parse text:
     num_qubits = int(mytext[3][6]) #fix location of num_qubits 
@@ -71,14 +74,16 @@ def qasm2text(qcircuit):
 
     operators = []
     for i in range(5,text_size):
-        if mytext[i][0] == 'c': # control case
-            operators.append([mytext[i][0]+mytext[i][1],mytext[i][6],mytext[i][13]])
-        if mytext[i][0] == 'r': # rotation case
-            # extract parameters
-            #operators.append()
-            pass
+        if mytext[i][0] == 'c':    # control case
+            operators.append([mytext[i][:2]
+                ,re.findall('\d+', mytext[i])[-3]
+                ,re.findall('\d+', mytext[i])[-1]])
+        if mytext[i][0] == 'r':    # rotation case
+            operators.append([mytext[i][:2]
+                ,float(re.findall("\d+\.\d+", mytext[i])[0])
+                ,re.findall('\d+', mytext[i])[-1]])
         else:
-            operators.append([mytext[i][0],mytext[i][5]]) #fix location of operators
+            operators.append([mytext[i][0],re.findall('\d+', mytext[i])[-1]]) #fix location of operators
 
     print(operators)
 
