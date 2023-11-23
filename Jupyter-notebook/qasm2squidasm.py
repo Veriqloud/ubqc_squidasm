@@ -13,26 +13,22 @@ import re
 
 
 def text2squidasm(myqubitList,operators):
-    #print("text2squidasm")
+
     for q in myqubitList:
-        q.H()  
+        q.H()  # fix the initial difference of ubits
 
     for line in operators:
         #print(f"processing...{line}")
-        if line[0] == 'h':  
-            #print(f"applyed h in qubit {line[1]}")                  
+        if line[0] == 'h':                   
             myqubitList[int(line[1])].H()     
             
-        elif line[0] == 'x':  
-            #print(f"applyed x in qubit {line[1]}")      
+        elif line[0] == 'x':        
             myqubitList[int(line[1])].X() 
 
-        elif line[0] == 'y':  
-            #print(f"applyed x in qubit {line[1]}")      
+        elif line[0] == 'y':      
             myqubitList[int(line[1])].Y() 
 
-        elif line[0] == 'z':  
-            #print(f"applyed z in qubit {line[1]}")                
+        elif line[0] == 'z':                  
             myqubitList[int(line[1])].Z()
 
         elif line[0] == 'cx' :   # control case
@@ -43,12 +39,10 @@ def text2squidasm(myqubitList,operators):
             #print(f"applyed rotation x in qubit {line[2]}") 
             myqubitList[int(line[2])].rot_X(int(line[1]),7) #convert customized unit to SquidASM parameters 
 
-        elif line[0] == 'ry': # rotation case
-            #print(f"applyed rotation y in qubit {line[2]}") 
+        elif line[0] == 'ry':  
             myqubitList[int(line[2])].rot_Y(int(line[1]),7) 
 
-        elif line[0] == 'rz': # rotation case
-            #print(f"applyed rotation z in qubit {line[2]}") 
+        elif line[0] == 'rz': 
             myqubitList[int(line[2])].rot_Z(int(line[1]),7) 
 
         else:
@@ -76,8 +70,7 @@ def qasmParse(path):
     #print(f"mytext: {mytext}")
 
     # parse text:
-    num_qubits = int(re.findall('\d+', mytext[3])[0]) #fix location of num_qubits 
-    #print(num_qubits)
+    num_qubits = int(re.findall('\d+', mytext[3])[0]) #find integers then take the first one  
 
     operators = []
     for i in range(5,text_size):
@@ -89,8 +82,9 @@ def qasmParse(path):
             operators.append([mytext[i][:2]
                 ,float(re.findall("\d+\.\d+", mytext[i])[0])
                 ,re.findall('\d+', mytext[i])[-1]])
-        else:
-            operators.append([mytext[i][0],re.findall('\d+', mytext[i])[-1]]) #fix location of operators
+        else: # H,X,Y,Z cases
+            operators.append([mytext[i][0],re.findall('\d+', mytext[i])[-1]]) 
+            # record the operation and find the qubit index
 
     #print(operators)
 
@@ -101,10 +95,9 @@ def qasmParse(path):
 class CircuitProgram(Program):
     PEER_NAME = "Alice"
     
-    def __init__(self,maxQubits: int, num_qubits: int, operators):
+    def __init__(self,maxQubits: int, path:str):
         self.maxQubits = maxQubits
-        self.num_qubits = num_qubits
-        self.operators = operators
+        self.path = path
         self.res = []
 
     @property
@@ -121,19 +114,21 @@ class CircuitProgram(Program):
         myConnection = context.connection
 
         
-
+        num_qubits, self.operators = qasmParse(self.path)
 
         # initialize qubits
         myqubitList = [] 
-        for q in range(self.num_qubits):
+        for q in range(num_qubits):
             myqubitList.append(Qubit(myConnection))
-        #print(f"length of qbuit:{len(myqubitList)}")
+
 
         self.res = text2squidasm(myqubitList,self.operators)
+
         
+        
+        # send results to the processor
         yield from myConnection.flush()
         self.res=[int(i) for i in self.res]
-        #print(f"Measurement result:{self.res}")
         
 
         return {}
@@ -141,6 +136,7 @@ class CircuitProgram(Program):
 
 if __name__ == "__main__":
 
+    # Circuit examples
     # Circuit 5, Expected outcome: [1,1]
     q5 = QuantumRegister(2)
     c5 = ClassicalRegister(2)
@@ -190,15 +186,16 @@ if __name__ == "__main__":
     qc16.cx(q16[0],q16[9])
 
     # generate qasm file
-    qcobj2qasm(qc14,"tempCircuit.qasm")
+    mypath = "tempCircuit.qasm"
+    #qcobj2qasm(qc16,mypath)
 
     # parsing qasm file
-    num_qubits,operators = qasmParse("tempCircuit.qasm")
+    #num_qubits,operators = qasmParse(mypath)
 
     cfg = StackNetworkConfig.from_file("config_perfect.yaml")
 
     maxQubits = 20
-    myCircuitProgram = CircuitProgram(maxQubits,num_qubits,operators) # import from qasm code
+    myCircuitProgram = CircuitProgram(maxQubits,mypath) # import from qasm code
     num_times = 1
     resList = []
 
