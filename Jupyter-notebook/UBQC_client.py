@@ -349,6 +349,6 @@ class AliceProgram(Program):
         yield from myConnection.flush()
         meas = [int(r) for r in meas]
         
-        print("Measurement in Z-Basis: {}".format(meas))
+        #print("Measurement in Z-Basis: {}".format(meas))
         return [meas,result]
 
