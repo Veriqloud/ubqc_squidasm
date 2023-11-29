@@ -90,12 +90,13 @@ def ubqcSim(path,configfile,maxQubits,num_times,exp_result):
 if __name__ == "__main__":
 
     fileName = "tempCircuit.qasm"
-    configFile = "config_noise.yaml"  #config_perfect.yaml,  config_default.yaml
-    Mynum_times = 20
+    Mynum_times = 50
     exp_res = [1,1,1,1,0]
 
     normRateList = []
     ubqcRateList = []
+
+    configFile = "config_noise.yaml"  #config_perfect.yaml,  config_default.yaml
 
     normalRes,correct_rate = normalSim(fileName,configFile
         ,maxQubits=20,num_times=Mynum_times,exp_result=exp_res)
@@ -128,47 +129,21 @@ if __name__ == "__main__":
 
     print(f"normRateList:{normRateList}")
     print(f"ubqcRateList:{ubqcRateList}")
-
     #=========================================================================
-    '''
-    #fig = plt.figure()
-    fig = plt.subplots() 
 
-    br1 = np.arange(len(normRateList))
-    br2 = np.arange(len(ubqcRateList))
-
-    x_axis = ['blinded', 'unblinded']
-    successful_rate = [correct_rate,ubqc_correct_rate]
-
-    plt.bar(x_axis, normRateList, color ='r', 
-        edgecolor ='grey', width = 0.4, label='Noise case')
-    plt.bar(x_axis, ubqcRateList, color ='b', 
-        edgecolor ='grey',width = 0.4,  label='Loss case') 
-
-    plt.title('Circuit 14')
-    plt.ylabel('successful rate')
-    plt.xlabel('circuit')
-    plt.yticks(np.arange(0.0, 1.0, 0.1))
-    #plt.xticks([r + 4 for r in range(len(normRateList))], ['blinded', 'unblinded'])
-    plt.legend()
-
-    plt.savefig('plotTest4.png')
-    plt.show()
-    '''
-    #============================================
     df = pd.DataFrame({ 
-    'Setting': ['Noise', 'Loss'], 
-    'namal circuit': normRateList, 
+    'Setting': ['Noise1', 'Loss'], 
+    'nomal circuit': normRateList, 
     'UBQC circuit': ubqcRateList 
     }) 
     
-    df.plot(x= 'Setting' ,y=['namal circuit','UBQC circuit'], kind="bar")  #"Noise case", "Loss case"
+    df.plot(x= 'Setting' ,y=['nomal circuit','UBQC circuit'], kind="bar")  #"Noise case", "Loss case"
 
     plt.title('Circuit 14')
     plt.yticks(np.arange(0.0, 1.0, 0.1))
     plt.ylabel('successful rate')
 
-    plt.savefig('plotTest6.png')
+    plt.savefig('plotTest9.png')
     plt.show()
 
 
