@@ -1,3 +1,9 @@
+'''
+The purpose of this script is to have a SquidASM quantum program that execute 
+quantum circuit converted from QASM. 
+The main function generates a .qasm file.
+'''
+
 from qiskit.circuit import QuantumRegister, ClassicalRegister, QuantumCircuit
 from qiskit.compiler.assembler import assemble
 from squidasm.run.stack.config import StackNetworkConfig
