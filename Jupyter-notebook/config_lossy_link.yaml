@@ -1,7 +1,7 @@
 # Noise configuration file with customized noise:
 
 qdevice_cfg: &qdevice_cfg
-  num_qubits: 100
+  num_qubits: 10000
   dummy: null
   init_time : 0
   measure_time : 0
@@ -14,9 +14,9 @@ link_cfg: &link_cfg
     # total length [km] of heralded connection (i.e. sum of fibers on both sides on midpoint station).
     length: 1.0
     # probability that photons are lost when entering connection the connection on either side.
-    p_loss_init: 0.05
+    p_loss_init: 0.5
     # attenuation coefficient [dB/km] of fiber on either side.
-    p_loss_length: 0.025
+    p_loss_length: 0.2
     # speed of light [km/s] in fiber on either side.
     speed_of_light: 200_000
     # dark-count probability per detection

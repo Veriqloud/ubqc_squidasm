@@ -66,11 +66,11 @@ def ubqcSim(path,configfile,maxQubits,num_times,exp_result):
         resListTmp.append(run(config=cfg,
             programs={"Alice": alice_program, "Bob": bob_program},
             num_times=1))
-        
+
     # extract only the result
     if(configfile!="config_noise.yaml" and configfile!="config_lossy_link.yaml"):    
         resList = resListTmp[0][0]
-        
+
     if(configfile=="config_noise.yaml" or configfile=="config_lossy_link.yaml"):
         #print(f"resListTmp :{resListTmp}")
 
@@ -90,7 +90,7 @@ def ubqcSim(path,configfile,maxQubits,num_times,exp_result):
 if __name__ == "__main__":
 
     fileName = "tempCircuit.qasm"
-    Mynum_times = 50
+    Mynum_times = 5
     exp_res = [1,1,1,1,0]
 
     normRateList = []
@@ -99,20 +99,20 @@ if __name__ == "__main__":
     configFile = "config_noise.yaml"  #config_perfect.yaml,  config_default.yaml
 
     normalRes,correct_rate = normalSim(fileName,configFile
-        ,maxQubits=20,num_times=Mynum_times,exp_result=exp_res)
+        ,maxQubits=30,num_times=Mynum_times,exp_result=exp_res)
     #print(f"normalRes :{normalRes}")
-    #rint(f"normal crrect Rate :{correct_rate}")
+    #print(f"normal crrect Rate :{correct_rate}")
     normRateList.append(correct_rate)
     
 
     ubquRes, ubqc_correct_rate = ubqcSim(fileName,configFile
-        ,maxQubits=20,num_times=Mynum_times,exp_result=exp_res)
+        ,maxQubits=30,num_times=Mynum_times,exp_result=exp_res)
     #print(f"ubquRes :{ubquRes}")
     #print(f"ubqc crrect Rate :{ubqc_correct_rate}")
     ubqcRateList.append(ubqc_correct_rate)
 
     #=========================================================================
-
+    '''
     configFile = "config_lossy_link.yaml"
     normalRes,correct_rate = normalSim(fileName,configFile
         ,maxQubits=20,num_times=Mynum_times,exp_result=exp_res)
@@ -129,10 +129,14 @@ if __name__ == "__main__":
 
     print(f"normRateList:{normRateList}")
     print(f"ubqcRateList:{ubqcRateList}")
+    '''
     #=========================================================================
+    print(f"normRateList:{normRateList}")
+    print(f"ubqcRateList:{ubqcRateList}")
+    #, 'Loss'
 
     df = pd.DataFrame({ 
-    'Setting': ['Noise1', 'Loss'], 
+    'Setting': ['Noise'], 
     'nomal circuit': normRateList, 
     'UBQC circuit': ubqcRateList 
     }) 
@@ -143,7 +147,7 @@ if __name__ == "__main__":
     plt.yticks(np.arange(0.0, 1.0, 0.1))
     plt.ylabel('successful rate')
 
-    plt.savefig('plotTest9.png')
+    plt.savefig('plotTest13.png')
     plt.show()
 
 

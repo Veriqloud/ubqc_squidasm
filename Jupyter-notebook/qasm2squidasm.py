@@ -186,15 +186,15 @@ if __name__ == "__main__":
     qc16.cx(q16[0],q16[9])
 
     # generate qasm file
-    mypath = "tempCircuit.qasm"
-    #qcobj2qasm(qc16,mypath)
+    mypath = "testCircuit.qasm"
+    qcobj2qasm(qc14,mypath)
 
     # parsing qasm file
-    #num_qubits,operators = qasmParse(mypath)
+    num_qubits,operators = qasmParse(mypath)
 
     cfg = StackNetworkConfig.from_file("config_perfect.yaml")
 
-    maxQubits = 20
+    maxQubits = 50
     myCircuitProgram = CircuitProgram(maxQubits,mypath) # import from qasm code
     num_times = 1
     resList = []
