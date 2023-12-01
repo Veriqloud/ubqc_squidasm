@@ -100,7 +100,7 @@ class AliceProgram(Program):
             name="UBQC",
             csockets=[self.PEER_NAME],
             epr_sockets=[self.PEER_NAME],
-            max_qubits=20,
+            max_qubits=self.args["max_qubits"],
         )
     
     def __init__(self, arguments):

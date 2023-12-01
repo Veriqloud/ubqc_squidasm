@@ -42,22 +42,21 @@ def normalSim(path,configfile,maxQubits,num_times,exp_result):
 
 def ubqcSim(path,configfile,maxQubits,num_times,exp_result):
 
-    #circ = load(path)
     cfg = StackNetworkConfig.from_file(configfile)
     loadMethod = LoadType.FILE
-    #"circuit": test_circ,"draw": draw, "log": log, "output": output_gates, "input": input_gates,
     test_circ = 1
+    maxQubits = maxQubits
     draw = False
     log = False
     output_gates = None
     input_gates = None
 
-    args = { "circuit": test_circ,"draw": draw, "log": log, 
+    args = { "circuit": test_circ,"max_qubits":maxQubits,"draw": draw, "log": log, 
         "output": output_gates, "input": input_gates,
-        "loadMethod": loadMethod,"loadPath": path}
+        "loadMethod": loadMethod,"loadPath": path} # arguments needed for UBQC protocol
 
     alice_program = AliceProgram(args)
-    bob_program = BobProgram()
+    bob_program = BobProgram(max_qubits=100)
     
     resListTmp = []
     resList = []

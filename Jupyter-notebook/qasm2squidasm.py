@@ -200,6 +200,7 @@ if __name__ == "__main__":
     resList = []
 
     for _ in range(num_times):
+        # We execute the circuit only at Bob's side since he is usually the server side. 
         run(config=cfg,
             programs={ "Bob": myCircuitProgram},
             num_times=1)
