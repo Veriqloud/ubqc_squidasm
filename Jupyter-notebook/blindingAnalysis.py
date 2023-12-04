@@ -1,15 +1,16 @@
 '''
-This script is used for comparing UBQC with corresponded original circuit.
-
+This script is used for benchmarking UBQC protocol.
+By running the blinded and unblinded circuit under the same hardware configuration,
+We are able to see the efficiency differnce among the two.
 '''
 from squidasm.run.stack.config import StackNetworkConfig
 from squidasm.run.stack.run import run
+from circuits_qasm import qasm_circs
+from qiskit.qasm3 import load
 
 from qasm2squidasm import CircuitProgram
 from UBQC_client import AliceProgram, LoadType
 from UBQC_server import BobProgram
-from circuits_qasm import qasm_circs
-from qiskit.qasm3 import load
 
 import matplotlib.pyplot as plt
 import pandas as pd 
