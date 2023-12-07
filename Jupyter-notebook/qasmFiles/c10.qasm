@@ -1,0 +1,13 @@
+OPENQASM 3;
+include "stdgates.inc";
+bit[4] c170;
+qubit[4] _all_qubits;
+let q170 = _all_qubits[0:3];
+z q170[0];
+z q170[1];
+h q170[0];
+h q170[1];
+h q170[2];
+h q170[3];
+x q170[2];
+cx q170[2], q170[3];

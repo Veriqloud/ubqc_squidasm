@@ -1,0 +1,12 @@
+OPENQASM 3;
+include "stdgates.inc";
+bit[5] c204;
+qubit[5] _all_qubits;
+let q204 = _all_qubits[0:4];
+z q204[0];
+z q204[1];
+h q204[0];
+h q204[1];
+h q204[2];
+h q204[3];
+h q204[4];

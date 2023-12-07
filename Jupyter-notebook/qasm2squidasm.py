@@ -13,8 +13,11 @@ from qiskit.qasm3 import dump
 from squidasm.sim.stack.program import Program, ProgramContext, ProgramMeta
 from netqasm.sdk.qubit import Qubit
 
+#from circuits_qasm import qasm_circs
+
 import re
 
+from qasmFiles.qCircuit import qasm_circs
 
 
 
@@ -142,62 +145,19 @@ class CircuitProgram(Program):
 
 if __name__ == "__main__":
 
-    # Circuit examples
-    # Circuit 5, Expected outcome: [1,1]
-    q5 = QuantumRegister(2)
-    c5 = ClassicalRegister(2)
-    qc5 = QuantumCircuit(q5, c5)
-    qc5.h(q5[0])
-    qc5.z(q5[1])
-    qc5.h(q5[1])
-    qc5.cx(q5[1],q5[0])
-
-    # Circuit 14, Expected outcome: [1,1,1,1,0]
-    q14 = QuantumRegister(5)
-    c14 = ClassicalRegister(5)
-    qc14 = QuantumCircuit(q14, c14)
-    qc14.z(q14[0])
-    qc14.z(q14[1])
-    qc14.h(q14[0])
-    qc14.h(q14[1])
-    qc14.h(q14[2])
-    qc14.h(q14[3])
-    qc14.h(q14[4])
-    qc14.rx(128,q14[2])
-    qc14.cx(q14[1],q14[3])
-
-    # Circuit 16 Expected outcome: [1,1,1,1,1,1,1,1,1,1]
-    q16 = QuantumRegister(10)
-    c16 = ClassicalRegister(10)
-    qc16 = QuantumCircuit(q16,c16)
-    qc16.h(q16[0])
-    qc16.x(q16[0])
-    qc16.h(q16[1])
-    qc16.x(q16[1])
-    qc16.h(q16[2])
-    qc16.cx(q16[1],q16[2])
-    qc16.h(q16[3])
-    qc16.cx(q16[2],q16[3])
-    qc16.h(q16[4])
-    qc16.cx(q16[3],q16[4])
-    qc16.h(q16[5])
-    qc16.cx(q16[4],q16[5])
-    qc16.h(q16[6])
-    qc16.cx(q16[0],q16[6])
-    qc16.h(q16[7])
-    qc16.cx(q16[0],q16[7])
-    qc16.h(q16[8])
-    qc16.cx(q16[0],q16[8])
-    qc16.h(q16[9])
-    qc16.cx(q16[0],q16[9])
 
     # generate qasm file
-    mypath = "testCircuit.qasm"
-    qcobj2qasm(qc14,mypath)
+    for i in range(16):
+        mypath = "qasmFiles/c"+str(i)+".qasm"
+        qcobj2qasm(qasm_circs()[i],mypath) #list [0,15]
 
+
+    # run sim
+    '''
     # parsing qasm file
     num_qubits,operators = qasmParse(mypath)
 
+    
     cfg = StackNetworkConfig.from_file("config_perfect.yaml")
 
     maxQubits = 50
@@ -211,5 +171,6 @@ if __name__ == "__main__":
             programs={ "Bob": myCircuitProgram},
             num_times=1)
         resList.append(myCircuitProgram.res)
-
+    
     print(f"Measurement result:{resList}")
+    '''
