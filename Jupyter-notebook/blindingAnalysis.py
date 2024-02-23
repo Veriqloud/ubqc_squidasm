@@ -6,7 +6,7 @@ We are able to see the efficiency differnce among the two.
 from squidasm.run.stack.config import StackNetworkConfig
 from squidasm.run.stack.run import run
 from circuits_qasm import qasm_circs
-from qiskit.qasm3 import load
+#from qiskit.qasm3 import load
 
 from qasm2squidasm import CircuitProgram
 from UBQC_client import AliceProgram, LoadType
@@ -112,7 +112,7 @@ if __name__ == "__main__":
     ubqcRateList.append(ubqc_correct_rate)
 
     #=========================================================================
-    '''
+    
     configFile = "config_lossy_link.yaml"
     normalRes,correct_rate = normalSim(fileName,configFile
         ,maxQubits=20,num_times=Mynum_times,exp_result=exp_res)
@@ -127,27 +127,30 @@ if __name__ == "__main__":
     #print(f"ubqc crrect Rate :{ubqc_correct_rate}")
     ubqcRateList.append(ubqc_correct_rate)
 
-    print(f"normRateList:{normRateList}")
-    print(f"ubqcRateList:{ubqcRateList}")
-    '''
+    #print(f"normRateList:{normRateList}")
+    #print(f"ubqcRateList:{ubqcRateList}")
+    
     #=========================================================================
     print(f"normRateList:{normRateList}")
     print(f"ubqcRateList:{ubqcRateList}")
-    #, 'Loss'
-
+    #, 'Loss' 
+    #'Setting': ['Noise on'], 
     df = pd.DataFrame({ 
-    'Setting': ['Noise'], 
+    'Setting': ['only noise', 'only loss'], 
     'nomal circuit': normRateList, 
     'UBQC circuit': ubqcRateList 
-    }) 
+    }) # requires the same size in list
+
     
     df.plot(x= 'Setting' ,y=['nomal circuit','UBQC circuit'], kind="bar")  #"Noise case", "Loss case"
+    #plt.xticks(rotation=90)
+    plt.xticks(rotation=45, ha='right')
 
-    plt.title('Circuit 14')
+    plt.title('UBQC algorithm benchmarking on Circuit 14 ')
     plt.yticks(np.arange(0.0, 1.0, 0.1))
     plt.ylabel('successful rate')
 
-    plt.savefig('plotTest13.png')
+    plt.savefig('plotTest4.png')
     plt.show()
 
 
