@@ -2,7 +2,7 @@
 
 
 qdevice_cfg: &qdevice_cfg
-  num_qubits: 100
+  num_qubits: 30
 
   # coherence times (same for each qubit)
   T1: 36_000_000_000_000

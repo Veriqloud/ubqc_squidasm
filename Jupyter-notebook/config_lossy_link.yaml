@@ -1,7 +1,7 @@
 # Noise configuration file with customized noise:
 
 qdevice_cfg: &qdevice_cfg
-  num_qubits: 10000
+  num_qubits: 30
   dummy: null
   init_time : 0
   measure_time : 0
