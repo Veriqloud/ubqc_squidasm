@@ -90,7 +90,7 @@ def ubqcSim(path,configfile,maxQubits,num_times,exp_result):
 if __name__ == "__main__":
 
     fileName = "tempCircuit.qasm"
-    Mynum_times = 5
+    Mynum_times = 100
     exp_res = [1,1,1,1,0]
 
     normRateList = []
@@ -99,14 +99,14 @@ if __name__ == "__main__":
     configFile = "config_noise.yaml"  #config_perfect.yaml,  config_default.yaml
 
     normalRes,correct_rate = normalSim(fileName,configFile
-        ,maxQubits=30,num_times=Mynum_times,exp_result=exp_res)
+        ,maxQubits=20,num_times=Mynum_times,exp_result=exp_res)
     #print(f"normalRes :{normalRes}")
     #print(f"normal crrect Rate :{correct_rate}")
     normRateList.append(correct_rate)
     
 
     ubquRes, ubqc_correct_rate = ubqcSim(fileName,configFile
-        ,maxQubits=30,num_times=Mynum_times,exp_result=exp_res)
+        ,maxQubits=20,num_times=Mynum_times,exp_result=exp_res)
     #print(f"ubquRes :{ubquRes}")
     #print(f"ubqc crrect Rate :{ubqc_correct_rate}")
     ubqcRateList.append(ubqc_correct_rate)
@@ -145,12 +145,14 @@ if __name__ == "__main__":
     df.plot(x= 'Setting' ,y=['nomal circuit','UBQC circuit'], kind="bar")  #"Noise case", "Loss case"
     #plt.xticks(rotation=90)
     plt.xticks(rotation=45, ha='right')
+    plt.tight_layout()
+    plt.subplots_adjust(left=0.1, right=0.9, top=0.9 ) #bottom=0.8
 
     plt.title('UBQC algorithm benchmarking on Circuit 14 ')
     plt.yticks(np.arange(0.0, 1.0, 0.1))
     plt.ylabel('successful rate')
 
-    plt.savefig('plotTest4.png')
+    plt.savefig('plotTest6.png',bbox_inches='tight')
     plt.show()
 
 
