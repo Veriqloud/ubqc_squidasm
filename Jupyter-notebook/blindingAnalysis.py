@@ -90,7 +90,7 @@ def ubqcSim(path,configfile,maxQubits,num_times,exp_result):
 if __name__ == "__main__":
 
     fileName = "tempCircuit.qasm"
-    Mynum_times = 100
+    Mynum_times = 10
     exp_res = [1,1,1,1,0]
 
     normRateList = []
@@ -144,7 +144,8 @@ if __name__ == "__main__":
     
     df.plot(x= 'Setting' ,y=['nomal circuit','UBQC circuit'], kind="bar")  #"Noise case", "Loss case"
     #plt.xticks(rotation=90)
-    plt.xticks(rotation=45, ha='right')
+    plt.xticks(rotation='horizontal')
+    #plt.xticks(rotation=45,ha='right')
     plt.tight_layout()
     plt.subplots_adjust(left=0.1, right=0.9, top=0.9 ) #bottom=0.8
 
@@ -152,7 +153,7 @@ if __name__ == "__main__":
     plt.yticks(np.arange(0.0, 1.0, 0.1))
     plt.ylabel('successful rate')
 
-    plt.savefig('plotTest6.png',bbox_inches='tight')
+    plt.savefig('plotTest7.png',bbox_inches='tight')
     plt.show()
 
 
