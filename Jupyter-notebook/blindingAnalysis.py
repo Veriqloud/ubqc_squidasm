@@ -67,13 +67,13 @@ def ubqcSim(path,configfile,maxQubits,num_times,exp_result):
             programs={"Alice": alice_program, "Bob": bob_program},
             num_times=1))
 
+    #print(f"resListTmp: {resListTmp}")
     # extract only the result
-    if(configfile!="config_noise.yaml" and configfile!="config_lossy_link.yaml"):    
+    if(configfile!="config_noise.yaml" and configfile!="config_lossy_link.yaml" and configfile!="config_noise2.yaml" ):    
         resList = resListTmp[0][0]
 
-    if(configfile=="config_noise.yaml" or configfile=="config_lossy_link.yaml"):
+    if(configfile=="config_noise.yaml" or configfile=="config_lossy_link.yaml" or configfile=="config_noise2.yaml" ):
         #print(f"resListTmp :{resListTmp}")
-
         results = [resListTmp[i][1][0][0] for i in range(num_times)]
         resList.append(results)
 
@@ -90,7 +90,7 @@ def ubqcSim(path,configfile,maxQubits,num_times,exp_result):
 if __name__ == "__main__":
 
     fileName = "tempCircuit.qasm"
-    Mynum_times = 10
+    Mynum_times = 40
     exp_res = [1,1,1,1,0]
 
     normRateList = []
@@ -113,39 +113,33 @@ if __name__ == "__main__":
 
     #=========================================================================
     
-    configFile = "config_lossy_link.yaml"
-    normalRes,correct_rate = normalSim(fileName,configFile
+    configFile = "config_noise2.yaml"
+    normalRes2,correct_rate2 = normalSim(fileName,configFile
         ,maxQubits=20,num_times=Mynum_times,exp_result=exp_res)
     #print(f"normalRes :{normalRes}")
-    #print(f"normal crrect Rate :{correct_rate}")
-    normRateList.append(correct_rate)
+    normRateList.append(correct_rate2)
     
 
-    ubquRes, ubqc_correct_rate = ubqcSim(fileName,configFile
+    ubquRes2, ubqc_correct_rate2 = ubqcSim(fileName,configFile
         ,maxQubits=20,num_times=Mynum_times,exp_result=exp_res)
     #print(f"ubquRes :{ubquRes}")
-    #print(f"ubqc crrect Rate :{ubqc_correct_rate}")
-    ubqcRateList.append(ubqc_correct_rate)
+    ubqcRateList.append(ubqc_correct_rate2)
 
-    #print(f"normRateList:{normRateList}")
-    #print(f"ubqcRateList:{ubqcRateList}")
     
     #=========================================================================
     print(f"normRateList:{normRateList}")
     print(f"ubqcRateList:{ubqcRateList}")
-    #, 'Loss' 
-    #'Setting': ['Noise on'], 
+
     df = pd.DataFrame({ 
-    'Setting': ['only noise', 'only loss'], 
+    'Setting': ['noise level1', 'noise level2'], 
     'nomal circuit': normRateList, 
     'UBQC circuit': ubqcRateList 
     }) # requires the same size in list
 
-    
+
     df.plot(x= 'Setting' ,y=['nomal circuit','UBQC circuit'], kind="bar")  #"Noise case", "Loss case"
-    #plt.xticks(rotation=90)
+
     plt.xticks(rotation='horizontal')
-    #plt.xticks(rotation=45,ha='right')
     plt.tight_layout()
     plt.subplots_adjust(left=0.1, right=0.9, top=0.9 ) #bottom=0.8
 
@@ -153,7 +147,7 @@ if __name__ == "__main__":
     plt.yticks(np.arange(0.0, 1.0, 0.1))
     plt.ylabel('successful rate')
 
-    plt.savefig('plotTest7.png',bbox_inches='tight')
+    plt.savefig('plotTest9.png',bbox_inches='tight')
     plt.show()
 
 

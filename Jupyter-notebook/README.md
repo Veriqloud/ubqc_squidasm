@@ -19,7 +19,8 @@ The UBQC protocol provides a scenario in which the client assigns a specific qua
 2. Configure the simulation by tuning the parameters in function `run_simulation()` in the cells. Or use the default configuration without modification.
 3. Press shift + enter keys to run a cell in the jupyter notebook. If the input circuit is legit, the software will draw the input circuit and give the computational results. 
 
-
+# Note
+- A new configuration file with noise or loss need to be included in `ubqcSim` function in order to extract the right outcome. Otherwise the successful rate will always be 0.
 
 # Additional tool
 One of the quantum circuit import method is via a `.qasm` file. For those who are not familiar with QASM syntax but want to try the feature, we provides a script(`makeQASMfile.py`) to convert Qiskit quantum circuit object to a `.qasm` file.
