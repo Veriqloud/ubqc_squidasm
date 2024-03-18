@@ -32,7 +32,7 @@ results = meas[0][0]
 counter = 0
 
 for i in range(len(results)):
-    if not results :
+    if results :
         if(results[i][0] == results[i][1]):
             counter += 1
 		
