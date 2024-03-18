@@ -1,15 +1,17 @@
 from qiskit.circuit import QuantumRegister, ClassicalRegister, QuantumCircuit
 from qiskit.compiler.assembler import assemble
 from qiskit.assembler.disassemble import disassemble
+from qiskit.qasm3 import dump
 import json
 import sys
 
-from collections import Iterable
+from collections.abc import Iterable
 from copy import deepcopy
 from itertools import chain
 
 # Create a circuit to assemble into a qobj
-# Note: The conversion from a circuit into a QASM object is only implemented here to test that the modified function
+# Note: The conversion from a circuit into a QASM object is only implemented 
+# here to test that the modified function
 # gives the same output as the original function.
 
 circuits_qasm = []
@@ -22,6 +24,8 @@ def qasm_circs():
         qc1.h(q1[0])
         qobj1 = assemble(qc1, shots=2000, memory=True)
         circuits_qasm.append((qobj1,[0],qc1.draw(filename="circuit.txt",output = "text")))
+
+
 
         # Circuit 2, Expected outcome: [0]
         q2 = QuantumRegister(1)
@@ -43,6 +47,7 @@ def qasm_circs():
         qobj3 = assemble(qc3, shots=2000, memory=True)
         circuits_qasm.append((qobj3,[0],qc3.draw(filename="circuit.txt",output = "text")))
 
+
         # Circuit 4, Expected outcome: [0,1]
         q4 = QuantumRegister(2)
         c4 = ClassicalRegister(2)
@@ -52,6 +57,7 @@ def qasm_circs():
         qc4.h(q4[1])
         qobj4 = assemble(qc4, shots=2000, memory=True)
         circuits_qasm.append((qobj4,[0,1],qc4.draw(filename="circuit.txt",output = "text")))
+
 
         # Circuit 5, Expected outcome: [1,1]
         q5 = QuantumRegister(2)
@@ -210,8 +216,38 @@ def qasm_circs():
         qc15.cx(q15[4],q15[0])
         qobj15 = assemble(qc15, shots=2000, memory=True)
         circuits_qasm.append((qobj15,[0,1,1,1,1],qc15.draw(filename="circuit.txt",output = "text")))
-        return circuits_qasm
+        
 
+        # Circuit 16 Expected outcome: [1,1,1,1,1,1,1,1,1,1]
+        q16 = QuantumRegister(10)
+        c16 = ClassicalRegister(10)
+        qc16 = QuantumCircuit(q16,c16)
+        qc16.h(q16[0])
+        qc16.x(q16[0])
+        qc16.h(q16[1])
+        qc16.x(q16[1])
+        qc16.h(q16[2])
+        qc16.cx(q16[1],q16[2])
+        qc16.h(q16[3])
+        qc16.cx(q16[2],q16[3])
+        qc16.h(q16[4])
+        qc16.cx(q16[3],q16[4])
+        qc16.h(q16[5])
+        qc16.cx(q16[4],q16[5])
+        qc16.h(q16[6])
+        qc16.cx(q16[0],q16[6])
+        qc16.h(q16[7])
+        qc16.cx(q16[0],q16[7])
+        qc16.h(q16[8])
+        qc16.cx(q16[0],q16[8])
+        qc16.h(q16[9])
+        qc16.cx(q16[0],q16[9])
+        qobj16 = assemble(qc16,shots=2000, memory=True)
+        circuits_qasm.append((qobj16,[1 for i in range(10)],qc16.draw(filename="circuit.txt",output="text")))
+        
+
+        return circuits_qasm
+	
 
 
 # Note: If custom circuits are added here, one also needs to add the expected result to infer about succes rates.

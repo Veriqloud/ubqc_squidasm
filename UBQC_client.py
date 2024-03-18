@@ -2,19 +2,28 @@ from netqasm.sdk.classical_communication.socket import Socket
 from netqasm.sdk.connection import BaseNetQASMConnection
 from netqasm.sdk.epr_socket import EPRSocket
 from netqasm.sdk.qubit import Qubit
+from qiskit import QuantumRegister,QuantumCircuit, ClassicalRegister
+from qiskit.compiler.assembler import assemble
 import random
-import subprocess
+#import subprocess
 import numpy as np
 import argparse
 from argparse import RawTextHelpFormatter
 from netqasm.sdk.qubit import Qubit as SdkQubit
 from netsquid.qubits import qubitapi as qapi
-import netsquid.qubits
+#import netsquid.qubits
 import squidasm.sim.stack.globals
 from circuits_qasm import qasm_circs
 from flow_qasm import circuit_file_to_flow, count_qubits_in_sequence
 from angle import measure_angle
 from squidasm.sim.stack.program import Program, ProgramContext, ProgramMeta
+from qiskit.qasm3 import load
+from enum import Enum
+
+class LoadType(Enum):
+    DEFAULT = 0
+    FILE = 1
+    #CUSTOM = 2
 
 def get_qubit(netqasm_qubit: SdkQubit, node_name) -> qapi.Qubit:
     """Get the the qubit(s), only possible in simulation and can be used for debugging.
@@ -62,13 +71,21 @@ parser.add_argument('-d','--draw', action="store_true", help='draw the circuit')
 parser.add_argument('-l','--log', action="store_true", help='enable or disable the logging')
 
 # Choose circuit
-parser.add_argument('-c','--circuit', type=str, help='choose a particular circuit in circuits', default="")
+parser.add_argument('-c','--circuit', type=int, help='choose a particular circuit in circuits')
 
 # Choose gates to be applied before protocol
 parser.add_argument('-i','--input', type=str, help='choose gates to apply on input states, default |+>. can be Pauli, rot_Pauli(angle),H,K,T.', default="")
 
 # Choose gates to be applied after protocol
 parser.add_argument('-o','--output', type=str, help='choose gates to apply before measurement, default is Z. can be Pauli, rot_Pauli(angle),H,K,T.', default="")
+
+# Choose the means of source
+parser.add_argument('-s','--source', type=int
+                    ,help='choose a way to input quantum cirsuit: 0: Use default circuits. 1:Use customized circuit. 2: Import from a .qasm file.', default = 0)
+
+# Put .qasm file path to load from if choosing import from source from a file in -s
+parser.add_argument('-p','--path', type=str, help='.qasm file path to load from if choosing import from source from a file in -s', default="")
+
 
 # Save arguments in args
 args=parser.parse_args()
@@ -78,6 +95,7 @@ circuits = qasm_circs()
 
 # Which circuit?
 
+
 # If no circuit is chosen, take a simple Hadamard gate (Circuit 1)
 if not args.circuit:
     circ = circuits[0]
@@ -85,8 +103,7 @@ if not args.circuit:
     circ_flow = circuit_file_to_flow(circ[0])
     seq = circ_flow[0]
     qout_idx = circ_flow[1]
-    print("Default circuit chosen!")
-    
+
 # Otherwise, take the circuit the client chose
 else:
     circ = circuits[int(args.circuit)]
@@ -94,7 +111,15 @@ else:
     seq = circ_flow[0]
     result = circ[1]
     qout_idx = circ_flow[1]
-    print("Client chose circuit {}!".format(int(args.circuit)+1))
+    #print("Client chose circuit {}!".format(int(args.circuit)+1))
+
+
+
+if args.source :
+    print("Loading circuit from path:{}".format)
+else :
+    print(f"Client chose default circuit {args.circuit}") #.format(int(args.circuit)+1)
+
 
 # If the client wants to draw the circuit
 if(args.draw):
@@ -133,6 +158,7 @@ if args.output:
     print(f"Client chose output gates {output_gates}!")
 
 # Count how many qubits are needed
+#if not args.source:
 nQubits = count_qubits_in_sequence(seq)
 
 nMeasurement = 0
@@ -165,8 +191,11 @@ class AliceProgram(Program):
             name="UBQC",
             csockets=[self.PEER_NAME],
             epr_sockets=[self.PEER_NAME],
-            max_qubits=20,
+            max_qubits=self.max_qubits,
         )
+    
+    def __init__(self, max_qubits):
+        self.max_qubits = max_qubits
 
     def run(self, context: ProgramContext):
 
@@ -174,12 +203,59 @@ class AliceProgram(Program):
         myConnection = context.connection
         myCsocket = context.csockets[self.PEER_NAME]
         myEprSocket = context.epr_sockets[self.PEER_NAME]
-        measurements = []
         
         # Initialize qubit and angles list
         
         qubits = []
         angles = []
+        
+        # Define circuits
+        circuits = qasm_circs()
+        if(args.log):
+            print(f"source index:{args.source}") 
+
+        if  LoadType(args.source) == LoadType.FILE:  #load from file
+            if(args.log):
+                print("client load from a file")
+            circ_obj = load(args.path)
+            circ = assemble(circ_obj,shots=2000,memory=True)
+            circ_flow = circuit_file_to_flow(circ)
+            seq = circ_flow[0]
+            result = 0
+            qout_idx = circ_flow[1]
+
+        else : #args.source == LoadType.DEFAULT #load default circit
+            
+            if not args.circuit:
+                args.circuit = 1
+            if(args.log):
+                print(f"use default circuit:{int(args.circuit)-1}")
+
+            circ = circuits[int(args.circuit)-1]
+            
+            circ_flow = circuit_file_to_flow(circ[0])
+            seq = circ_flow[0]
+            result = circ[1]
+            qout_idx = circ_flow[1]
+
+        # Count how many qubits are needed
+        nQubits = count_qubits_in_sequence(seq)
+
+        nMeasurement = 0
+        E1 = []
+        E2 = []
+
+        # Construct lists for entanglement
+        for s in seq:
+            if s.type == "E":
+                E1.append(s.qubits[0])
+                E2.append(s.qubits[1])
+            if s.type == "M":
+                nMeasurement += 1
+        nInputs = nQubits - nMeasurement
+
+        # Initialize list to store measurement results, needed for corrections
+        outcome = nQubits * [-1]
         
         # For all input angles: create a random angle and save it into our angles array
         for i in range(0, nInputs):

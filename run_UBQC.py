@@ -12,8 +12,8 @@ cfg = StackNetworkConfig.from_file("config_perfect.yaml")
 
 # Load client's and server's instructions
 
-alice_program = AliceProgram()
-bob_program = BobProgram()
+alice_program = AliceProgram(30)
+bob_program = BobProgram(30)
 
 # Initialize array with simulation results
 
@@ -23,7 +23,7 @@ meas = []
 
 meas.append(run(config=cfg,
     programs={"Alice": alice_program, "Bob": bob_program},
-    num_times=100))
+    num_times=20))
     
 results = meas[0][0]
 
