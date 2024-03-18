@@ -103,6 +103,7 @@ if not args.circuit:
     circ_flow = circuit_file_to_flow(circ[0])
     seq = circ_flow[0]
     qout_idx = circ_flow[1]
+    args.circuit = 0
 
 # Otherwise, take the circuit the client chose
 else:
@@ -113,7 +114,8 @@ else:
     qout_idx = circ_flow[1]
     #print("Client chose circuit {}!".format(int(args.circuit)+1))
 
-
+if(args.log and result):
+    print(f"expected result :{result}")
 
 if args.source :
     print("Loading circuit from path:{}".format)
@@ -272,7 +274,7 @@ class AliceProgram(Program):
             # Let the user know the random angles
             if(args.log):
             	print("i = {} rand_ang = {}".format(i,angles[i]))
-            
+
             # Create qubits with these lists
             q = Qubit(myConnection)
             q.rot_Y(1,1)  # |+> state
