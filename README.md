@@ -81,7 +81,9 @@ Here $\phi$ refers to the measurement angle that's acquired through the flow con
 Functioning versions of SquidASM [4] and NetQASM [5] on the user's side are required to run the simulation. To run the simulation, head to the directory in which the files are deposited. Using the consol, python run_ubqc.py can be used to run the simulation given the current settings provided in run_ubqc.py. Possible arguments include:
 - $\texttt{- l}$ for enabling the logging, most logs are disabled by default. 
 - $\texttt{- c \{ CIRCUIT \} }$ for choosing a circuit from circuits_qasm.py. Note that enumeration starts from zero.
-- $\texttt{- d}$ to enable or disable the drawing of the circuit
+- $\texttt{- d}$ to enable or disable the drawing of the circuit.
+- $\texttt{- s}$ to choose from the different source of input. 0: Default circuits, 1:From a file.
+- $\texttt{- p}$ to specify the path of the .qasm file as an input if -s is set to 1. Would not do anything if -s is set to 0. 
 - $\texttt{- i \{ GATES \} }$ for choosing input gates that are applied onto the input qubits independently from the chosen circuit (Default input state is +).
 
   Choose between I, X, Y, Z, H, rot_X:angle:, rot_Y:angle:, rot_Z:angle:. I refers to identity gate, rotation angles are provided in the format $n/256$. Seperation between gates: Comma. Example Syntax (3 qubits): -i x,z,rot_x:30:
