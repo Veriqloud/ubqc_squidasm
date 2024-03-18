@@ -23,7 +23,7 @@ meas = []
 
 meas.append(run(config=cfg,
     programs={"Alice": alice_program, "Bob": bob_program},
-    num_times=20))
+    num_times=5))
     
 results = meas[0][0]
 
@@ -32,8 +32,9 @@ results = meas[0][0]
 counter = 0
 
 for i in range(len(results)):
-	if(results[i][0] == results[i][1]):
-		counter += 1
+    if not results :
+        if(results[i][0] == results[i][1]):
+            counter += 1
 		
 print(f"Success rate: {counter} in {len(results)}")
 

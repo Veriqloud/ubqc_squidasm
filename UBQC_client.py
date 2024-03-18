@@ -217,12 +217,17 @@ class AliceProgram(Program):
         if  LoadType(args.source) == LoadType.FILE:  #load from file
             if(args.log):
                 print("client load from a file")
-            circ_obj = load(args.path)
-            circ = assemble(circ_obj,shots=2000,memory=True)
-            circ_flow = circuit_file_to_flow(circ)
-            seq = circ_flow[0]
-            result = 0
-            qout_idx = circ_flow[1]
+            if not args.path :
+                print("Error! Please specify a file path with command -p ")
+                return 
+            else:
+                circ_obj = load(args.path)
+                circ = assemble(circ_obj,shots=2000,memory=True)
+                circ_flow = circuit_file_to_flow(circ)
+                seq = circ_flow[0]
+                result = 0
+                qout_idx = circ_flow[1]
+            
 
         else : #args.source == LoadType.DEFAULT #load default circit
             
