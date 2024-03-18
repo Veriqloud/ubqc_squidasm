@@ -199,3 +199,8 @@ A basic framework for running Shor's prime factorization algorithm using UBQC ca
 Younes Naceur
 
 Email: naceur.younes@yahoo.de
+
+## 11. Repository maintenance
+Chin-Te LIAO
+
+Email: liao.chinte@veriqloud.fr
