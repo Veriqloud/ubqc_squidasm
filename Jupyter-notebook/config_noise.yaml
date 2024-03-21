@@ -6,7 +6,7 @@ qdevice_cfg: &qdevice_cfg
 
   # coherence times (same for each qubit)
   T1: 36_000_000_000_000
-  T2: 4_900_000
+  T2: 49_000_000
 
   # gate execution times
   init_time: 10_000
