@@ -1,12 +1,12 @@
-# Noise configuration file with customized noise:
+# Noise configuration file with customized low noise:
 
 
 qdevice_cfg: &qdevice_cfg
   num_qubits: 30
 
   # coherence times (same for each qubit)
-  T1: 10_000_000
-  T2: 15_000
+  T1: 36_000_000_000_000
+  T2: 50_000_000
 
   # gate execution times
   init_time: 1
