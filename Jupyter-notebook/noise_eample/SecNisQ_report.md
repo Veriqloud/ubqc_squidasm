@@ -30,15 +30,15 @@ Such software stack is not designed along with the protocol simulation code. The
 We have build an UBQC compiler which compiles quantum circuit into UBQC program in SquidASM. [Source code](https://github.com/Veriqloud/ubqc_squidasm). 
 This compiler provides a convenient environment to benchmark the [UBQC algorithm](https://arxiv.org/abs/0807.4154).
 
-### Noise case simulation
+### Realistic case simulation
 
-To simulate more realistic cases, we applied two different levels of noises to the simulator. We select circuit 5 from the default circuit as an example:
+To simulate more realistic cases, we applied two different levels of noises and losses to the simulator. We select circuit 5 from the default circuit as an example:
 
 
 ![circuit5](./circuit5.png)
 
 
-The reason for using this circuit is that it has low complexity and still features many single and two qubits gates. 
+The reason for using this circuit is that it has decently low complexity and still features single and two qubits gates which are commonly used. 
 
 
 Here are the results of 200 simulation runs:
@@ -47,7 +47,7 @@ Here are the results of 200 simulation runs:
 
 [hardware configuration](https://github.com/Veriqloud/ubqc_squidasm/blob/main/Jupyter-notebook/noise_eample/plotTest_sample200.txt)
 
-As we can see, the high noise has a significant impact on the successful rate of the protocol in normal circuit cases. However, it does not have much effect on UBQC cases. Although the successful rate of UBQC cases in general are much lower than the normal cases, we can say UBQC circuits have better resistance against noises as the figure shows.  
+As we can see, the high noise/loss has a significant impact on the successful rate of the protocol in normal circuit cases. However, it does not have much effect on UBQC cases. Although the successful rate of UBQC cases in general are much lower than the normal cases, we can say UBQC circuits have better resistance against noises/losses as the figure shows.
 
 
 
