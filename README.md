@@ -195,6 +195,8 @@ A basic framework for running Shor's prime factorization algorithm using UBQC ca
 
 [6] "Parsimonious and robust realizations of unitary maps in the one-way model",  V. Danos, E. Kashefi, P. Panangaden 
 
+"We acknowledge the support of the European Union’s Horizon 2020 research and innovation program through the FET project PHOQUSING (“PHOtonic Quantum SamplING machine” – Grant Agreement No. 899544)"
+
 ## 10. Author
 Younes Naceur
 

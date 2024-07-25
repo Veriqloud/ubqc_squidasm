@@ -34,6 +34,7 @@ Or just use the example one: `qcircuitTest.qasm`.
 
 - [Reference compiler](https://github.com/quantumprotocolzoo/protocols/tree/master/UBQC)
 
+"We acknowledge the support of the European Union’s Horizon 2020 research and innovation program through the FET project PHOQUSING (“PHOtonic Quantum SamplING machine” – Grant Agreement No. 899544)"
 
 # Author
 Original author:
