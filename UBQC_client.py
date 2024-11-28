@@ -181,7 +181,7 @@ outcome = nQubits * [-1]
 
 class AliceProgram(Program):
     PEER_NAME = "Bob"
-
+    
     '''
     def __init__(self, targetQubit: int):
         self.targetQubit = targetQubit
@@ -334,8 +334,7 @@ class AliceProgram(Program):
         
         # Then: Send lists E1 and E2 of which qubits to entangle
 
-        myCsocket.send(np.array(E1))
-        myCsocket.send(np.array(E2))
+        myCsocket.send([np.array(E1),np.array(E2)])
 
         qout_idx2 = list(range(nQubits))
         
@@ -395,14 +394,13 @@ class AliceProgram(Program):
             yield from myConnection.flush()
 
             # receive 2 bits message
-            m0 = yield from myCsocket.recv()
-            m1 = yield from myCsocket.recv()
+            loc_mes = yield from myCsocket.recv()
             yield from myConnection.flush()
 
             # Apply correction depending on outcome
-            if int(m0) == 1:
+            if int(loc_mes[0]) == 1:
                 output_qubit.Z()
-            if int(m1) == 1:
+            if int(loc_mes[1]) == 1:
                 output_qubit.X()
                 
             # Store qubits send back by server in qout

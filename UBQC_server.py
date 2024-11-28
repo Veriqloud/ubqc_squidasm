@@ -22,7 +22,7 @@ class BobProgram(Program):
             epr_sockets=[self.PEER_NAME],
             max_qubits=self.max_qubits,
         )
-
+    
     def __init__(self, max_qubits):
         self.max_qubits = max_qubits
 
@@ -45,16 +45,15 @@ class BobProgram(Program):
             yield from myConnection.flush()
             
                     # receive 2 bits message
-            m0 = yield from myCsocket.recv()
+            loc_m = yield from myCsocket.recv()
 
-            m1 = yield from myCsocket.recv()
 
             
             # Apply correction depending on outcome
-            if int(m0) == 1:
+            if int(loc_m[0]) == 1:
                 eprQubit.Z()
                 
-            if int(m1) == 1:
+            if int(loc_m[1]) == 1:
                 eprQubit.X()
 
                 
@@ -66,11 +65,10 @@ class BobProgram(Program):
         E = []
         
         # Server receives lists of qubits to entangle
-        E1 = yield from myCsocket.recv()        
-        E2 = yield from myCsocket.recv()
+        Elist = yield from myCsocket.recv()      
         
         # Entangle qubits
-        for i, j in zip(E1,E2):
+        for i, j in zip(Elist[0],Elist[1]):
             qubit_i = qubits[i-1]
             qubit_j = qubits[j-1]
             
